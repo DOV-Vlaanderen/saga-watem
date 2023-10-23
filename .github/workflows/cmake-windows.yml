@@ -63,12 +63,14 @@ jobs:
         -DCMAKE_C_COMPILER=${{ matrix.c_compiler }} `
         -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} `
         -S ${{ github.workspace }}
-
     - name: Build
       # Build your program with the given configuration. Note that --config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
-      run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
+      run: |
+        cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
+        cmake --install install
+        7z a -tzip saga_watem.zip -r .\build\*.dll
     - name: 'Upload Artifact'
       uses: actions/upload-artifact@v3
       with:
         name: Release dll files
-        Path: build/**/*.dll
+        Path: saga_watem.zip

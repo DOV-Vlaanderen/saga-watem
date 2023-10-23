@@ -1,0 +1,50 @@
+name: 'Build on debian/ubuntu in container'
+
+on:
+  push:
+    branches: [main, gha]
+
+jobs:
+  bullseye-container-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: ["debian:bullseye", "debian:bookworm", "ubuntu:focal"]
+    container:
+      image: ghcr.io/johanvdw/saga-watem-build-${{ matrix.os }}
+      options: --user 1001
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.PRIVATE_ACCESS_TOKEN }}
+    steps:
+    - uses: actions/checkout@v3
+    - name: run cmake
+      run: |
+        mkdir build
+        cd build
+        cmake ..
+        make
+    - name: run tests
+      run: |
+        pytest-3 -vv || true
+      
+  bullseye-container-build-deb:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: ["debian:bullseye", "debian:bookworm", "ubuntu:focal"]
+    container:
+      image: ghcr.io/johanvdw/saga-watem-build-${{ matrix.os }}
+      options: --user 1001
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.PRIVATE_ACCESS_TOKEN }}
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-tags: true
+        fetch-depth: 0
+    - name: run cmake
+      run: |
+        dch --newversion $(git describe --tags)  "autobuild $(git describe --tags)"
+        fakeroot debian/rules binary
