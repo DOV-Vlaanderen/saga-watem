@@ -3,6 +3,7 @@ name: 'Build on debian/ubuntu in container'
 on:
   push:
     branches: [main, gha]
+  workflow_call:
 
 jobs:
   bullseye-container-test:
@@ -13,9 +14,6 @@ jobs:
     container:
       image: ghcr.io/johanvdw/saga-watem-build-${{ matrix.os }}
       options: --user 1001
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.PRIVATE_ACCESS_TOKEN }}
     steps:
     - uses: actions/checkout@v3
     - name: run cmake
@@ -29,7 +27,7 @@ jobs:
         zip "saga_watem_$release.zip" $(find . -name *.so) -j
     - name: run tests
       run: |
-        pytest-3 -vv || true
+        pytest-3 -vv
     - name: 'Upload Artifact'
       uses: actions/upload-artifact@v3
       with:
@@ -44,9 +42,6 @@ jobs:
     container:
       image: ghcr.io/johanvdw/saga-watem-build-${{ matrix.os }}
       options: --user 1001
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.PRIVATE_ACCESS_TOKEN }}
     steps:
     - uses: actions/checkout@v3
       with:
