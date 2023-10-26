@@ -2,7 +2,9 @@ name: 'Build on debian/ubuntu in container'
 
 on:
   push:
-    branches: [main, gha]
+    branches: ["main"]
+    pull-request:
+      branches: ["main"]
   workflow_call:
 
 jobs:
