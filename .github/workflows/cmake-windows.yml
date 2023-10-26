@@ -41,7 +41,7 @@ jobs:
       shell: bash
       run: |
         mkdir d:\\deps
-        C:\\msys64\\usr\\bin\\wget https://sourceforge.net/projects/saga-gis/files/SAGA%20-%20${{ split('.', matrix.saga_version)[0] }}/SAGA%20-%20${{ matrix.saga_version }}/saga-${{ matrix.saga_version }}_x64.zip/download -O d:/deps/saga.zip
+        C:\\msys64\\usr\\bin\\wget https://sourceforge.net/projects/saga-gis/files/SAGA%20-%20${{ matrix.saga_version| split('.')[0] }}/SAGA%20-%20${{ matrix.saga_version }}/saga-${{ matrix.saga_version }}_x64.zip/download -O d:/deps/saga.zip
         7z x d:\\deps\\saga.zip -o"d:\\deps\\"
 
     - name: store cache
