@@ -41,7 +41,8 @@ jobs:
       shell: bash
       run: |
         mkdir d:\\deps
-        $major='{{ matrix.saga_version }}'.split('.')[0]
+        version="{{ matrix.saga_version }}"
+        major="${version%%.*}"
         C:\\msys64\\usr\\bin\\wget https://sourceforge.net/projects/saga-gis/files/SAGA%20-%20$major/SAGA%20-%20${{ matrix.saga_version }}/saga-${{ matrix.saga_version }}_x64.zip/download -O d:/deps/saga.zip
         7z x d:\\deps\\saga.zip -o"d:\\deps\\"
 
