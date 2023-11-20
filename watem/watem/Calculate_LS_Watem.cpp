@@ -90,6 +90,16 @@ CCalculate_LS_Watem::CCalculate_LS_Watem(void)
 		_TL("Optional Slope output grid "),
 		PARAMETER_OUTPUT_OPTIONAL
 	);
+	Parameters.Add_Grid(
+		NULL, "L"	, _TL("Calculated L"),
+		_TL("This will contain L. "),
+		PARAMETER_OUTPUT_OPTIONAL
+	);
+	Parameters.Add_Grid(
+		NULL, "S"	, _TL("Calculated S"),
+		_TL("This will contain S. "),
+		PARAMETER_OUTPUT_OPTIONAL
+	);
 
 	Parameters.Add_Choice("",
 		"METHOD", _TL("LS Calculation"),
@@ -119,7 +129,6 @@ CCalculate_LS_Watem::~CCalculate_LS_Watem(void)
 bool CCalculate_LS_Watem::On_Execute(void)
 {
 	int		x, y;
-	CSG_Grid	*pLS;
 
 	//-----------------------------------------------------
 	// Get parameter settings...
@@ -129,7 +138,9 @@ bool CCalculate_LS_Watem::On_Execute(void)
 	PRC = Parameters("PRC")->asGrid();
 	use_prc = Parameters("USEPRC")->asBool();
 
-	pLS		= Parameters("LS")->asGrid();
+	m_pLS		= Parameters("LS")->asGrid();
+	m_pL		= Parameters("L")->asGrid();
+	m_pS		= Parameters("S")->asGrid();
 	m_pSlope = Parameters("SLOPE")->asGrid();
 	m_Stability = 0;
 	m_Erosivity = 1;
@@ -148,11 +159,11 @@ bool CCalculate_LS_Watem::On_Execute(void)
 		for(x=0; x<Get_NX(); x++)
 		{
 			if (m_pDEM->is_NoData(x, y)){
-				pLS->Set_NoData(x, y);
+				m_pLS->Set_NoData(x, y);
 				if (m_pSlope) m_pSlope->Set_NoData(x, y);
             }
 			else
-				pLS->Set_Value(x, y, Get_LS(x, y));
+				m_pLS->Set_Value(x, y, Get_LS(x, y));
 		}
 	}
 
@@ -166,7 +177,7 @@ bool CCalculate_LS_Watem::On_Execute(void)
 
 double CCalculate_LS_Watem::Get_LS(int x, int y)
 {
-	double	LS, Slope, Aspect, Area, sin_Slope;
+	double	L,S,LS, Slope, Aspect, Area, sin_Slope;
 
 	//-----------------------------------------------------
 
@@ -248,7 +259,7 @@ double CCalculate_LS_Watem::Get_LS(int x, int y)
 		//-----------------------------------------------------
 		case 1:		// Desmet and Govers
 		{
-			double	L, S, m, x;
+			double	m, x;
 
 			double beta = m_Erosivity * (sin_Slope / 0.0896) / (3.0 * pow(sin_Slope, 0.8) + 0.56);
 			m = beta / (1.0 + beta);
@@ -321,15 +332,17 @@ double CCalculate_LS_Watem::Get_LS(int x, int y)
 				exp = 0.72;
 			}
 
-			double sfactor = -1.5 + 17 / (1 + pow(2.718281828, 2.3 - 6.1 * sin(Slope)));
-			double lfactor = (pow(Area + Get_Cellarea(), exp + 1) - pow(Area, exp + 1) )
+			S = -1.5 + 17 / (1 + pow(2.718281828, 2.3 - 6.1 * sin(Slope)));
+			L = (pow(Area + Get_Cellarea(), exp + 1) - pow(Area, exp + 1) )
 				/ (pow(adjust, exp) * pow(Get_Cellsize(), exp + 2)*pow(22.13, exp));
 
-			LS = sfactor * lfactor;
+			LS = S * L;
 
 		}
 
 	}
+       if (m_pL) m_pL->Set_Value(x, y, L);
+       if (m_pS) m_pS->Set_Value(x, y, S);
 
 	return(LS);
 }
