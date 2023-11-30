@@ -4,7 +4,7 @@ This tutorial is a rework of the
 [Dutch report](https://archief.algemeen.omgeving.vlaanderen.be/xmlui/handle/acd/269123). 
 The complete calculation of the erosion map in SAGA GIS consists of 4 steps:
 
-![img1](/img/erosiekaart-img1.png)
+![img1](img/erosiekaart-img1.png)
 
 *Figure 1: The process of calculating an erosion map*
 
@@ -111,7 +111,7 @@ reclassification of the 'Landgebruik_boswijzer' file is done using the
 'reclassify grid values' and the file 'reclasslanduse' (shown below). You can 
 find this tool under 'Tool > Grid > Tools > Reclassify Grid Values'.
 
-![img2](/img/erosiekaart-img2.png)
+![img2](img/erosiekaart-img2.png)
 
 *Figure 2: creation of land-use map*
 
@@ -130,7 +130,7 @@ Note: value -2 remains -2 in the new map and is therefore not converted.
 
 ## CREATION OF THE PARCEL GRID (PRC MAP) (MODULE 1.)
 
-![img4](/img/erosiekaart-img4.png)
+![img4](img/erosiekaart-img4.png)
 
 *Figure 3: The process of calculating an erosion map, creation of the parcel 
 grid (in Dutch)*
@@ -165,13 +165,13 @@ layers)
     was used and not WLas from GRB (because VHA was more recent)], WTZ (VHA polygons) 
     (-1)
 
-![img5](/img/erosiekaart-img5.png)
+![img5](img/erosiekaart-img5.png)
 
 *Figure 4: module '1. Creation of parcel grid (PRC)'.*
 
 ## 3X3 FILTER WITHIN PLOT BOUNDARIES (MODULE 2.)
 
-![img6](/img/erosiekaart-img6.png)
+![img6](img/erosiekaart-img6.png)
 
 *Figure 5: The process of calculating an erosion map, filtering within plot 
 boundaries (in Dutch)*
@@ -183,7 +183,7 @@ plot boundaries'. This option is on by default because in 2017 it was decided
 to use this option to be used starting from the calculation of the erosion 
 map 2018.
 
-![img7](/img/erosiekaart-img7.png)
+![img7](img/erosiekaart-img7.png)
 
 *Figure 6: Module 2. 3x3 filter within plot boundaries*
 
@@ -194,7 +194,7 @@ map 2018.
 In SAGA GIS, all modules can be called from the "Geoprocessing" menu, in the 
 'Watem' submenu.
 
-![img8](/img/erosiekaart-img8.png)
+![img8](img/erosiekaart-img8.png)
 
 *Figure 7: Calling the Watem module from the menu*
 
@@ -202,7 +202,7 @@ It is also possible to launch the same modules from the tools tab in the
 "manager" window. The description tab then also displays the module's 
 documentation.
 
-![img9](/img/erosiekaart-img9.png)
+![img9](img/erosiekaart-img9.png)
 
 *Figure 8: Calling up the Watem module via the "manager" window*
 
@@ -212,7 +212,7 @@ are mandatory for import. Output grids (or shapefiles) start by default with
 
 ## EROSION MAP CALCULATION
 
-![img10](/img/erosiekaart-img10.png)
+![img10](img/erosiekaart-img10.png)
 
 *Figure 9: The process of calculating an erosion map, the creation of an 
 erosion map (in Dutch)*
@@ -226,25 +226,25 @@ below in 1 run.
 
 ### Calculation of the upslope area (module 3.1)
 
-![img11](/img/erosiekaart-img11.png)
+![img11](img/erosiekaart-img11.png)
 
 *Figure 10: Module 3.1. Uparea calculation*
 
 ### LS Calculation (module 3.2)
 
-![img12](/img/erosiekaart-img12.png)
+![img12](img/erosiekaart-img12.png)
 
 *Figure 11: Module 3.2. LS calculation*
 
 ### C calculation (Module 3.3)
 
-![img13](/img/erosiekaart-img13.png)
+![img13](img/erosiekaart-img13.png)
 
 *Figure 12: Module 3.3. C calculation*
 
 ### Water erosion calculation based on LS (module 3.4)
 
-![img14](/img/erosiekaart-img14.png)
+![img14](img/erosiekaart-img14.png)
 
 *Figure 13: Module 3.4. Water erosion calculation based on LS*
 
@@ -252,13 +252,13 @@ below in 1 run.
 
 Tillage erosion is not included in the annual Potential soil erosion map per plot.
 
-![img15](/img/erosiekaart-img15.png)
+![img15](img/erosiekaart-img15.png)
 
 *Figure 14: Module 3.5. Tillage erosion calculation*
 
 ## SINGLE MODULE EROSION MAP CALCULATION (MODULE 3.)
 
-![img16](/img/erosiekaart-img16.png)
+![img16](img/erosiekaart-img16.png)
 
 *Figure 15: Module 3. Erosion map calculation (complete).*
 
@@ -269,7 +269,7 @@ will not be performed.
 
 # Postprocessing
 
-![img17](/img/erosiekaart-img17.png)
+![img17](img/erosiekaart-img17.png)
 
 *Figure 16: The process of calculating an erosion map, adding the erosion map 
 to the parcel grid (in Dutch)*
@@ -301,7 +301,7 @@ Here the first command (watem) indicates which library is used, and the second
 example, the tool 3x3 filter within plot boundaries is called (identifier 2). 
 This information can be derived from the tools' documentation given earlier:
 
-![img19](/img/erosiekaart-img19.png)
+![img19](img/erosiekaart-img19.png)
 
 The tool performs a 3x3 filter on a digital elevation model using only cells within the plot.
 
@@ -316,7 +316,7 @@ The tool performs a 3x3 filter on a digital elevation model using only cells wit
 It is also possible to create a sample script from the tool manager in the 
 graphical interface (save to script file or copy to clipboard).
 
-![img20](/img/erosiekaart-img20.png)
+![img20](img/erosiekaart-img20.png)
 
 *Figure 17: A script can also be created from the graphical interface*
 
