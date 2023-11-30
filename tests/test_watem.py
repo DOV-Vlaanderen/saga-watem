@@ -85,11 +85,11 @@ def test_watem_ls(tmpdir):
             "LS": tmpdir / "ls.sgrd",
             }
 
-    # test running with slope output
+    # test running with optional slope,l,s output
     run_saga("watem", "5", args)
 
     # test with optional slope
-    args = {**args,"SLOPE": tmpdir / "slope.sgrd"}
+    args = {**args,"SLOPE": tmpdir / "slope.sgrd", "L": tmpdir/"l.sgrd", "S": tmpdir/"s.sgrd"}
     run_saga("watem", "5", args)
 
     with rio.open(str(tmpdir / "slope.sdat")) as slope_file:
