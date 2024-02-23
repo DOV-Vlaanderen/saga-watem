@@ -12,7 +12,7 @@ On windows, download version SAGA 8.5.1 from the website, a direct link to the f
 
 Get the windows built dll files from the releases page and copy these dll files into the tools subfolder of saga and restart. You can also drag and drop the dll on saga if they are stored in a different location.
 
-If you want to test unreleased version of SAGA, go to the github action page for [windows builds](https://github.com/johanvdw/saga-watem/actions/workflows/cmake-windows.yml). You can find snapshots of the dll here.
+If you want to test unreleased version of SAGA, go to the github action page for [windows builds](https://github.com/DOV-Vlaanderen/saga-watem/actions/workflows/cmake-windows.yml). You can find snapshots of the dll here.
 
 ## On linux
 Packages are built for Debian Linux (Bullseye) and Ubuntu LTS (Focal). The pacakges can be grabbed from the release page.
@@ -46,13 +46,14 @@ cd build
 cmake ..
 make
 make DESTDIR=libs install
+cd ..
 ```
 
-To build the documentation do
+To build the documentation do:
 
 ```
 cd docs
-SAGA_TLB=../build/libs saga_cmd --create-docs tool_html
+SAGA_TLB=../build/libs/saga saga_cmd --create-docs=tool_html
 make html
 ```
 
