@@ -1,4 +1,5 @@
-# Introduction
+# Potential Erosion map
+## Introduction
 
 This tutorial is a rework of the 
 [Dutch report](https://archief.algemeen.omgeving.vlaanderen.be/xmlui/handle/acd/269123). 
@@ -30,9 +31,9 @@ For more detail on the parameters and input layers used, please refer to the
 final reports of the "Potential soil erosion maps by plot" (Oorts et al., 
 2019).
 
-# Preprocessing
+## Preprocessing
 
-## ELEVATION MODEL CREATION
+### ELEVATION MODEL CREATION
 
 The elevation model used is the [DHMVII](https://www.vlaanderen.be/digitaal-vlaanderen/onze-oplossingen/earth-observation-data-science-eodas/het-digitaal-hoogtemodel/digitaal-hoogtemodel-vlaanderen-ii)
 from Agency Information Flanders.  The different files were pasted together 
@@ -44,7 +45,7 @@ Grid Filter tool (smooth filter with radius 2 and square kernel). This method
 was abandoned in the final creation of the erosion map to proceed with a grid 
 filter per plot.
 
-## CREATION OF K-GRID
+### CREATION OF K-GRID
 
 The K-map consists of the digitised version of the polygon map based on the 
 [digital soil map_2_0](https://www.dov.vlaanderen.be/geonetwork/static/api/records/ff28b153-137b-4ea0-bf0e-3acb07d5f348).
@@ -103,7 +104,7 @@ subtracted from this afterwards.
     - Grid: original grid
     - Patch grid: the interpolated grid
 
-## CREATION OF LAND-USE MAP
+### CREATION OF LAND-USE MAP
 
 The land use map is created based on the reclassified land use map with forest 
 pointer of the sediment model (file  Landgebruik_boswijzer_reclassified'). The 
@@ -267,7 +268,7 @@ other grids can be selected. In this module, the machining erosion can
 optionally also be calculated. If no value is given here, this calculation 
 will not be performed.
 
-# Postprocessing
+## Postprocessing
 
 ![img17](img/erosiekaart-img17.png)
 
@@ -285,7 +286,7 @@ same algorithm that was used when the grid was created. In the module
 "Grid statistics for polygons" you have to choose method 1 (polygon 
 wise (cell centres)).
 
-# Run in command line
+## Run in command line
 
 It is also possible to run the module(s) from the command line. This 
 is particularly useful if several scenarios need to be executed. This takes 
@@ -320,7 +321,7 @@ graphical interface (save to script file or copy to clipboard).
 
 *Figure 17: A script can also be created from the graphical interface*
 
-## EXAMPLE SCRIPT: FINAL SCRIPT EROSION MAP 2018
+### EXAMPLE SCRIPT: FINAL SCRIPT EROSION MAP 2018
 
 ```shell
 @ECHO OFF
@@ -365,11 +366,11 @@ grd-z" -RESULT="%OUTPUT%\erosie_berekend.shp"
 PAUSE
 ```
 
-# Extra information
+## Extra information
 
 For extra information see the [document on the Calculation of the potential erosion map per plot in SAGA GIS](https://archief.algemeen.omgeving.vlaanderen.be/xmlui/handle/acd/269123) from the Flemish Department of Environment (in Dutch).
 
-# References
+## References
 
 Desmet, P., & Govers, G. (1996). A GIS procedure for automatically calculating 
 the USLE LS factor  on topographically complex landscape units. Journal of Soil 

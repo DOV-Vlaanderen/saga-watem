@@ -40,11 +40,22 @@ sudo apt install build-essential cmake libsaga-dev
 Next, build and install from source:
 
 ```
+rm -rf build
 mkdir build
 cd build
 cmake ..
 make
+make DESTDIR=libs install
 ```
+
+To build the documentation do
+
+```
+cd docs
+SAGA_TLB=../build/libs saga_cmd --create-docs tool_html
+make html
+```
+
 
 ## Running automated tests
 
