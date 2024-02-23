@@ -320,31 +320,36 @@ template_path = "."
 env = Environment(loader=FileSystemLoader(template_path))
 template = env.get_template("overview.md.j2")
 
-with open('tool_html/watem/watem.html', 'r') as file:
-    watem_html = file.read()
+def saga_tool_overview(library):
+   """
+   Parse saga tool description to a library overview md
+   requires toolls to be under tool_html
+   """
+   with open(f'tool_html/{library}/{library}.html', 'r') as file:
+       html = file.read()
+   
+   soup = BeautifulSoup(html, 'html.parser')
+  
+   tables = soup.find_all('table')
+   last_table_index = len(tables) - 1
+   
+   # reformat the last table to be more useful for rest of the game
+   
+   tools = {}
+   for row in tables[1].find_all('tr')[1:]:  # Skipping the header row
+       columns = row.find_all(['td', 'th'])
+       id_column, name_column = columns[0].text.strip(), columns[1].text.strip()
+       tools[id_column] = name_column
+   
+   output = template.render({"tools": tools, "library": library})
+   with open(f'overview_{library}.md', 'w') as overview_file:
+       overview_file.write(output)
+   # remove last table (replaced by index)
+   tables[-1].extract() 
 
+   with open(f'tool_html/{library}/{library}_parsed.html', 'w') as file:
+        file.write(soup.prettify())
 
-soup = BeautifulSoup(watem_html, 'html.parser')
-
-tables = soup.find_all('table')
-
-last_table_index = len(tables) - 1
-
-content_before_last_table = soup.find_all('table')[:last_table_index]
-
-with open('tool_html/watem/watem_parsed.html', 'w') as file:
-   for element in content_before_last_table:
-       file.write(str(element))
-
-# reformat the last table to be more useful for rest of the game
-
-tools = {}
-for row in tables[1].find_all('tr')[1:]:  # Skipping the header row
-    columns = row.find_all(['td', 'th'])
-    id_column, name_column = columns[0].text.strip(), columns[1].text.strip()
-    tools[id_column] = name_column
-
-output = template.render({"tools": tools})
-with open('overview.md', 'w') as overview_file:
-    overview_file.write(output)
+saga_tool_overview("watem")
+saga_tool_overview("topology")
 

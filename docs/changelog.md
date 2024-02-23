@@ -2,5 +2,3 @@
 :relative-docs: docs/
 :relative-images:
 ```
-
-# Changelog

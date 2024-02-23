@@ -19,7 +19,8 @@ Erosion <potential_erosion_map>
 :maxdepth: 2
 :caption: Developer guide
 Development guidelines <contributing>
-Overview <overview>
+Watem <overview_watem>
+Topology <overview_topology>
 
 Authors <authors>
 Changelog <changelog>

@@ -1,15 +1,23 @@
-# Overview
+# {{ library}} Tool Library
 
 ```{raw} html
-:file: tool_html/watem/watem_parsed.html
+:file: tool_html/{{ library }}/{{ library }}_parsed.html
+
 ```
 
+```{contents}
+:local:
+:depth: 1
+
+```
 {% for tool in tools %}
 
-### {{ tools[tool] }}
+## {{ tools[tool] }} [{{ tool }}]
 
 ```{raw} html
-:file: tool_html/watem/watem_{{ tool }}.html
+:file: tool_html/{{ library }}/{{ library }}_{{ tool }}.html
 ```
-
+```{raw} html
+<br />
+```
 {% endfor %}
