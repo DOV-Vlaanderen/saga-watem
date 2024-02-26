@@ -2,22 +2,22 @@
 
 The aim of this page is to explain how the water erosion is computed. The 
 water erosion is derived from the RUSLE-equation 
-($$E = \frac{\text{kg}}{\text{m}^{2}.\text{year}}$$) (Revised
+($E = \frac{\text{kg}}{\text{m}^{2}.\text{year}}$) (Revised
 Universal Soil Loss Equation, Renard et al., 1997):
 
 $$ E = R \cdot K \cdot LS \cdot C \cdot P $$
 
 with
 
-- $$R$$: rainfall erosivity factor (:math:`\frac{\text{MJ.mm}}{\text{m}^2.\text{h.year}}`)
-- $$K$$: soil erodibility factor (:math:`\frac{\text{kg.h}}{\text{MJ.mm}}`)
-- $$LS$$: topographical slope and length factor (-)
-- $$C$$: crop management factor (-, :math:`\in [0,1]`)
-- $$P$$: erosion control factor (-, :math:`\in [0,1]`)
+- $R$: rainfall erosivity factor ($\frac{\text{MJ.mm}}{\text{m}^2.\text{h.year}}$)
+- $K$: soil erodibility factor ($\frac{\text{kg.h}}{\text{MJ.mm}}$)
+- $LS$: topographical slope and length factor (-)
+- $C$: crop management factor (-, $$\in [0,1]$$)
+- $P$: erosion control factor (-, $$\in [0,1]$$)
 
 In SAGA-WaTEM, an adjusted formula is used to compensate for:
 
-- Very high RUSLE-values: values above 150
+- Very high RUSLE-values: values above 150 are set equal to 150.
 - Difference in resolution: the S-values are compensated by 
   dividing them by 1.4 (see Notebaert et al. 2006).
 
@@ -31,12 +31,12 @@ $$ L = \frac{(A+D^2)^{m+1}-A^{m+1}}{D^{m+2}.x^m.22,13^m} $$
 
 with: 
 
-- $$A$$: upstream area (m$$^2$$) (see next section).
-- $$m$$: exponent (-).
-- $$D$$: grid resolution (m).
-- $$x$$: factor incorporating the flow direction (-).
+- $A$: upstream area (m$^2$) (see next section).
+- $m$: exponent (-).
+- $D$: grid resolution (m).
+- $x$: factor incorporating the flow direction (-).
 
-$$x$$ is calculated as a function of the aspect of the pixel:
+$x$ is calculated as a function of the aspect of the pixel:
 
 $$ x = |sin(\text{aspect})| + |cos(\text{aspect})|$$
 
@@ -48,11 +48,11 @@ with $\beta$:
 
 $$ \beta = \frac{\frac{sin(\theta)}{0.0896}}{3.sin^{0.8}(\theta) + 0.56}$$
 
-where $$\theta$$ stands for the slope of the pixel in percentages.
+where $\theta$ stands for the slope of the pixel in percentages.
 
 The S-factor is, when the slope is lower than 9 %, computed as:
 
-$$ S = 10.8 * sin(\text(slope)) + 0.03 $$
+$$ S = 10.8 * sin(\text{slope}) + 0.03 $$
 
 Otherwise (larger than or equal to 9 %):
 
@@ -61,7 +61,7 @@ $$ S = 16.8 * \text{slope} - 0.5 $$
 Note another formula for S is used in the case that the upstream area is 
 smaller than 25 m$^2$: 
 
-$$ S = 3.0 * pow(\text{slope}, 0.8) + 0.56 $$
+$$ S = 3.0 * \text{slope}^{0.8} + 0.56 $$
 
 ## Upslope area
 
@@ -98,16 +98,16 @@ pixel. Following rules are defined:
 
 Tillage erosion, or soil translocation by tillage, is calculated according to
 the method of Van Oost et al. (2000). For every pixel the outgoing flux
-$$Q_{s,t}$$ (kg.m$$^{-1}$$ due to tillage translocation is calculated as (
+$Q_{s,t}$ (kg.m$^{-1}$) due to tillage translocation is calculated as (
 slope as gradient = dx/dh)
 
 $$ Q_{s,t} = k_{til} \cdot \text{slope} $$
 
 with
 
-- $$ktil$$: tillage transport coefficient (kg.m$$^{-1}$$)
+- $ktil$: tillage transport coefficient (kg.m$^{-1}$)
 
-The local erosion or deposition rate by tillage (:math:`E_t`) can be calculated 
+The local erosion or deposition rate by tillage ($E_t$) can be calculated 
 as:
 
 $$ E_t = - \frac{Q_{s,t}}{dx} $$
