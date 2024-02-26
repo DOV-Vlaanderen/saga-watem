@@ -1,39 +1,18 @@
-# Potential Erosion map
-## Introduction
+# Application in the context of Flanders (extra tooling)
 
-This tutorial is a rework of the 
-[Dutch report](https://archief.algemeen.omgeving.vlaanderen.be/xmlui/handle/acd/269123). 
-The complete calculation of the erosion map in SAGA GIS consists of 4 steps:
+On this page, the information for the application of the WaTEM module for data 
+available for Flanders can be found. Note that extra tooling developed in the 
+context of Flanders can be useful for your own case study. Following sections
+can be found here:
 
-![img1](img/erosiekaart-img1.png)
-
-*Figure 1: The process of calculating an erosion map*
-
-1. Creation of the plot grid
-2. Filtering of the DEM
-3. Creation of the water erosion map (pixel map)
-4. Adding water erosion map values to the plot map.
-
-
-All steps can be performed in SAGA GIS. For the first 3 a new saga module was 
-developed. For the last step (adding erosion map to plot map) an existing 
-module is used. The creation of the water erosion map itself is conceived in
-give different steps, which can be performed together, but also separately:
-
-1. The calculation of the upslope area
-2. Calculation of the LS factor
-3. The calculation of the C factor
-4. The calculation of the water erosion
-5. Calculation of the machining erosion (optional: If no value is given here 
-   this calculation is not performed).
-
-For more detail on the parameters and input layers used, please refer to the 
-final reports of the "Potential soil erosion maps by plot" (Oorts et al., 
-2019).
+- Preprocessing: an example of data used for preprocessing and how the extra 
+  tooling is applied.
+- Postprocessing: example of postprocessing of the module output.
+- Example script for the application to Flanders.
 
 ## Preprocessing
 
-### ELEVATION MODEL CREATION
+### Digital elevation model
 
 The elevation model used is the [DHMVII](https://www.vlaanderen.be/digitaal-vlaanderen/onze-oplossingen/earth-observation-data-science-eodas/het-digitaal-hoogtemodel/digitaal-hoogtemodel-vlaanderen-ii)
 from Agency Information Flanders.  The different files were pasted together 
@@ -43,9 +22,25 @@ of this mosaic is also the extent that was further used).
 Optionally, this input grid can also be filtered. This can be done with the
 Grid Filter tool (smooth filter with radius 2 and square kernel). This method 
 was abandoned in the final creation of the erosion map to proceed with a grid 
-filter per plot.
+filter per plot:
 
-### CREATION OF K-GRID
+![img6](img/erosiekaart-img6.png)
+
+*Figure 5: The process of calculating an erosion map, filtering within plot 
+boundaries (in Dutch)*
+
+A second optional step is to perform a 3x3 filter on the DTM. This filters
+the DTM but only considers cells that lie within the same 
+plot. This filter can be done in SAGA using the tool '2. 3x3 filter within 
+plot boundaries'. This option is on by default because in 2017 it was decided 
+to use this option to be used starting from the calculation of the erosion 
+map 2018.
+
+![img7](img/erosiekaart-img7.png)
+
+*Figure 6: Module 2. 3x3 filter within plot boundaries*
+
+### K-grid
 
 The K-map consists of the digitised version of the polygon map based on the 
 [digital soil map_2_0](https://www.dov.vlaanderen.be/geonetwork/static/api/records/ff28b153-137b-4ea0-bf0e-3acb07d5f348).
@@ -104,7 +99,7 @@ subtracted from this afterwards.
     - Grid: original grid
     - Patch grid: the interpolated grid
 
-### CREATION OF LAND-USE MAP
+### Landuse map
 
 The land use map is created based on the reclassified land use map with forest 
 pointer of the sediment model (file  Landgebruik_boswijzer_reclassified'). The 
@@ -129,7 +124,7 @@ find this tool under 'Tool > Grid > Tools > Reclassify Grid Values'.
 
 Note: value -2 remains -2 in the new map and is therefore not converted.
 
-## CREATION OF THE PARCEL GRID (PRC MAP) (MODULE 1.)
+### Parcels map
 
 ![img4](img/erosiekaart-img4.png)
 
@@ -169,104 +164,6 @@ layers)
 ![img5](img/erosiekaart-img5.png)
 
 *Figure 4: module '1. Creation of parcel grid (PRC)'.*
-
-## 3X3 FILTER WITHIN PLOT BOUNDARIES (MODULE 2.)
-
-![img6](img/erosiekaart-img6.png)
-
-*Figure 5: The process of calculating an erosion map, filtering within plot 
-boundaries (in Dutch)*
-
-A second optional step is to perform a 3x3 filter on the DTM. This filters
-the DTM but only considers cells that lie within the same 
-plot. This filter can be done in SAGA using the tool '2. 3x3 filter within 
-plot boundaries'. This option is on by default because in 2017 it was decided 
-to use this option to be used starting from the calculation of the erosion 
-map 2018.
-
-![img7](img/erosiekaart-img7.png)
-
-*Figure 6: Module 2. 3x3 filter within plot boundaries*
-
-# Run in GUI
-
-## STARTING WITH THE WATEM MODULE
-
-In SAGA GIS, all modules can be called from the "Geoprocessing" menu, in the 
-'Watem' submenu.
-
-![img8](img/erosiekaart-img8.png)
-
-*Figure 7: Calling the Watem module from the menu*
-
-It is also possible to launch the same modules from the tools tab in the 
-"manager" window. The description tab then also displays the module's 
-documentation.
-
-![img9](img/erosiekaart-img9.png)
-
-*Figure 8: Calling up the Watem module via the "manager" window*
-
-The import grids are displayed in the interface with ">>" This means that they
-are mandatory for import. Output grids (or shapefiles) start by default with 
-"<<" for mandatory output and "<" for optional output.
-
-## EROSION MAP CALCULATION
-
-![img10](img/erosiekaart-img10.png)
-
-*Figure 9: The process of calculating an erosion map, the creation of an 
-erosion map (in Dutch)*
-
-The calculation of water erosion can be done in several steps (different 
-tools 3.1, 3.2, 3.3, 3.4 and 3.5) or in 1 step with the tool 
-'3. Calculation Erosion Map (complete)'. This tool performs all the steps 
-below in 1 run.
-
-## CALCULATION OF EROSION MAP WITH SEVERAL INTERMEDIATE MODULES
-
-### Calculation of the upslope area (module 3.1)
-
-![img11](img/erosiekaart-img11.png)
-
-*Figure 10: Module 3.1. Uparea calculation*
-
-### LS Calculation (module 3.2)
-
-![img12](img/erosiekaart-img12.png)
-
-*Figure 11: Module 3.2. LS calculation*
-
-### C calculation (Module 3.3)
-
-![img13](img/erosiekaart-img13.png)
-
-*Figure 12: Module 3.3. C calculation*
-
-### Water erosion calculation based on LS (module 3.4)
-
-![img14](img/erosiekaart-img14.png)
-
-*Figure 13: Module 3.4. Water erosion calculation based on LS*
-
-### Treatment erosion calculation (module 3.5)
-
-Tillage erosion is not included in the annual Potential soil erosion map per plot.
-
-![img15](img/erosiekaart-img15.png)
-
-*Figure 14: Module 3.5. Tillage erosion calculation*
-
-## SINGLE MODULE EROSION MAP CALCULATION (MODULE 3.)
-
-![img16](img/erosiekaart-img16.png)
-
-*Figure 15: Module 3. Erosion map calculation (complete).*
-
-Initially, under "Grid system" you need to select the correct system. Then the 
-other grids can be selected. In this module, the machining erosion can 
-optionally also be calculated. If no value is given here, this calculation 
-will not be performed.
 
 ## Postprocessing
 
@@ -321,7 +218,7 @@ graphical interface (save to script file or copy to clipboard).
 
 *Figure 17: A script can also be created from the graphical interface*
 
-### EXAMPLE SCRIPT: FINAL SCRIPT EROSION MAP 2018
+## Example script for Flanders
 
 ```shell
 @ECHO OFF
