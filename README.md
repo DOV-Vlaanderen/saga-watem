@@ -49,10 +49,11 @@ make DESTDIR=libs install
 cd ..
 ```
 
-To build the documentation do:
+To build the documentation do (make sure you have dependencies in ci/requirements.txt) installed:
 
 ```
 cd docs
+mkdir tool_html
 SAGA_TLB=../build/libs/saga saga_cmd --create-docs=tool_html
 make html
 ```
