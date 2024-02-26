@@ -8,7 +8,7 @@ on:
   workflow_call:
 
 jobs:
-  bullseye-container-test:
+  build-docs-linux:
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/johanvdw/saga-watem-build-docs
@@ -27,12 +27,9 @@ jobs:
       env:
         SAGA_TLB: ../build/libs/saga
       run: |
-        ls -R
         cd docs
         mkdir tool_html
-        ls ../build/libs
         saga_cmd --create-docs=tool_html
-        ls tool_html
         make html
     - name: upload_docs
       uses: actions/upload-artifact@v3
