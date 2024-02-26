@@ -11,6 +11,7 @@
 
 Installation <self>
 Getting started <gettingstarted>
+Model description <description>
 Topology <topology>
 Erosion <potential_erosion_map>
 ```
