@@ -2,17 +2,79 @@
 
 On this page, the information for the application of the WaTEM module for data 
 available for Flanders can be found. Note that extra tooling developed in the 
-context of Flanders can be useful for your own case study. Following sections
-can be found here:
+context of Flanders can be useful for your own case study. Following steps are 
+defined:
 
-- Preprocessing: an example of data used for preprocessing and how the extra 
-  tooling is applied.
-- Postprocessing: example of postprocessing of the module output.
-- Example script for the application to Flanders.
+- Generation of landuse parcels maps (next two sections). 
+- Processing of digital elevation model (section 'digital elevation model')
+- Definition of the K-grid (section 'K-grid')
+- Compute erosion map: see [Getting started](gettingstarted.md)
+- Postprocessing of the results
 
-## Preprocessing
+In addition, an examples of :
 
-### Digital elevation model
+- run in the command line; 
+- script for Flanders
+
+are found on this page. 
+
+## Landuse map
+
+The land use map is created based on the reclassified land use map with forest 
+pointer of the sediment model (file  Landgebruik_boswijzer_reclassified'). The 
+reclassification of the 'Landgebruik_boswijzer' file is done using the 
+'reclassify grid values' and the file 'reclasslanduse' (shown below). You can 
+find this tool under 'Tool > Grid > Tools > Reclassify Grid Values'.
+
+
+| minimum   | maximum   | new         |
+| --------- | --------- | ----------- |
+| -6.100000 | -5.900000 | 1.000000    |
+| -3.100000 | -2.900000 | 1000.000000 |
+| -4.100000 | -3.900000 | 1.000000    |
+| -5.100000 | -4.900000 | -1.000000   |
+| 9.900000  | 10.100000 | 1.000000    |
+
+*Table 2: example of a table with values*
+
+Note: value -2 remains -2 in the new map and is therefore not converted.
+
+## Parcels map
+
+The plot grid can be created in SAGA using the module '1. 
+(PRC)'. The plot grid is created from the files listed below. The 
+order used is this: (where later map layers are superimposed on previous map 
+layers)
+
+- Land use map 'Land use_forest_reclassified' (see next section)
+
+  - 10000: forest
+
+  - 1: other land use
+
+  - -2: built-up 
+
+- GRB layers(geopoint - dataset GRBgis)
+
+  - GBG (building to land), GBA (building attachment), WGA (road attachment), 
+    KNW (structure), TRN (terrain): built-up (-2)
+
+- Parcel map
+
+  - Get values between 2 and 9999
+
+- Waterways and roads
+
+  - SBN (railway line), WBN (road line) (-2)
+  - WLas (VHA lines) [For the erosion map 2018, the shape 'VHA_09052017.shp' was used 
+    was used and not WLas from GRB (because VHA was more recent)], WTZ (VHA polygons) 
+    (-1)
+
+![img5](img/erosiekaart-img5.png)
+
+*Figure 4: module '1. Creation of parcel grid (PRC)'.*
+
+## Digital elevation model
 
 The elevation model used is the [DHMVII](https://www.vlaanderen.be/digitaal-vlaanderen/onze-oplossingen/earth-observation-data-science-eodas/het-digitaal-hoogtemodel/digitaal-hoogtemodel-vlaanderen-ii)
 from Agency Information Flanders.  The different files were pasted together 
@@ -22,12 +84,7 @@ of this mosaic is also the extent that was further used).
 Optionally, this input grid can also be filtered. This can be done with the
 Grid Filter tool (smooth filter with radius 2 and square kernel). This method 
 was abandoned in the final creation of the erosion map to proceed with a grid 
-filter per plot:
-
-![img6](img/erosiekaart-img6.png)
-
-*Figure 5: The process of calculating an erosion map, filtering within plot 
-boundaries (in Dutch)*
+filter per plot.
 
 A second optional step is to perform a 3x3 filter on the DTM. This filters
 the DTM but only considers cells that lie within the same 
@@ -40,7 +97,7 @@ map 2018.
 
 *Figure 6: Module 2. 3x3 filter within plot boundaries*
 
-### K-grid
+## K-grid
 
 The K-map consists of the digitised version of the polygon map based on the 
 [digital soil map_2_0](https://www.dov.vlaanderen.be/geonetwork/static/api/records/ff28b153-137b-4ea0-bf0e-3acb07d5f348).
@@ -98,79 +155,8 @@ subtracted from this afterwards.
   - Tools\Grid\Patching
     - Grid: original grid
     - Patch grid: the interpolated grid
-
-### Landuse map
-
-The land use map is created based on the reclassified land use map with forest 
-pointer of the sediment model (file  Landgebruik_boswijzer_reclassified'). The 
-reclassification of the 'Landgebruik_boswijzer' file is done using the 
-'reclassify grid values' and the file 'reclasslanduse' (shown below). You can 
-find this tool under 'Tool > Grid > Tools > Reclassify Grid Values'.
-
-![img2](img/erosiekaart-img2.png)
-
-*Figure 2: creation of land-use map*
-
-
-| minimum   | maximum   | new         |
-| --------- | --------- | ----------- |
-| -6.100000 | -5.900000 | 1.000000    |
-| -3.100000 | -2.900000 | 1000.000000 |
-| -4.100000 | -3.900000 | 1.000000    |
-| -5.100000 | -4.900000 | -1.000000   |
-| 9.900000  | 10.100000 | 1.000000    |
-
-*Table 2: example of a table with values*
-
-Note: value -2 remains -2 in the new map and is therefore not converted.
-
-### Parcels map
-
-![img4](img/erosiekaart-img4.png)
-
-*Figure 3: The process of calculating an erosion map, creation of the parcel 
-grid (in Dutch)*
-
-The plot grid can be created in SAGA using the module '1. 
-(PRC)' (see 1.1.2.1 Creating plot grid (PRC)).
-The plot grid is created from the files listed below. The 
-order used is this: (where later map layers are superimposed on previous map 
-layers)
-
-- Land use map 'Land use_forest_reclassified' 
-
-  - 10000: forest
-
-  - 1: other land use
-
-  - -2: built-up 
-
-- GRB layers(geopoint - dataset GRBgis)
-
-  - GBG (building to land), GBA (building attachment), WGA (road attachment), 
-    KNW (structure), TRN (terrain): built-up (-2)
-
-- Parcel map
-
-  - Get values between 2 and 9999
-
-- Waterways and roads
-
-  - SBN (railway line), WBN (road line) (-2)
-  - WLas (VHA lines) [For the erosion map 2018, the shape 'VHA_09052017.shp' was used 
-    was used and not WLas from GRB (because VHA was more recent)], WTZ (VHA polygons) 
-    (-1)
-
-![img5](img/erosiekaart-img5.png)
-
-*Figure 4: module '1. Creation of parcel grid (PRC)'.*
-
+    
 ## Postprocessing
-
-![img17](img/erosiekaart-img17.png)
-
-*Figure 16: The process of calculating an erosion map, adding the erosion map 
-to the parcel grid (in Dutch)*
 
 To aggregate grid cells by plot, the tool "Add Grid Values to shapes" or if 
 more statistics are required "Grid Statistics for polygons" can be used in 
@@ -188,7 +174,6 @@ wise (cell centres)).
 It is also possible to run the module(s) from the command line. This 
 is particularly useful if several scenarios need to be executed. This takes 
 the following form.
-
 
 ```bash
 saga_cmd watem 2 -DEM=DEM.sg-grd-z -PRC=prc.sg-grd-z -DEM_FILTER=DEM-filtered.sggrd-z
