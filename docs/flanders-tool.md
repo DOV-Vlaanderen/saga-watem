@@ -251,20 +251,3 @@ PAUSE
 ## Extra information
 
 For extra information see the [document on the Calculation of the potential erosion map per plot in SAGA GIS](https://archief.algemeen.omgeving.vlaanderen.be/xmlui/handle/acd/269123) from the Flemish Department of Environment (in Dutch).
-
-## References
-
-Desmet, P., & Govers, G. (1996). A GIS procedure for automatically calculating 
-the USLE LS factor  on topographically complex landscape units. Journal of Soil 
-and Water Conservation 51:427-433.
-
-McCool, D., Brown, L., Foster, G., Mutchler, C., & Meyer, L. (1987). Revised 
-Slope Steepness Factor  for the Universal Soil Loss Equation. Transactions of 
-the Asae 30:1387-1396.
-
-McCool, D., Foster, G., Mutchler, C., & Meyer, L. (1989). Revised Slope Length
-Factor for the  Universal Soil Loss Equation. Transactions of the 
-Asae 32:1571-1576.
-
-Oorts, K., Deproost, P., Buyle, S. & Swerts, M. (2019). Eindrapport potentiële 
-bodemerosiekaart  per perceel (2018). Departement Omgeving, Brussel.
