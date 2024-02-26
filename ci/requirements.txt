@@ -9,6 +9,7 @@ alabaster==0.7.16
 babel==2.14.0
     # via sphinx
 beautifulsoup4==4.12.3
+    # via -r requirements.in
 certifi==2024.2.2
     # via requests
 charset-normalizer==3.3.2
@@ -50,6 +51,8 @@ requests==2.31.0
     # via sphinx
 snowballstemmer==2.2.0
     # via sphinx
+soupsieve==2.5
+    # via beautifulsoup4
 sphinx==7.2.6
     # via
     #   -r requirements.in
