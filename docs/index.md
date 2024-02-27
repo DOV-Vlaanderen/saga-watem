@@ -10,10 +10,10 @@
 :caption: User guide
 
 Installation <self>
-Getting started <gettingstarted>
 Model description <description>
+Getting started <gettingstarted>
+Flanders application <flanders-tool>
 Topology <topology>
-Erosion <potential_erosion_map>
 ```
 
 ```{toctree}

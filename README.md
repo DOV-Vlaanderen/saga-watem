@@ -1,8 +1,9 @@
 # SAGA GIS WATEM module
-This repository contains a [SAGA-GIS](https://saga-gis.org) translation of the [WATEM erosion model](https://cn-ws.github.io/). It also contains modules that can be used in preprocessing and postprocessing the result of that program.
+This repository contains a [SAGA-GIS](https://saga-gis.org) translation of the [WATEM erosion model](https://watem-sedem.github.io/). It also contains modules that can be used in preprocessing and postprocessing the result of that program.
 
 More details on the modules can be found in:
-- [Potential erosion map](docs/potential_erosion_map.md)
+- [Getting started](docs/gettingstarted.md)
+- [Application to Flanders](docs/flanders-tool.md)
 - [Topology](docs/topology.md)
 
 # Installing SAGA
