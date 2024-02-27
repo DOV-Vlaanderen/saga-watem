@@ -352,4 +352,5 @@ def saga_tool_overview(library):
 
 saga_tool_overview("watem")
 saga_tool_overview("topology")
+saga_tool_overview("line_direction")
 

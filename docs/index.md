@@ -22,6 +22,7 @@ Erosion <potential_erosion_map>
 Development guidelines <contributing>
 Watem <overview_watem>
 Topology <overview_topology>
+Line direction <overview_line_direction>
 
 Authors <authors>
 Changelog <changelog>
