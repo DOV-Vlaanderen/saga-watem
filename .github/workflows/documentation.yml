@@ -1,0 +1,38 @@
+name: 'Build documentation in linux'
+
+on:
+  push:
+    branches: ["main","docs-site" ]
+    pull-request:
+      branches: ["main"]
+  workflow_call:
+
+jobs:
+  build-docs-linux:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/johanvdw/saga-watem-build-docs
+      options: --user 1001
+    steps:
+    - uses: actions/checkout@v4
+    - name: run cmake
+      shell: bash
+      run: |
+        mkdir build
+        cd build
+        cmake ..
+        make
+        make DESTDIR=./libs install 
+    - name: build docs
+      env:
+        SAGA_TLB: ../build/libs/saga
+      run: |
+        cd docs
+        mkdir tool_html
+        saga_cmd --create-docs=tool_html
+        make html
+    - name: upload_docs
+      uses: actions/upload-artifact@v3
+      with:
+        name: Upload docs
+        Path: docs/_build

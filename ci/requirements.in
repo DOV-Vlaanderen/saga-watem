@@ -1,0 +1,5 @@
+beautifulsoup4
+sphinx
+sphinx_rtd_theme
+sphinx-copybutton
+myst-parser[linkify]

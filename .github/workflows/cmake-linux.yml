@@ -17,7 +17,7 @@ jobs:
       image: ghcr.io/johanvdw/saga-watem-build-${{ matrix.os }}
       options: --user 1001
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: run cmake
       shell: bash
       run: |
