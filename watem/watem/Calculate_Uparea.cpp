@@ -68,12 +68,6 @@ CCalculate_Uparea::CCalculate_Uparea()
     );
 
     Parameters.Add_Value (
-        NULL, "WRONG", "Use old (wrong) calculation near roads and rivers",
-        "De oorspronkelijke berekening gebruiken voor wegen en rivieren of de gecorrigeerde versie.",
-        PARAMETER_TYPE_Bool, false
-    );
-
-    Parameters.Add_Value (
         NULL, "PIT_FLOW", "Flow from pits into closeby cells (within radius)",
         "If pits occur (local minima in the digital elevation model) water can flow to nearby cells if they are lower and within the PIT_SEARCH radius if this option is enabled.",
         PARAMETER_TYPE_Bool, false
@@ -103,7 +97,6 @@ bool CCalculate_Uparea::On_Execute ( void )
     TFCAtoForestOrPasture = Parameters ( "PCTOFOREST" )->asDouble();
     TFCAtoRoad = Parameters ( "PCTOROAD" )->asDouble();
 
-    wrong = Parameters ( "WRONG" )->asBool();
 
     pit_flow = Parameters ( "PIT_FLOW" )->asBool();
     pit_radius = Parameters ( "PIT_RADIUS" )->asInt();
@@ -486,11 +479,6 @@ void CCalculate_Uparea::DistributeTilDirEvent ( int i, int j, double *AREA )
                 {
                     closeriver = true;
                 }
-                if ( wrong )
-                    //bug: the else clause should be removed because it is a bug - only the topright pixel is analysed if a river is found in other cells the result is overwritten
-                {
-                    closeriver = false;
-                }
             }
         }
     }
@@ -790,42 +778,25 @@ void CCalculate_Uparea::DistributeTilDirEvent ( int i, int j, double *AREA )
             }
             else   //receiving cell belongs to a different parcel
             {
-                if ( !wrong )
+                if ( PRC->asInt ( i + ROWMIN2, j + COLMIN2 ) == 10000 )
                 {
-                    if ( PRC->asInt ( i + ROWMIN2, j + COLMIN2 ) == 10000 )
+                    Abis = *AREA * ( 100 - TFCAtoForestOrPasture ) / 100.0;
+                }
+                else
+                    if ( PRC->asInt ( i + ROWMIN2, j + COLMIN2 ) > 0 )
                     {
-                        Abis = *AREA * ( 100 - TFCAtoForestOrPasture ) / 100.0;
+
+                        Abis = *AREA * ( 100 - TFCAtoCropLand ) / 100.0;
                     }
                     else
-                        if ( PRC->asInt ( i + ROWMIN2, j + COLMIN2 ) > 0 )
+                        if ( PRC->asInt ( i + ROWMIN2, j + COLMIN2 ) == -2 )
                         {
-
-                            Abis = *AREA * ( 100 - TFCAtoCropLand ) / 100.0;
+                            Abis = *AREA * ( 100 - TFCAtoRoad ) / 100.0;
                         }
                         else
-                            if ( PRC->asInt ( i + ROWMIN2, j + COLMIN2 ) == -2 )
-                            {
-                                Abis = *AREA * ( 100 - TFCAtoRoad ) / 100.0;
-                            }
-                            else
-                            {
-                                Abis = 0;
-                            }
-                }
-                else //use wrong calulation
-                {
-                    /* WRONG calculation - but the same as the original version of WATEM
-                    if grid cell is -1 or - 2 then there is no result. The previous value of abis is used. */
-                    if ( PRC->asInt ( i + ROWMIN2, j + COLMIN2 ) == 10000 )
-                    {
-                        Abis = *AREA * ( 100 - TFCAtoForestOrPasture ) / 100.0;
-                    }
-                    else
-                        if ( PRC->asInt ( i + ROWMIN2, j + COLMIN2 ) > 0 )
                         {
-                            Abis = *AREA * ( 100 - TFCAtoCropLand ) / 100.0;
+                            Abis = 0;
                         }
-                }
 
                 if ( Pit->asInt ( i + ROWMIN2, j + COLMIN2 ) != 0 )
                 {
