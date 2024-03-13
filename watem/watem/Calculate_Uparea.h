@@ -1,7 +1,8 @@
-#include "MLB_Interface.h"
+#include "TLB_Interface.h"
 #include <vector>
 
-typedef struct {
+typedef struct
+{
     int outr, outc, aantal, r, c = 0;//outr: outrow, outc:outcolumn
     double input = 0;
 
@@ -11,32 +12,32 @@ typedef struct {
 class CCalculate_Uparea :
     public CSG_Tool_Grid
 {
-public:
+    public:
 
-    CCalculate_Uparea();
-    virtual ~CCalculate_Uparea();
+        CCalculate_Uparea();
+        virtual ~CCalculate_Uparea();
 
-    bool On_Execute();
+        bool On_Execute();
 
-private:
-    CSG_Grid *DEM, *Up_Area, *PRC, *Pit, *FINISH, *m_pAspect;
+    private:
+        CSG_Grid *DEM, *Up_Area, *PRC, *Pit, *FINISH, *m_pAspect;
 
-    void CalculateUparea();
-    void CalculatePitStuff();
-    void DistributeTilDirEvent (int i, int j, double *AREA);
-    std::vector<TPitData> PitDat;
-    int pitnum = 0;
-    int pitwin = 200;
-    double TFCAtoCropLand;
-    double TFCAtoForestOrPasture = 100;
-    double TFCAtoRoad = 100;
-    double Abis;
-    bool wrong = false;
+        void CalculateUparea();
+        void CalculatePitStuff();
+        void DistributeTilDirEvent ( int i, int j, double *AREA );
+        std::vector<TPitData> PitDat;
+        int pitnum = 0;
+        int pitwin = 200;
+        double TFCAtoCropLand;
+        double TFCAtoForestOrPasture = 100;
+        double TFCAtoRoad = 100;
+        double Abis;
+        bool wrong = false;
 
-    bool pit_flow = true;
-    int pit_radius = 4;
+        bool pit_flow = true;
+        int pit_radius = 4;
 
-    CSG_Table *pPitDataTable;
+        CSG_Table *pPitDataTable;
 
 };
 

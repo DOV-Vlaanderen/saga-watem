@@ -1,11 +1,11 @@
 #include "TLB_Interface.h"
 
-class Tillage_Erosion :
+class Complete :
     public CSG_Tool_Grid
 {
     public:
-        Tillage_Erosion();
+        Complete();
         bool On_Execute();
-        ~Tillage_Erosion();
+        ~Complete();
 };
 

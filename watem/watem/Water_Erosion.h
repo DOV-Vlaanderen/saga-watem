@@ -1,15 +1,15 @@
-#include "MLB_Interface.h"
+#include "TLB_Interface.h"
 class Water_Erosion :
     public CSG_Tool_Grid
 {
-public:
-    Water_Erosion();
-    bool On_Execute();
-    ~Water_Erosion();
+    public:
+        Water_Erosion();
+        bool On_Execute();
+        ~Water_Erosion();
 
 
-private:
-    CSG_Grid *C, *K, *LS, *water_erosion;
-    double R, P;
+    private:
+        CSG_Grid *C, *K, *LS, *water_erosion;
+        double R, P;
 };
 
