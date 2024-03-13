@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Model description &mdash; fluves.saga_watem unknown documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=3f1b9271"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Getting started" href="gettingstarted.html" />
+    <link rel="prev" title="SAGA GIS WATEM module" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            fluves.saga_watem
+          </a>
+              <div class="version">
+                unknown
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Model description</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ls-factor">LS-factor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#upslope-area">Upslope area</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tillage-erosion">Tillage erosion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flanders-tool.html">Flanders application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topology.html">Topology</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview_watem.html">Watem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview_topology.html">Topology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview_line_direction.html">Line direction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">fluves.saga_watem</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Model description</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="https://git.fluves.net/fluves/saga_watem/src/branch/master/docs/description.md">View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="model-description">
+<h1>Model description<a class="headerlink" href="#model-description" title="Link to this heading">¶</a></h1>
+<p>The aim of this page is to explain how the water erosion is computed. The
+water erosion is derived from the RUSLE-equation
+(<span class="math notranslate nohighlight">\(E = \frac{\text{kg}}{\text{m}^{2}.\text{year}}\)</span>) (Revised
+Universal Soil Loss Equation, Renard et al., 1997):</p>
+<div class="math notranslate nohighlight">
+\[ E = R \cdot K \cdot LS \cdot C \cdot P \]</div>
+<p>with</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(R\)</span>: rainfall erosivity factor (<span class="math notranslate nohighlight">\(\frac{\text{MJ.mm}}{\text{m}^2.\text{h.year}}\)</span>)</p></li>
+<li><p><span class="math notranslate nohighlight">\(K\)</span>: soil erodibility factor (<span class="math notranslate nohighlight">\(\frac{\text{kg.h}}{\text{MJ.mm}}\)</span>)</p></li>
+<li><p><span class="math notranslate nohighlight">\(LS\)</span>: topographical slope and length factor (-)</p></li>
+<li><p><span class="math notranslate nohighlight">\(C\)</span>: crop management factor (-, $<span class="math notranslate nohighlight">\(\in [0,1]\)</span>$)</p></li>
+<li><p><span class="math notranslate nohighlight">\(P\)</span>: erosion control factor (-, $<span class="math notranslate nohighlight">\(\in [0,1]\)</span>$)</p></li>
+</ul>
+<p>In SAGA-WaTEM, an adjusted formula is used to compensate for:</p>
+<ul class="simple">
+<li><p>Very high RUSLE-values: values above 150 are set equal to 150.</p></li>
+<li><p>Difference in resolution: the S-values are compensated by
+dividing them by 1.4 (see Notebaert et al. 2006).</p></li>
+</ul>
+<p>In the following text, it is explained how the subfactors are calculated.</p>
+<section id="ls-factor">
+<h2>LS-factor<a class="headerlink" href="#ls-factor" title="Link to this heading">¶</a></h2>
+<p>The L-factor is computed according the formula of Desmet &amp; Govers (1996):</p>
+<div class="math notranslate nohighlight">
+\[ L = \frac{(A+D^2)^{m+1}-A^{m+1}}{D^{m+2}.x^m.22,13^m} \]</div>
+<p>with:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(A\)</span>: upstream area (m<span class="math notranslate nohighlight">\(^2\)</span>) (see next section).</p></li>
+<li><p><span class="math notranslate nohighlight">\(m\)</span>: exponent (-).</p></li>
+<li><p><span class="math notranslate nohighlight">\(D\)</span>: grid resolution (m).</p></li>
+<li><p><span class="math notranslate nohighlight">\(x\)</span>: factor incorporating the flow direction (-).</p></li>
+</ul>
+<p><span class="math notranslate nohighlight">\(x\)</span> is calculated as a function of the aspect of the pixel:</p>
+<div class="math notranslate nohighlight">
+\[ x = |sin(\text{aspect})| + |cos(\text{aspect})|\]</div>
+<p>The exponent is computed with McCool et al. (1989, 1987)</p>
+<div class="math notranslate nohighlight">
+\[ m = \frac{\beta}{\beta + 1} \]</div>
+<p>with <span class="math notranslate nohighlight">\(\beta\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[ \beta = \frac{\frac{sin(\theta)}{0.0896}}{3.sin^{0.8}(\theta) + 0.56}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\theta\)</span> stands for the slope of the pixel in percentages.</p>
+<p>The S-factor is, when the slope is lower than 9 %, computed as:</p>
+<div class="math notranslate nohighlight">
+\[ S = 10.8 * sin(\text{slope}) + 0.03 \]</div>
+<p>Otherwise (larger than or equal to 9 %):</p>
+<div class="math notranslate nohighlight">
+\[ S = 16.8 * \text{slope} - 0.5 \]</div>
+<p>Note another formula for S is used in the case that the upstream area is
+smaller than 25 m<span class="math notranslate nohighlight">\(^2\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[ S = 3.0 * \text{slope}^{0.8} + 0.56 \]</div>
+</section>
+<section id="upslope-area">
+<h2>Upslope area<a class="headerlink" href="#upslope-area" title="Link to this heading">¶</a></h2>
+<p>The upslope or upstream area is computed as:</p>
+<div class="math notranslate nohighlight">
+\[ A = {\sum_1^n{\text{influx}_i}} \]</div>
+<p>with:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(n\)</span>: number of neighbors</p></li>
+<li><p>influx<span class="math notranslate nohighlight">\(_i\)</span>: influx area of neighboring pixel <span class="math notranslate nohighlight">\(i\)</span></p></li>
+</ul>
+<p>Pits are determined before computing the upslope area. These pits are defined
+as points or areas lower than the surrounding landscape, where there is a net
+inflow. These are used to fill in the value of the upslope area for pits/flat
+areas. The upslope area here equals the sum of all water flowing into the pits.
+The calculation of the upslope area proceeds from the highest to the lowest
+pixel. Following rules are defined:</p>
+<ul class="simple">
+<li><p>If the pixel is adjacent to a river: all water flows to the river, even if
+this pixel is not a lower pixel.</p></li>
+<li><p>Within a parcel: first, the aspect (direction of steepest slope) is
+determined. Based on this, the water is distributed over the two neighboring
+pixels in the direction of the aspect (if they are lower than the current
+cell).</p></li>
+<li><p>At the edge of a parcel: the water will primarily stay within the parcel,
+i.e. the water flows to the lowest pixel in the parcel next to the current
+pixel. Only if there is no lower pixel within the field, the water flows to
+the lowest adjacent pixel. Not all water flows to the adjacent parcel in
+this case. Between two parcels, only 30% of the water flows through. Towards
+a forest, this is only 0%. These values are adjustable (connectivity).</p></li>
+</ul>
+</section>
+<section id="tillage-erosion">
+<h2>Tillage erosion<a class="headerlink" href="#tillage-erosion" title="Link to this heading">¶</a></h2>
+<p>Tillage erosion, or soil translocation by tillage, is calculated according to
+the method of Van Oost et al. (2000). For every pixel the outgoing flux
+<span class="math notranslate nohighlight">\(Q_{s,t}\)</span> (kg.m<span class="math notranslate nohighlight">\(^{-1}\)</span>) due to tillage translocation is calculated as (
+slope as gradient = dx/dh)</p>
+<div class="math notranslate nohighlight">
+\[ Q_{s,t} = k_{til} \cdot \text{slope} \]</div>
+<p>with</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(ktil\)</span>: tillage transport coefficient (kg.m<span class="math notranslate nohighlight">\(^{-1}\)</span>)</p></li>
+</ul>
+<p>The local erosion or deposition rate by tillage (<span class="math notranslate nohighlight">\(E_t\)</span>) can be calculated
+as:</p>
+<div class="math notranslate nohighlight">
+\[ E_t = - \frac{Q_{s,t}}{dx} \]</div>
+<p>The outgoing sediment volume of a cell is distributed to one or two target
+pixels.</p>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">¶</a></h2>
+<p>Desmet, P.J.J., Govers, G., 1996, A gis procedure for automatically
+calculating the USLE LS factor on topographically complex landscapes.
+Journal of Soil and Water Conservation 51, 427–433.
+<a class="reference external" href="https://www.jswconline.org/content/51/5/427">https://www.jswconline.org/content/51/5/427</a></p>
+<p>McCool, D.K., Brown, C.L., Foster, R.G., Mutchler, K.C., Meyer, D.L., 1987,
+Revised Slope Steepness Factor for the Universal Soil Loss Equation.
+Transactions of the ASAE 30, 1387–1396. <a class="reference external" href="https://doi.org/10.13031/2013.30576">https://doi.org/10.13031/2013.30576</a></p>
+<p>McCool, D.K., Foster, G.R., Mutchler, K.C., Meyer, D.L., 1989. Revised Slope
+Length Factor for the Universal Soil Loss Equation. Transactions of the
+ASAE 32, 1571–1576. <a class="reference external" href="https://doi.org/10.13031/2013.31192">https://doi.org/10.13031/2013.31192</a></p>
+<p>Notebaert, B., Govers, G., Verstraeten, G., Van Oost, K., Poesen, J., Van
+Rompaey, A., 2006, Verfijnde erosiekaart Vlaanderen: eindrapport. K.U.
+Leuven, Leuven.
+<a class="reference external" href="https://omgeving.vlaanderen.be/sites/default/files/atoms/files/Verfijnde_erosiekaart.pdf">https://omgeving.vlaanderen.be/sites/default/files/atoms/files/Verfijnde_erosiekaart.pdf</a></p>
+<p>Renard, K.G., Foster, G.R., Weesies, G.A., McCool, D.K., Yoder, D.C.,
+1997, Predicting soil erosion by water: a guide to conservation planning with
+the revised universal soil loss equation (RUSLE), Agriculture Handbook. U.S.
+Department of Agriculture, Washington.
+<a class="reference external" href="https://www.ars.usda.gov/ARSUserFiles/64080530/RUSLE/AH_703.pdf">https://www.ars.usda.gov/ARSUserFiles/64080530/RUSLE/AH_703.pdf</a></p>
+<p>Van Oost, K., Govers, G., Desmet, P., 2000, Evaluating the effects of changes
+in landscape structure on soil erosion by water and tillage. Landscape
+Ecology 15, 577–589. <a class="reference external" href="https://doi.org/10.1023/A:1008198215674">https://doi.org/10.1023/A:1008198215674</a></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="SAGA GIS WATEM module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="gettingstarted.html" class="btn btn-neutral float-right" title="Getting started" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Fluves.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

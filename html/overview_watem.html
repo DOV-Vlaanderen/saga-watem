@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>watem Tool Library &mdash; fluves.saga_watem unknown documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=3f1b9271"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="topology Tool Library" href="overview_topology.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="contributing.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            fluves.saga_watem
+          </a>
+              <div class="version">
+                unknown
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="description.html">Model description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flanders-tool.html">Flanders application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topology.html">Topology</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer guide</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Watem</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#aanmaak-percelengrid-prc-1">1. Aanmaak percelengrid (PRC) [1]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#x3-filter-binnen-perceelsgrenzen-2">2. 3x3 filter binnen perceelsgrenzen [2]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#berekening-erosiekaart-compleet-3">3. Berekening Erosiekaart (compleet) [3]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uparea-berekening-4">3.1. Uparea berekening [4]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ls-berekening-5">3.2. LS berekening [5]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#watererosie-berekening-op-basis-van-ls-6">3.4. Watererosie berekening op basis van LS [6]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tillage-erosion-berekening-7">3.5. Tillage erosion berekening [7]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#c-berekening-8">3.3. C berekening [8]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#c-berekening-attribuut-9">3.6. C berekening attribuut [9]</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="overview_topology.html">Topology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview_line_direction.html">Line direction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">fluves.saga_watem</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">watem Tool Library</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="https://git.fluves.net/fluves/saga_watem/src/branch/master/docs/overview_watem.md">View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="watem-tool-library">
+<h1>watem Tool Library<a class="headerlink" href="#watem-tool-library" title="Link to this heading">¶</a></h1>
+<h4>
+ Tool Library
+</h4>
+<table border="0">
+ <tr>
+  <td valign="top">
+   <b>
+    Name
+   </b>
+  </td>
+  <td valign="top">
+   SAGA implementatie van het WATEM model
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+   <b>
+    Author
+   </b>
+  </td>
+  <td valign="top">
+   Johan Van de Wauw 2016 - 2017 - gebaseerd op originele pascal code van KULeuven.Ontwikkeld in opdracht van Vlaamse overheid, departement Omgeving.
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+   <b>
+    ID
+   </b>
+  </td>
+  <td valign="top">
+   watem
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+   <b>
+    File
+   </b>
+  </td>
+  <td valign="top">
+   /__w/saga-watem/saga-watem/build/libs/saga/libwatem.so
+  </td>
+ </tr>
+</table>
+<hr/>
+<h4>
+ Description
+</h4>
+SAGA Implementatie van het WATEM model (KULeuven), inclusief modules voor aanmaak invoerbestanden.
+<br/>
+<br/>
+WaTEM/SEDEM is a spatially distributed soil erosion and sediment delivery model that is developed at the Physicaland Regional Geography Research Group (K.U.Leuven, Belgium) as a user-friendly and optimised version of the WaTEM and SEDEM models, which were also developed at K.U.Leuven. These models were specifically developed to simulate the impact of soil conservation and sediment control measures as well as land use changes in the framework of an integrated catchment management, on the local soil loss and sediment delivery to rivers. This model combines the WaTEM and SEDEM models and aims at providing useful information for land managers to select the most effective catchment management scenario. The building of an interface for the WaTEM/SEDEM model was financed by Vlaamse overheid (Vlaams Planbureau voor de Omgeving, Departement Omgeving).
+<hr/>
+<h4>
+ Tools
+</h4>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#aanmaak-percelengrid-prc-1" id="id1">1. Aanmaak percelengrid (PRC) [1]</a></p></li>
+<li><p><a class="reference internal" href="#x3-filter-binnen-perceelsgrenzen-2" id="id2">2. 3x3 filter binnen perceelsgrenzen [2]</a></p></li>
+<li><p><a class="reference internal" href="#berekening-erosiekaart-compleet-3" id="id3">3. Berekening Erosiekaart (compleet) [3]</a></p></li>
+<li><p><a class="reference internal" href="#uparea-berekening-4" id="id4">3.1. Uparea berekening [4]</a></p></li>
+<li><p><a class="reference internal" href="#ls-berekening-5" id="id5">3.2. LS berekening [5]</a></p></li>
+<li><p><a class="reference internal" href="#watererosie-berekening-op-basis-van-ls-6" id="id6">3.4. Watererosie berekening op basis van LS [6]</a></p></li>
+<li><p><a class="reference internal" href="#tillage-erosion-berekening-7" id="id7">3.5. Tillage erosion berekening [7]</a></p></li>
+<li><p><a class="reference internal" href="#c-berekening-8" id="id8">3.3. C berekening [8]</a></p></li>
+<li><p><a class="reference internal" href="#c-berekening-attribuut-9" id="id9">3.6. C berekening attribuut [9]</a></p></li>
+</ul>
+</nav>
+<section id="aanmaak-percelengrid-prc-1">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">1. Aanmaak percelengrid (PRC) [1]</a><a class="headerlink" href="#aanmaak-percelengrid-prc-1" title="Link to this heading">¶</a></h2>
+<h4>Tool</h4><table border="0"><tr><td valign="top"><b>Name</b></td><td valign="top">1. Aanmaak percelengrid (PRC)</td></tr><tr><td valign="top"><b>Author</b></td><td valign="top">Johan Van de Wauw (2017)</td></tr><tr><td valign="top"><b>Version</b></td><td valign="top">2023.10.23</td></tr><tr><td valign="top"><b>Library</b></td><td valign="top">watem</td></tr><tr><td valign="top"><b>ID</b></td><td valign="top">1</td></tr><tr><td valign="top"><b>Specification</b></td><td valign="top">grid</td></tr></table><hr><h4>Description</h4>Maakt percelengridkaart aan die vereist is voor het gebruik in de berekening van de erosiekaart. Hierbij krijgen percelen een code tussen 2 en 9999, bos 10000, rivieren en open water -1, bebouwing -2<hr><h4>Parameters</h4><table border="1" width="100%" valign="top" cellpadding="5" rules="all"><tr><th>Name</th><th>Type</th><th>Identifier</th><th>Description</th><th>Constraints</th></tr><br><tr><th colspan="5">Input</th></tr><tr><td>Percelen</td><td>Shapes, input</td><td>PARCEL_SHAPES</td><td>Percelen (shapefile)</td><td></td></tr><tr><td>Landgebruik</td><td>Grid, input</td><td>LANDUSE</td><td>Landgebruik (grid)</td><td></td></tr><tr><td>GRB WTZ (VHA-polygoon)</td><td>Shapes, input</td><td>WTZ</td><td>VHA (polygoon)</td><td></td></tr><tr><td>VHA Lijnen</td><td>Shapes, input</td><td>WLAS</td><td>VHA (lijnen). Eventueel kan de laag GRB Wlas gebruikt worden, deze loopt echter soms achter op de VHA.</td><td></td></tr><tr><td>GRB Sbn (spoorbaan)</td><td>Shapes, input</td><td>SBN</td><td>GRB Sbn (spoorbaan)</td><td></td></tr><tr><td>GRB Wbn (wegbaan)</td><td>Shapes, input</td><td>WBN</td><td>GRB Wbn (wegbaan)</td><td></td></tr><tr><td>GRB Wga (wegaanhorigheid)</td><td>Shapes, input</td><td>WGA</td><td>GRB Wga (wegaanhorigheid)</td><td></td></tr><tr><td>GRB Gbg (gebouw aan de grond)</td><td>Shapes, input</td><td>GBG</td><td>GRB Gbg (gebouw aan de grond)</td><td></td></tr><tr><td>GRB Gba (gebouwaanhorigheid)</td><td>Shapes, input</td><td>GBA</td><td>GRB Gba (gebouwaanhorigheid)</td><td></td></tr><tr><td>GRB Trn (terrein)</td><td>Shapes, input</td><td>TRN</td><td>GRB Trn (Terrein) - enkel bepaalde klassen worden gebruikt</td><td></td></tr><tr><td>GRB Knw (Kunstwerk)</td><td>Shapes, input</td><td>KNW</td><td>GRB Knw (Kunstwerk)</td><td></td></tr><tr><th colspan="5">Output</th></tr><tr><td>Percelen grid</td><td>Grid, output</td><td>PRC</td><td>Percelengridkaart gecodeerd volgens watem </td><td></td></tr></table>
+<br /></section>
+<section id="x3-filter-binnen-perceelsgrenzen-2">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">2. 3x3 filter binnen perceelsgrenzen [2]</a><a class="headerlink" href="#x3-filter-binnen-perceelsgrenzen-2" title="Link to this heading">¶</a></h2>
+<h4>Tool</h4><table border="0"><tr><td valign="top"><b>Name</b></td><td valign="top">2. 3x3 filter binnen perceelsgrenzen</td></tr><tr><td valign="top"><b>Author</b></td><td valign="top">Copyright (c) 2017.  Johan Van de Wauw</td></tr><tr><td valign="top"><b>Version</b></td><td valign="top">2023.10.23</td></tr><tr><td valign="top"><b>Library</b></td><td valign="top">watem</td></tr><tr><td valign="top"><b>ID</b></td><td valign="top">2</td></tr><tr><td valign="top"><b>Specification</b></td><td valign="top">grid</td></tr></table><hr><h4>Description</h4>De tool voert een 3x3 filter uit op een digitaal hoogtemodel die enkel cellen binnen het perceel gebruikt.<hr><h4>Parameters</h4><table border="1" width="100%" valign="top" cellpadding="5" rules="all"><tr><th>Name</th><th>Type</th><th>Identifier</th><th>Description</th><th>Constraints</th></tr><br><tr><th colspan="5">Input</th></tr><tr><td>Elevation</td><td>Grid, input</td><td>DEM</td><td>Digitaal hoogtemodel. </td><td></td></tr><tr><td>Percelen</td><td>Grid, input</td><td>PRC</td><td>Percelengrid met unieke identifier per perceel, kan aangemaakt worden met de tool 'aanmaak percelengrid'</td><td></td></tr><tr><th colspan="5">Output</th></tr><tr><td>Filtered DEM</td><td>Grid, output</td><td>DEM_FILTER</td><td>DEM gefilterd met een 3x3 filter die enkel binnen de perceelsgrenzen actief is.</td><td></td></tr></table>
+<br /></section>
+<section id="berekening-erosiekaart-compleet-3">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">3. Berekening Erosiekaart (compleet) [3]</a><a class="headerlink" href="#berekening-erosiekaart-compleet-3" title="Link to this heading">¶</a></h2>
+<h4>Tool</h4><table border="0"><tr><td valign="top"><b>Name</b></td><td valign="top">3. Berekening Erosiekaart (compleet)</td></tr><tr><td valign="top"><b>Author</b></td><td valign="top">Based on Watem (KULeuven). Converted to SAGA by Johan Van de Wauw (2016-2017)</td></tr><tr><td valign="top"><b>Version</b></td><td valign="top">2023.10.23</td></tr><tr><td valign="top"><b>Library</b></td><td valign="top">watem</td></tr><tr><td valign="top"><b>ID</b></td><td valign="top">3</td></tr><tr><td valign="top"><b>Specification</b></td><td valign="top">grid</td></tr></table><hr><h4>Description</h4>3. Berekening Erosiekaart (compleet)<hr><h4>Parameters</h4><table border="1" width="100%" valign="top" cellpadding="5" rules="all"><tr><th>Name</th><th>Type</th><th>Identifier</th><th>Description</th><th>Constraints</th></tr><br><tr><th colspan="5">Input</th></tr><tr><td>DEM</td><td>Grid, input</td><td>DEM</td><td>Digitaal hoogtemodel. Eventueel met gebruik van filter.</td><td></td></tr><tr><td>Percelen</td><td>Grid, input</td><td>PRC</td><td>Percelengrid zoals aangemaakt met de tool 'aanmaak percelengrid'</td><td></td></tr><tr><td>K: bodemerosiegevoeligheidsfactor (ton ha MJ-1 mm-1)</td><td>Grid, input</td><td>K</td><td>K: bodemerosiegevoeligheidsfactor (ton ha MJ-1 mm-1)</td><td></td></tr><tr><th colspan="5">Output</th></tr><tr><td>Pit</td><td>Grid, output</td><td>PIT</td><td>Grid met pits zoals bepaald in de uparea berekening</td><td></td></tr><tr><td>UPAREA</td><td>Grid, output</td><td>UPSLOPE_AREA</td><td>Upslope Area: oppervlakte dat afstroomt naar een pixel</td><td></td></tr><tr><td>LS</td><td>Grid, output</td><td>LS</td><td>LS: de topografische hellings- en lengtefactor (dimensieloos)</td><td></td></tr><tr><td>Tillage Erosion</td><td>Grid, output, optional</td><td>TILL</td><td>Gemiddeld bodemverlies als gevolg van bodemerosie  (ton ha-1 jaar-1)</td><td></td></tr><tr><td>Water erosion</td><td>Grid, output</td><td>WATER_EROSION</td><td>A: gemiddeld bodemverlies als gevolg van geul- en intergeulerosie (ton ha-1 jaar-1)</td><td></td></tr><tr><th colspan="5">Options</th></tr><tr><td>R</td><td>Floating point</td><td>R</td><td>regenerosiviteitsfactor (MJ mm ha-1 jaar-1)</td><td>Minimum: 0.000000<br>Default: 880.000000</td></tr><tr><td>P</td><td>Floating point</td><td>P</td><td>de erosiebeheersingsfactor (dimensieloos) </td><td>Minimum: 0.000000<br>Default: 1.000000</td></tr><tr><td>correctiefactor grid</td><td>Floating point</td><td>CORR</td><td>Correctiefactor omdat de berekeningen bepaald werden op een standaard plot van 22.1 meter. 1.4 voor grids van 5x5</td><td>Minimum: 0.000000<br>Default: 1.400000</td></tr><tr><td>Parcel Connectivity to cropland</td><td>Floating point</td><td>PCTOCROP</td><td></td><td>Minimum: 0.000000<br>Default: 70.000000</td></tr><tr><td>Parcel Connectivity to forest</td><td>Floating point</td><td>PCTOFOREST</td><td></td><td>Minimum: 0.000000<br>Default: 100.000000</td></tr><tr><td>Save memory</td><td>Boolean</td><td>SAVE_MEMORY</td><td>Optie om het geheugengebruik tijdens het uitvoeren te verminderen. Opgelet: kan de doorlooptijd sterk verhogen.</td><td>Default: 0</td></tr><tr><td>Flow from pits into closeby cells (within radius)</td><td>Boolean</td><td>PIT_FLOW</td><td></td><td>Default: 1</td></tr><tr><td>Search radius from pit.</td><td>Integer</td><td>PIT_RADIUS</td><td>Maximum radius from a pit to which upstream water can flow</td><td>Default: 4</td></tr><tr><td>Perceelsgrenzen gebruiken in LS berekening</td><td>Boolean</td><td>LS_USE_PRC</td><td>Perceelsgrenzen gebruiken in LS berekening (slope enkel binnen veld). </td><td>Default: 1</td></tr><tr><td>LS Calculation</td><td>Choice</td><td>METHOD</td><td></td><td>Available Choices:<br>[0] Moore & Nieber 1989<br>[1] Desmet & Govers 1996 (standaard WATEM)<br>[2] Wischmeier & Smith 1978<br>[3] Van Oost, 2003<br>Default: 1</td></tr><tr><td>Maximale erosie per pixel aftoppen</td><td>Boolean</td><td>EROSION_CROP_MAX</td><td></td><td>Default: 1</td></tr><tr><td>Maximale erosie, hogere waarden worden afgetopt</td><td>Floating point</td><td>EROSION_MAX</td><td></td><td>Minimum: 0.000000<br>Default: 150.000000</td></tr></table>
+<br /></section>
+<section id="uparea-berekening-4">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">3.1. Uparea berekening [4]</a><a class="headerlink" href="#uparea-berekening-4" title="Link to this heading">¶</a></h2>
+<h4>Tool</h4><table border="0"><tr><td valign="top"><b>Name</b></td><td valign="top">3.1. Uparea berekening</td></tr><tr><td valign="top"><b>Author</b></td><td valign="top">Copyright (c) 2006 - 2016 by KULeuven. Converted to SAGA/C++ by Johan Van de Wauw</td></tr><tr><td valign="top"><b>Version</b></td><td valign="top">2023.10.23</td></tr><tr><td valign="top"><b>Library</b></td><td valign="top">watem</td></tr><tr><td valign="top"><b>ID</b></td><td valign="top">4</td></tr><tr><td valign="top"><b>Specification</b></td><td valign="top">grid</td></tr></table><hr><h4>Description</h4>This module converts a digital elevation model grid and a parcel grid and converts it to an upslope area.<br><br>The method takes into account parcel borders, rivers (grid value -1) and landuse (forest has value 10000).<br>Pits are taken into account. Optionally a grid with Pits and a table with pit information can be generated. <hr><h4>Parameters</h4><table border="1" width="100%" valign="top" cellpadding="5" rules="all"><tr><th>Name</th><th>Type</th><th>Identifier</th><th>Description</th><th>Constraints</th></tr><br><tr><th colspan="5">Input</th></tr><tr><td>Digitaal hoogtemodel</td><td>Grid, input</td><td>DEM</td><td></td><td></td></tr><tr><td>Percelen</td><td>Grid, input</td><td>PRC</td><td>Percelengrid met unieke identifier per perceel. Bossen krijgen waarde 10000. Bebouwde gebieden en wegen -2 en rivieren -1.</td><td></td></tr><tr><th colspan="5">Output</th></tr><tr><td>Pit</td><td>Grid, output</td><td>PIT</td><td>Gridfile met pits</td><td></td></tr><tr><td>Upslope Area</td><td>Grid, output</td><td>UPSLOPE_AREA</td><td>Upslope Area: oppervlakte dat afstroomt naar een pixel</td><td></td></tr><tr><td>Pit data</td><td>Table, output, optional</td><td>PITDATA</td><td>Tabel met gegevens per gevonden pit. Coordinaten volgens het grid in watem.</td><td></td></tr><tr><th colspan="5">Options</th></tr><tr><td>Parcel Connectivity to cropland</td><td>Floating point</td><td>PCTOCROP</td><td></td><td>Minimum: 0.000000<br>Default: 70.000000</td></tr><tr><td>Parcel Connectivity to forest</td><td>Floating point</td><td>PCTOFOREST</td><td></td><td>Minimum: 0.000000<br>Default: 100.000000</td></tr><tr><td>Parcel Connectivity to road/built-up areas</td><td>Floating point</td><td>PCTOROAD</td><td></td><td>Minimum: 0.000000<br>Default: 70.000000</td></tr><tr><td>Use old (wrong) calculation near roads and rivers</td><td>Boolean</td><td>WRONG</td><td>De oorspronkelijke berekening gebruiken voor wegen en rivieren of de gecorrigeerde versie.</td><td>Default: 0</td></tr><tr><td>Flow from pits into closeby cells (within radius)</td><td>Boolean</td><td>PIT_FLOW</td><td>Geeft aan of in de buurt van pits gezocht moet worden naar lagergelegen cellen waar dan nog water naar kan stromen. Gebruikt de maximale zoekstraal die hieronder bepaald wordt. </td><td>Default: 0</td></tr><tr><td>Search radius from pit.</td><td>Integer</td><td>PIT_RADIUS</td><td>Maximale zoekstraal waarin naar pixels gezocht wordt die lager liggen dan gevonden pits. Enkel van toepassing als ook PIT_FLOW geselecterd is.</td><td>Default: 4</td></tr></table>
+<br /></section>
+<section id="ls-berekening-5">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">3.2. LS berekening [5]</a><a class="headerlink" href="#ls-berekening-5" title="Link to this heading">¶</a></h2>
+<h4>Tool</h4><table border="0"><tr><td valign="top"><b>Name</b></td><td valign="top">3.2. LS berekening</td></tr><tr><td valign="top"><b>Author</b></td><td valign="top">Copyright (c) 2003 Olaf Conrad. Modified by Johan Van de Wauw (2016) to make model identical to Watem</td></tr><tr><td valign="top"><b>Version</b></td><td valign="top">2023.10.23</td></tr><tr><td valign="top"><b>Library</b></td><td valign="top">watem</td></tr><tr><td valign="top"><b>ID</b></td><td valign="top">5</td></tr><tr><td valign="top"><b>Specification</b></td><td valign="top">grid</td></tr></table><hr><h4>Description</h4>Berekening van de LS factor analoog aan de bereking in Watem/sedem.<hr><h4>Parameters</h4><table border="1" width="100%" valign="top" cellpadding="5" rules="all"><tr><th>Name</th><th>Type</th><th>Identifier</th><th>Description</th><th>Constraints</th></tr><br><tr><th colspan="5">Input</th></tr><tr><td>Elevation</td><td>Grid, input</td><td>DEM</td><td></td><td></td></tr><tr><td>Upslope Length Factor</td><td>Grid, input</td><td>UPSLOPE_AREA</td><td></td><td></td></tr><tr><td>Percelen grid (PRC)</td><td>Grid, input, optional</td><td>PRC</td><td>Percelengrid met unieke identifier per perceel. Bossen krijgen waarde 10000. Bebouwde gebieden en wegen -2 en rivieren -1.</td><td></td></tr><tr><th colspan="5">Output</th></tr><tr><td>Calculated LS</td><td>Grid, output</td><td>LS</td><td>This will contain LS. </td><td></td></tr><tr><td>Slope</td><td>Grid, output, optional</td><td>SLOPE</td><td>Optional Slope output grid </td><td></td></tr><tr><td>Calculated L</td><td>Grid, output, optional</td><td>L</td><td>This will contain L. </td><td></td></tr><tr><td>Calculated S</td><td>Grid, output, optional</td><td>S</td><td>This will contain S. </td><td></td></tr><tr><th colspan="5">Options</th></tr><tr><td>Perceelsgrenzen gebruiken in de berekening van de slope</td><td>Boolean</td><td>USEPRC</td><td>Perceelsgrenzen gebruiken bij de berekening van de slope: enkel pixels binnen dezelfde unit worden in beschouwing genomen</td><td>Default: 1</td></tr><tr><td>LS Calculation</td><td>Choice</td><td>METHOD</td><td></td><td>Available Choices:<br>[0] Moore & Nieber 1989<br>[1] Desmet & Govers 1996 (standaard WATEM)<br>[2] Wischmeier & Smith 1978<br>[3] Van Oost, 2003<br>Default: 1</td></tr></table>
+<br /></section>
+<section id="watererosie-berekening-op-basis-van-ls-6">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">3.4. Watererosie berekening op basis van LS [6]</a><a class="headerlink" href="#watererosie-berekening-op-basis-van-ls-6" title="Link to this heading">¶</a></h2>
+<h4>Tool</h4><table border="0"><tr><td valign="top"><b>Name</b></td><td valign="top">3.4. Watererosie berekening op basis van LS</td></tr><tr><td valign="top"><b>Author</b></td><td valign="top">2016-2017  - Johan Van de Wauw</td></tr><tr><td valign="top"><b>Version</b></td><td valign="top">2023.10.23</td></tr><tr><td valign="top"><b>Library</b></td><td valign="top">watem</td></tr><tr><td valign="top"><b>ID</b></td><td valign="top">6</td></tr><tr><td valign="top"><b>Specification</b></td><td valign="top">grid</td></tr></table><hr><h4>Description</h4>Berekening van de watererosie op basis van de LS factor en de C factor. Berekende waarden worden afgetopt op 150.<hr><h4>Parameters</h4><table border="1" width="100%" valign="top" cellpadding="5" rules="all"><tr><th>Name</th><th>Type</th><th>Identifier</th><th>Description</th><th>Constraints</th></tr><br><tr><th colspan="5">Input</th></tr><tr><td>LS</td><td>Grid, input</td><td>LS</td><td>LS: de topografische hellings- en lengtefactor (dimensieloos)</td><td></td></tr><tr><td>K: bodemerosiegevoeligheidsfactor (ton ha MJ-1 mm-1)</td><td>Grid, input</td><td>K</td><td>K: bodemerosiegevoeligheidsfactor (ton ha MJ-1 mm-1)</td><td></td></tr><tr><td>C: de gewas- en bedrijfsvoeringsfactor (dimensieloos)</td><td>Grid, input</td><td>C</td><td>Grid met de gewas en bedrijfsvoeringsfactor. </td><td></td></tr><tr><th colspan="5">Output</th></tr><tr><td>Water erosion</td><td>Grid, output</td><td>WATER_EROSION</td><td>Gemiddeld bodemverlies als gevolg van geul- en intergeulerosie (ton ha-1 jaar-1)</td><td></td></tr><tr><th colspan="5">Options</th></tr><tr><td>regenerosiviteitsfactor (MJ mm ha-1 jaar-1)</td><td>Floating point</td><td>R</td><td></td><td>Minimum: 0.000000<br>Default: 880.000000</td></tr><tr><td>de erosiebeheersingsfactor (dimensieloos) </td><td>Floating point</td><td>P</td><td>de erosiebeheersingsfactor (dimensieloos)</td><td>Minimum: 0.000000<br>Default: 1.000000</td></tr><tr><td>correctiefactor grid</td><td>Floating point</td><td>CORR</td><td>Correctiefactor omdat de berekeningen bepaald werden op een standaard plot van 22.1 meter. 1.4 voor grids van 5x5</td><td>Minimum: 0.000000<br>Default: 1.400000</td></tr><tr><td>Maximale erosie per pixel aftoppen</td><td>Boolean</td><td>EROSION_CROP_MAX</td><td></td><td>Default: 1</td></tr><tr><td>Maximale erosie, hogere waarden worden afgetopt</td><td>Floating point</td><td>EROSION_MAX</td><td></td><td>Minimum: 0.000000<br>Default: 150.000000</td></tr></table>
+<br /></section>
+<section id="tillage-erosion-berekening-7">
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">3.5. Tillage erosion berekening [7]</a><a class="headerlink" href="#tillage-erosion-berekening-7" title="Link to this heading">¶</a></h2>
+<h4>Tool</h4><table border="0"><tr><td valign="top"><b>Name</b></td><td valign="top">3.5. Tillage erosion berekening</td></tr><tr><td valign="top"><b>Author</b></td><td valign="top">Copyright (c) 2006 - 2016 by KULeuven. Converted to SAGA/C++ by Johan Van de Wauw</td></tr><tr><td valign="top"><b>Version</b></td><td valign="top">2023.10.23</td></tr><tr><td valign="top"><b>Library</b></td><td valign="top">watem</td></tr><tr><td valign="top"><b>ID</b></td><td valign="top">7</td></tr><tr><td valign="top"><b>Specification</b></td><td valign="top">grid</td></tr></table><hr><h4>Description</h4>Berekening van de Bewerkingserosie. Gebaseerd op de code van WATEM (KULeuven).<hr><h4>Parameters</h4><table border="1" width="100%" valign="top" cellpadding="5" rules="all"><tr><th>Name</th><th>Type</th><th>Identifier</th><th>Description</th><th>Constraints</th></tr><br><tr><th colspan="5">Input</th></tr><tr><td>Elevation</td><td>Grid, input</td><td>DEM</td><td>Digitaal hoogtemodel.</td><td></td></tr><tr><td>Percelen</td><td>Grid, input</td><td>PRC</td><td>Percelengrid met unieke identifier per perceel. Bossen krijgen waarde 10000. Bebouwde gebieden en wegen -2 en rivieren -1.</td><td></td></tr><tr><th colspan="5">Output</th></tr><tr><td>Tillage erosion</td><td>Grid, output</td><td>TILL</td><td>Gemiddels bodemverlies als gevolg van bodemerosie  (ton ha-1 jaar-1)</td><td></td></tr></table>
+<br /></section>
+<section id="c-berekening-8">
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">3.3. C berekening [8]</a><a class="headerlink" href="#c-berekening-8" title="Link to this heading">¶</a></h2>
+<h4>Tool</h4><table border="0"><tr><td valign="top"><b>Name</b></td><td valign="top">3.3. C berekening</td></tr><tr><td valign="top"><b>Author</b></td><td valign="top">Copyright (c) 2017, Johan Van de Wauw</td></tr><tr><td valign="top"><b>Version</b></td><td valign="top">2023.10.23</td></tr><tr><td valign="top"><b>Library</b></td><td valign="top">watem</td></tr><tr><td valign="top"><b>ID</b></td><td valign="top">8</td></tr><tr><td valign="top"><b>Specification</b></td><td valign="top">grid</td></tr></table><hr><h4>Description</h4>Berekening van de C kaart op basis van de percelenkaart. <hr><h4>Parameters</h4><table border="1" width="100%" valign="top" cellpadding="5" rules="all"><tr><th>Name</th><th>Type</th><th>Identifier</th><th>Description</th><th>Constraints</th></tr><br><tr><th colspan="5">Input</th></tr><tr><td>Percelengrid</td><td>Grid, input</td><td>PRC</td><td></td><td></td></tr><tr><th colspan="5">Output</th></tr><tr><td>C Grid</td><td>Grid, output</td><td>C</td><td>C Grid</td><td></td></tr></table>
+<br /></section>
+<section id="c-berekening-attribuut-9">
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">3.6. C berekening attribuut [9]</a><a class="headerlink" href="#c-berekening-attribuut-9" title="Link to this heading">¶</a></h2>
+<h4>Tool</h4><table border="0"><tr><td valign="top"><b>Name</b></td><td valign="top">3.6. C berekening attribuut</td></tr><tr><td valign="top"><b>Author</b></td><td valign="top">Copyright (c) 2022, Johan Van de Wauw</td></tr><tr><td valign="top"><b>Version</b></td><td valign="top">2023.10.23</td></tr><tr><td valign="top"><b>Library</b></td><td valign="top">watem</td></tr><tr><td valign="top"><b>ID</b></td><td valign="top">9</td></tr><tr><td valign="top"><b>Specification</b></td><td valign="top">grid</td></tr></table><hr><h4>Description</h4>Berekening van de C kaart op basis van percelen met C attribuut. <hr><h4>Parameters</h4><table border="1" width="100%" valign="top" cellpadding="5" rules="all"><tr><th>Name</th><th>Type</th><th>Identifier</th><th>Description</th><th>Constraints</th></tr><br><tr><th colspan="5">Input</th></tr><tr><td>Percelen</td><td>Shapes, input</td><td>PARCEL_SHAPES</td><td>Percelen (shapefile)</td><td></td></tr><tr><td>Land use grid</td><td>Grid, input</td><td>LANDUSE</td><td></td><td></td></tr><tr><td>GRB WTZ (VHA-polygoon)</td><td>Shapes, input, optional</td><td>WTZ</td><td>VHA (polygoon)</td><td></td></tr><tr><td>VHA Lijnen</td><td>Shapes, input, optional</td><td>WLAS</td><td>VHA (lijnen). Eventueel kan de laag GRB Wlas gebruikt worden, deze loopt echter soms achter op de VHA.</td><td></td></tr><tr><td>GRB Sbn (spoorbaan)</td><td>Shapes, input, optional</td><td>SBN</td><td>GRB Sbn (spoorbaan)</td><td></td></tr><tr><td>GRB Wbn (wegbaan)</td><td>Shapes, input, optional</td><td>WBN</td><td>GRB Wbn (wegbaan)</td><td></td></tr><tr><td>GRB Wga (wegaanhorigheid)</td><td>Shapes, input, optional</td><td>WGA</td><td>GRB Wga (wegaanhorigheid)</td><td></td></tr><tr><td>GRB Gbg (gebouw aan de grond)</td><td>Shapes, input, optional</td><td>GBG</td><td>GRB Gbg (gebouw aan de grond)</td><td></td></tr><tr><td>GRB Gba (gebouwaanhorigheid)</td><td>Shapes, input, optional</td><td>GBA</td><td>GRB Gba (gebouwaanhorigheid)</td><td></td></tr><tr><td>GRB Trn (terrein)</td><td>Shapes, input, optional</td><td>TRN</td><td>GRB Trn (Terrein) - enkel bepaalde klassen worden gebruikt</td><td></td></tr><tr><td>GRB Knw (Kunstwerk)</td><td>Shapes, input, optional</td><td>KNW</td><td>GRB Knw (Kunstwerk)</td><td></td></tr><tr><th colspan="5">Output</th></tr><tr><td>C Grid</td><td>Grid, output</td><td>C</td><td>C Grid</td><td></td></tr><tr><th colspan="5">Options</th></tr><tr><td>C Field</td><td>Table field</td><td>PARCEL_SHAPE_C_FIELD</td><td>Field containing C value</td><td></td></tr><tr><td>Use GRB and VHA as extra landuse</td><td>Boolean</td><td>GRB_VHA</td><td></td><td>Default: 0</td></tr></table>
+<br /></section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="contributing.html" class="btn btn-neutral float-left" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="overview_topology.html" class="btn btn-neutral float-right" title="topology Tool Library" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Fluves.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+# topology Tool Library
+
+```{raw} html
+:file: tool_html/topology/topology_parsed.html
+
+```
+
+```{contents}
+:local:
+:depth: 1
+
+```
+
+
+## Topologize Polylines [0]
+
+```{raw} html
+:file: tool_html/topology/topology_0.html
+```
+```{raw} html
+<br />
+```
+
+
+## Upstream Edges [1]
+
+```{raw} html
+:file: tool_html/topology/topology_1.html
+```
+```{raw} html
+<br />
+```
+
+
+## Routing to shape [2]
+
+```{raw} html
+:file: tool_html/topology/topology_2.html
+```
+```{raw} html
+<br />
+```
+
+
+## Segment to subcatchments [3]
+
+```{raw} html
+:file: tool_html/topology/topology_3.html
+```
+```{raw} html
+<br />
+```
