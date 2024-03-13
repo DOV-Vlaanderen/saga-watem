@@ -8,8 +8,8 @@
 //                                                       //
 //      System for Automated Geoscientific Analyses      //
 //                                                       //
-//                     Tool Library                      //
-//                     Grid_Gridding                     //
+//                       Network                         //
+//                     Line_Direction                    //
 //                                                       //
 //-------------------------------------------------------//
 //                                                       //
@@ -65,7 +65,7 @@ CLineDirection::CLineDirection(void)
 	Set_Author		("Johan Van de Wauw (c) 2019");
 
 	Set_Description	(_TW(
-		"Creates a grid of the direction (fat) of a shapes. "
+		"Creates a grid of the direction (fat) of a line shapes. "
 	));
 
 	Set_Version(VERSION);
