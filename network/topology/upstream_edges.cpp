@@ -10,8 +10,8 @@ Upstream_Edges::Upstream_Edges(void)
     Set_Author(_TL("Copyrights (c) 2018 by Johan Van de Wauw"));
 
     Set_Description(_TL(
-        "Upstream Edges.")
-    );
+                        "Upstream Edges.")
+                   );
 
     //----------------------------------------------------
 
@@ -148,13 +148,13 @@ bool Upstream_Edges::On_Execute(void)
     nodes.clear();
 
     // search for and break circular edges
-   for (auto const& it : edges)
-   {
-       int edge_id = it.first;
-       std::vector<int> upstream;
-       upstream.push_back(edge_id);
-       this->break_cycles(edge_id, upstream, 1);
-   }
+    for (auto const& it : edges)
+    {
+        int edge_id = it.first;
+        std::vector<int> upstream;
+        upstream.push_back(edge_id);
+        this->break_cycles(edge_id, upstream, 1);
+    }
 
 
     // all edges without upper edges to todo

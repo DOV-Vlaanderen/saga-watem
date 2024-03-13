@@ -82,34 +82,34 @@
 ///////////////////////////////////////////////////////////
 
 //---------------------------------------------------------
-class CLineDirection : public CSG_Tool  
+class CLineDirection : public CSG_Tool
 {
 public:
-	CLineDirection(void);
+    CLineDirection(void);
 
 
 protected:
 
-	virtual bool				On_Execute				(void);
-	virtual int					On_Parameter_Changed(CSG_Parameters *pParameters, CSG_Parameter *pParameter);
-	virtual int					On_Parameters_Enable(CSG_Parameters *pParameters, CSG_Parameter *pParameter);
+    virtual bool				On_Execute				(void);
+    virtual int					On_Parameter_Changed(CSG_Parameters *pParameters, CSG_Parameter *pParameter);
+    virtual int					On_Parameters_Enable(CSG_Parameters *pParameters, CSG_Parameter *pParameter);
 
 
 private:
 
-	int							m_Multiple;
-	TSG_Point_Int                   prev;
+    int							m_Multiple;
+    TSG_Point_Int                   prev;
 
-	CSG_Parameters_Grid_Target	m_Grid_Target;
+    CSG_Parameters_Grid_Target	m_Grid_Target;
 
-	CSG_Grid					*m_pGrid;
+    CSG_Grid					*m_pGrid;
 
 
-	void						Set_Value				(int x, int y, double Value);
+    void						Set_Value				(int x, int y, double Value);
 
 
     void						Set_Line				(CSG_Shape *pShape);
-	void						Set_Line_Fat			(TSG_Point a, TSG_Point b);
+    void						Set_Line_Fat			(TSG_Point a, TSG_Point b);
 };
 
 
@@ -118,34 +118,36 @@ private:
 ///////////////////////////////////////////////////////////
 
 //---------------------------------------------------------
-class CPolygons2Grid : public CSG_Tool  
+class CPolygons2Grid : public CSG_Tool
 {
 public:
-	CPolygons2Grid(void);
+    CPolygons2Grid(void);
 
-	virtual CSG_String			Get_MenuPath			(void)	{	return( _TL("Polygons") );	}
+    virtual CSG_String			Get_MenuPath			(void)	{
+        return( _TL("Polygons") );
+    }
 
 
 protected:
 
-	virtual bool				On_Execute				(void);
+    virtual bool				On_Execute				(void);
 
-	virtual int					On_Parameter_Changed	(CSG_Parameters *pParameters, CSG_Parameter *pParameter);
-	virtual int					On_Parameters_Enable	(CSG_Parameters *pParameters, CSG_Parameter *pParameter);
+    virtual int					On_Parameter_Changed	(CSG_Parameters *pParameters, CSG_Parameter *pParameter);
+    virtual int					On_Parameters_Enable	(CSG_Parameters *pParameters, CSG_Parameter *pParameter);
 
 
 private:
 
-	int							m_Multiple;
+    int							m_Multiple;
 
-	CSG_Parameters_Grid_Target	m_Grid_Target;
+    CSG_Parameters_Grid_Target	m_Grid_Target;
 
-	CSG_Grid					*m_pGrid, *m_pCoverage;
+    CSG_Grid					*m_pGrid, *m_pCoverage;
 
 
-	TSG_Data_Type				Get_Data_Type			(int Field);
+    TSG_Data_Type				Get_Data_Type			(int Field);
 
-	void						Set_Value				(int x, int y, double Value, double Coverage);
+    void						Set_Value				(int x, int y, double Value, double Coverage);
 
 
 };

@@ -70,26 +70,27 @@
 
 CSG_String Get_Info(int i)
 {
-	switch( i )
-	{
-	case TLB_INFO_Name:	default:
-		return( _TL("Network") );
+    switch( i )
+    {
+    case TLB_INFO_Name:
+    default:
+        return( _TL("Network") );
 
-	case TLB_INFO_Category:
-		return( _TL("Grid") );
+    case TLB_INFO_Category:
+        return( _TL("Grid") );
 
-	case TLB_INFO_Author:
+    case TLB_INFO_Author:
         return( SG_T("J. Van de Wauw (c) 2019") );
 
-	case TLB_INFO_Description:
+    case TLB_INFO_Description:
         return( _TL("Topology grid tools") );
 
-	case TLB_INFO_Version:
-		return( SG_T("1.0") );
+    case TLB_INFO_Version:
+        return( SG_T("1.0") );
 
-	case TLB_INFO_Menu_Path:
+    case TLB_INFO_Menu_Path:
         return( _TL("Topologize") );
-	}
+    }
 }
 
 
@@ -106,12 +107,15 @@ CSG_String Get_Info(int i)
 
 CSG_Tool *		Create_Tool(int i)
 {
-	switch( i )
-	{
-	case  0:	return( new CLineDirection );
-	case  1:    return(NULL);
-	default:	return( TLB_INTERFACE_SKIP_TOOL );
-	}
+    switch( i )
+    {
+    case  0:
+        return( new CLineDirection );
+    case  1:
+        return(NULL);
+    default:
+        return( TLB_INTERFACE_SKIP_TOOL );
+    }
 }
 
 
@@ -124,6 +128,6 @@ CSG_Tool *		Create_Tool(int i)
 //---------------------------------------------------------
 //{{AFX_SAGA
 
-	TLB_INTERFACE
+TLB_INTERFACE
 
 //}}AFX_SAGA

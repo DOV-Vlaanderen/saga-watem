@@ -9,9 +9,10 @@
 
 CSG_String Get_Info(int i)
 {
-	switch( i )
-	{
-    case TLB_INFO_Name:	default:
+    switch( i )
+    {
+    case TLB_INFO_Name:
+    default:
         return( _TL("Topologize") );
 
     case TLB_INFO_Author:
@@ -21,12 +22,12 @@ CSG_String Get_Info(int i)
         return( _TL("Generate a network from a line shapefile; Based on Microcity") );
 
     case TLB_INFO_Version:
-		return( SG_T("0.905") );
+        return( SG_T("0.905") );
 
     case TLB_INFO_Menu_Path:
 
         return( _TL("Network") );
-	}
+    }
 }
 
 #include "topologize.h"
@@ -37,13 +38,13 @@ CSG_String Get_Info(int i)
 CSG_Tool *		Create_Tool(int i)
 {
 
-	CSG_Tool	*pModule;
-	
-	switch( i )
-	{
-	case 0:
-		pModule = new CTopologize;
-		break;
+    CSG_Tool	*pModule;
+
+    switch( i )
+    {
+    case 0:
+        pModule = new CTopologize;
+        break;
     case 1:
         pModule = new Upstream_Edges;
         break;
@@ -54,11 +55,11 @@ CSG_Tool *		Create_Tool(int i)
         pModule = new segment_catchment;
         break;
     default:
-		pModule	= NULL;
-		break;
-	}
+        pModule	= NULL;
+        break;
+    }
 
-	return( pModule );
+    return( pModule );
 }
 
 
@@ -71,6 +72,6 @@ CSG_Tool *		Create_Tool(int i)
 //---------------------------------------------------------
 //{{AFX_SAGA
 
-    TLB_INTERFACE
+TLB_INTERFACE
 
 //}}AFX_SAGA

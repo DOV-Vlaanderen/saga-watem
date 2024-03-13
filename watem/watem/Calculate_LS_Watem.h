@@ -56,8 +56,8 @@
 
 
 ///////////////////////////////////////////////////////////
-//                                                       //												
-//                                                       //												
+//                                                       //
+//                                                       //
 //                                                       //
 ///////////////////////////////////////////////////////////
 
@@ -73,23 +73,23 @@ class CCalculate_LS_Watem : public CSG_Tool_Grid
 {
 public: ////// public members and functions: //////////////
 
-	CCalculate_LS_Watem 
-	(void);							// constructor
-	virtual ~CCalculate_LS_Watem 
-	(void);				// destructor
+    CCalculate_LS_Watem
+    (void);							// constructor
+    virtual ~CCalculate_LS_Watem
+    (void);				// destructor
 
 
 protected: /// protected members and functions: ///////////
 
-	virtual bool		On_Execute(void);		// always override this function
+    virtual bool		On_Execute(void);		// always override this function
 
 
 private: ///// private members and functions: /////////////
-	double					Get_LS(int x, int y);
-	CSG_Grid				*m_pDEM, *m_pUp_Area, *PRC, *m_pSlope, *m_pL, *m_pS, *m_pLS;
-	bool					use_prc;
-	double					m_Erosivity, m_Stability;
-	int						m_Method;
+    double					Get_LS(int x, int y);
+    CSG_Grid				*m_pDEM, *m_pUp_Area, *PRC, *m_pSlope, *m_pL, *m_pS, *m_pLS;
+    bool					use_prc;
+    double					m_Erosivity, m_Stability;
+    int						m_Method;
 
 };
 

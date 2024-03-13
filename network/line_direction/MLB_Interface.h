@@ -8,9 +8,9 @@
 
 //---------------------------------------------------------
 #ifdef grid_gridding_EXPORTS
-	#define	grid_gridding_EXPORT	_SAGA_DLL_EXPORT
+#define	grid_gridding_EXPORT	_SAGA_DLL_EXPORT
 #else
-	#define	grid_gridding_EXPORT	_SAGA_DLL_IMPORT
+#define	grid_gridding_EXPORT	_SAGA_DLL_IMPORT
 #endif
 
 
