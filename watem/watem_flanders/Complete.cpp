@@ -118,7 +118,7 @@ bool Complete::On_Execute ( void )
         ls->Set_Cache ( true );
     }
 
-    SG_RUN_TOOL_ExitOnError ( "watem", 4, //uparea,
+    SG_RUN_TOOL_ExitOnError ( "watem", 1, //uparea,
                               SG_TOOL_PARAMETER_SET ( "DEM", Parameters ( "DEM" ) )
                               && SG_TOOL_PARAMETER_SET ( "PRC", Parameters ( "PRC" ) )
                               && SG_TOOL_PARAMETER_SET ( "PIT", Parameters ( "PIT" ) )
@@ -139,7 +139,7 @@ bool Complete::On_Execute ( void )
         ls->Set_Cache ( false );
     }
 
-    SG_RUN_TOOL_ExitOnError ( "watem", 5, //LS calculation,
+    SG_RUN_TOOL_ExitOnError ( "watem", 2, //LS calculation,
                               SG_TOOL_PARAMETER_SET ( "DEM", Parameters ( "DEM" ) )
                               && SG_TOOL_PARAMETER_SET ( "UPSLOPE_AREA", Parameters ( "UPSLOPE_AREA" ) )
                               && SG_TOOL_PARAMETER_SET ( "USEPRC", Parameters ( "LS_USE_PRC" ) )
@@ -163,7 +163,7 @@ bool Complete::On_Execute ( void )
     // C grid genereren op basis van percelengrid
     CSG_Grid *C = new CSG_Grid ( Get_System(), SG_DATATYPE_Short ); // we use a short to save memory
 
-    SG_RUN_TOOL_ExitOnError ( "watem", 8, //watererosie op basis LS,
+    SG_RUN_TOOL_ExitOnError ( "watem_flanders", 3, //
                               SG_TOOL_PARAMETER_SET ( "PRC", Parameters ( "PRC" ) )
                               && SG_TOOL_PARAMETER_SET ( "C", C )
                             );
@@ -175,7 +175,7 @@ bool Complete::On_Execute ( void )
         K->Set_Cache ( false );
     }
 
-    SG_RUN_TOOL_ExitOnError ( "watem", 6, //watererosie op basis LS,
+    SG_RUN_TOOL_ExitOnError ( "watem", 3, //watererosie op basis LS,
                               SG_TOOL_PARAMETER_SET ( "LS", Parameters ( "LS" ) )
                               && SG_TOOL_PARAMETER_SET ( "K", Parameters ( "K" ) )
                               && SG_TOOL_PARAMETER_SET ( "C", C )
@@ -201,7 +201,7 @@ bool Complete::On_Execute ( void )
 
     if ( Parameters ( "TILL" )->asGrid() != NULL )
     {
-        SG_RUN_TOOL_ExitOnError ( "watem", 7, //tillage erosion op basis LS,
+        SG_RUN_TOOL_ExitOnError ( "watem", 4, //tillage erosion op basis LS,
                                   SG_TOOL_PARAMETER_SET ( "DEM", Parameters ( "DEM" ) )
                                   && SG_TOOL_PARAMETER_SET ( "PRC", Parameters ( "PRC" ) )
                                   && SG_TOOL_PARAMETER_SET ( "TILL", Parameters ( "TILL" ) )

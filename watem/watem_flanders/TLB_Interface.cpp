@@ -93,11 +93,11 @@ CSG_String Get_Info ( int i )
 //---------------------------------------------------------
 // 3. Include the headers of your tools here...
 
-#include "Complete.h"
 #include "Create_Parcel_Grid.h"
 #include "Parcel_Filter.h"
 #include "Calculate_C_Grid.h"
 #include "Parcel_C_Grid.h"
+#include "Complete.h"
 
 //---------------------------------------------------------
 // 4. Allow your tools to be created here...
