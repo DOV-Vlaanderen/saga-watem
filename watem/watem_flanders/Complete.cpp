@@ -2,7 +2,7 @@
 
 Complete::Complete()
 {
-    Set_Name ( _TL ( "3. Berekening Erosiekaart (compleet)" ) );
+    Set_Name ( _TL ( "Complete Calculation Erosion map (combines all steps)" ) );
 
     Set_Author ( "Based on Watem (KULeuven). Converted to SAGA by Johan Van de Wauw (2016-2017)" );
 

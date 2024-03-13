@@ -15,5 +15,5 @@ docs/tool_html
 docs/_build
 
 # generated from overview.md.j2
-docs/overview.md
+docs/overview*.md
 *.swp

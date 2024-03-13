@@ -3,7 +3,7 @@
 
 Tillage_Erosion::Tillage_Erosion()
 {
-    Set_Name ( _TL ( "1.5 Tillage erosion calculation" ) );
+    Set_Name ( _TL ( "Tillage erosion calculation" ) );
 
     Set_Author ( _TL ( "Copyright (c) 2006 - 2016 by KU Leuven. Converted to SAGA/C++ by Johan Van de Wauw" ) );
 

@@ -7,7 +7,7 @@ Water_Erosion::Water_Erosion()
     //-----------------------------------------------------
     // Give some information about your tool...
 
-    Set_Name ( _TL ( "1.3. Watererosion based on LS" ) );
+    Set_Name ( _TL ( "Watererosion based on LS (RUSLE)" ) );
 
     Set_Author ( _TL ( "2016-2017  - Johan Van de Wauw" ) );
 

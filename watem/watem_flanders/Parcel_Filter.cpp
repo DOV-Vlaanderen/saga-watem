@@ -4,15 +4,14 @@
 
 Parcel_Filter::Parcel_Filter()
 {
-    Set_Name ( _TL ( "2. 3x3 filter binnen perceelsgrenzen" ) );
+    Set_Name ( _TL ( "3x3 filter within parcel boundaries" ) );
 
     Set_Author ( _TL ( "Copyright (c) 2017.  Johan Van de Wauw" ) );
 
     Set_Version ( VERSION );
 
-    Set_Description ( _TW (
-                          "De tool voert een 3x3 filter uit op een digitaal hoogtemodel die enkel cellen binnen het perceel gebruikt."
-                      )
+    Set_Description ( _TW ( "The tool performs a 3x3 filter on a digital elevation model using only cells within the parcel."
+                          )
                     );
 
 
@@ -22,20 +21,20 @@ Parcel_Filter::Parcel_Filter()
 
     Parameters.Add_Grid (
         NULL, "DEM", "Elevation",
-        "Digitaal hoogtemodel. ",
+        "Digital elevation model",
         PARAMETER_INPUT
     );
 
     Parameters.Add_Grid (
         NULL, "PRC", "Percelen",
-        "Percelengrid met unieke identifier per perceel, kan aangemaakt worden met de tool 'aanmaak percelengrid'",
+        "Parcel grid with unique identifier per parcel, can be created using the 'create parcel grid' tool.",
         PARAMETER_INPUT
     );
 
 
     Parameters.Add_Grid (
         NULL, "DEM_FILTER", "Filtered DEM",
-        "DEM gefilterd met een 3x3 filter die enkel binnen de perceelsgrenzen actief is.",
+        "DEM filtered with a 3x3 filter that is active only within parcel boundaries.",
         PARAMETER_OUTPUT
     );
 

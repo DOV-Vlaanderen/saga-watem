@@ -7,7 +7,7 @@
 #endif
 CCalculate_Uparea::CCalculate_Uparea()
 {
-    Set_Name ( _TL ( "1.1. Calculate uparea" ) );
+    Set_Name ( _TL ( "Calculate uparea" ) );
 
     Set_Version ( VERSION );
 

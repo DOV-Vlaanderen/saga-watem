@@ -7,14 +7,14 @@ Calculate_C_Grid::Calculate_C_Grid()
     //-----------------------------------------------------
     // Give some information about your tool...
 
-    Set_Name ( _TL ( "3.3. C berekening" ) );
+    Set_Name ( _TL ( "3.3. C calculation" ) );
 
     Set_Author ( _TL ( "Copyright (c) 2017, Johan Van de Wauw" ) );
 
     Set_Version ( VERSION );
 
     Set_Description ( _TW (
-                          "Berekening van de C kaart op basis van de percelenkaart. "
+                          "Calculation of the C map based on parcel grid"
                       )
                     );
 

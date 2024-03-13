@@ -15,7 +15,7 @@ Parcel_C_Grid::Parcel_C_Grid()
     Set_Version ( VERSION );
 
     Set_Description ( _TW (
-                          "Berekening van de C kaart op basis van percelen met C attribuut. "
+                          "Calculate C map (alternative) using shapefile with C attribute. Optionally GRB and VHA can be added. "
                       )
                     );
 

@@ -21,6 +21,7 @@ Topology <topology>
 :caption: Developer guide
 Development guidelines <contributing>
 Watem <overview_watem>
+Watem Flanders <overview_watem_flanders>
 Topology <overview_topology>
 Line direction <overview_line_direction>
 

@@ -351,6 +351,7 @@ def saga_tool_overview(library):
         file.write(soup.prettify())
 
 saga_tool_overview("watem")
+saga_tool_overview("watem_flanders")
 saga_tool_overview("topology")
 saga_tool_overview("line_direction")
 

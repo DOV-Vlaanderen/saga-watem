@@ -60,10 +60,10 @@ CSG_String Get_Info ( int i )
     {
         case TLB_INFO_Name:
         default:
-            return ( _TL ( "SAGA implementatie van het WATEM model. Flanders specific" ) );
+            return ( _TL ( "SAGA implementation of the WATEM model. Flanders specific modules" ) );
 
         case TLB_INFO_Category:
-            return ( _TL ( "Watem" ) );
+            return ( _TL ( "Watem Flanders" ) );
 
         case TLB_INFO_Author:
             return ( SG_T ( "Johan Van de Wauw 2016 - 2017 - gebaseerd op originele pascal code van KULeuven."

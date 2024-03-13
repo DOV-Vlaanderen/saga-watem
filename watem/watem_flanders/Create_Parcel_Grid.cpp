@@ -4,7 +4,7 @@
 
 Create_Parcel_Grid::Create_Parcel_Grid()
 {
-    Set_Name ( _TL ( "2.1 Prepare parcel Map" ) );
+    Set_Name ( _TL ( "Prepare parcel Map" ) );
 
     Set_Author ( "Johan Van de Wauw (2017)" );
 
