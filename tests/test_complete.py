@@ -9,7 +9,6 @@ from test_topology import sagify
 
 data_dir = Path("tests/data/langegracht")
 
-
 def run_saga(library, module, args):
     cmd = ["saga_cmd", library, module] + sagify(args)
     print(cmd)
@@ -32,6 +31,13 @@ def test_watem_complete(tmpdir):
 
     with rio.open(str(tmpdir / "water_erosion.sdat")) as we_file:
         water_erosion = we_file.read()
+        transform = we_file.transform
+        row,col = we_file.index(166777.5, 167282.5)
+
 
     assert water_erosion.shape == (1, 735, 1134)
+
+    print(row, col)
+    assert pytest.approx(48.4928) == water_erosion[0, row, col]
+
 
