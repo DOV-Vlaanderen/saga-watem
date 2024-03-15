@@ -64,7 +64,7 @@ CCalculate_LS_Watem::CCalculate_LS_Watem ( void )
 
     Parameters.Add_Grid (
         NULL, "UPSLOPE_AREA", _TL ( "Upslope Length Factor" ),
-        "Upslope Area, can be created using
+        "Upslope Area, can be created using "
         "the 'Calculate uparea' tool (watem-1).",
         PARAMETER_INPUT
     );
@@ -77,8 +77,8 @@ CCalculate_LS_Watem::CCalculate_LS_Watem ( void )
 
     Parameters.Add_Grid (
         useprc, "PRC", _TL ( "Parcels" ),
-        "Parcel grid with unique identifier per parcel, can be created using
-        "the 'create parcel grid' tool (watem-flanders-1).,
+        "Parcel grid with unique identifier per parcel, can be created using "
+        "the 'create parcel grid' tool (watem-flanders-1).",
         PARAMETER_INPUT_OPTIONAL
     );
 

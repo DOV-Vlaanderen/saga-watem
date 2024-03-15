@@ -24,7 +24,7 @@ Water_Erosion::Water_Erosion()
 
     Parameters.Add_Grid (
         NULL, "LS", "LS",
-        "LS: topographic slope and length factor (dimensionless), can be created using
+        "LS: topographic slope and length factor (dimensionless), can be created using "
         "the 'LS calculations' tool (watem-2).",
         PARAMETER_INPUT
     );
@@ -37,7 +37,7 @@ Water_Erosion::Water_Erosion()
 
     Parameters.Add_Grid (
         NULL, "C", "C-factor Grid",
-        "Grid containing the crop and management factor. Should be defined as
+        "Grid containing the crop and management factor. Should be defined as "
         "a grid with values between 0 and 1.",
         PARAMETER_INPUT
     );

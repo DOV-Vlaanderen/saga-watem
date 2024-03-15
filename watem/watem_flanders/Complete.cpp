@@ -11,7 +11,7 @@ Complete::Complete()
     Set_Description ( _TW ("Complete computation erosion raster in one step. "
                            "This model executes following steps: \n "
                            "- Calculate uparea (watem-1) \n"
-                           "- LS calculation (watem-2) \n
+                           "- LS calculation (watem-2) \n"
                            "- C calculation based on parcel grid (watem-flanders-3) \n"
                            "- Watererosion based on LS (RUSLE) (optional tillage erosion) (watem-3 and watem-4) \n"
                       ) );

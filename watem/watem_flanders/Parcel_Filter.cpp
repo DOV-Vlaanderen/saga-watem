@@ -29,7 +29,7 @@ Parcel_Filter::Parcel_Filter()
 
     Parameters.Add_Grid (
         NULL, "PRC", "Percelen",
-        "Parcel grid with unique identifier per parcel, can be created using
+        "Parcel grid with unique identifier per parcel, can be created using "
         "the 'create parcel grid' tool (tool 1).",
         PARAMETER_INPUT
     );

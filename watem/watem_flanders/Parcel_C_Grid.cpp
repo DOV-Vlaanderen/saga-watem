@@ -24,7 +24,7 @@ Parcel_C_Grid::Parcel_C_Grid()
                           "data specific attributes (i.e. GRB, VHA, in "
                           "dutch). We refer to the GRB and VHA metadata at "
                           "'datavindplaats' of www.vlaanderen.be for more "
-                          "information.""
+                          "information."
                       )
                     );
 
