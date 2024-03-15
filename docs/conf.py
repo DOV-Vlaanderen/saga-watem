@@ -35,7 +35,6 @@ except ImportError:
     from sphinx import apidoc
 
 output_dir = os.path.join(__location__, "api")
-#module_dir = os.path.join(__location__, "../src/fluves")
 try:
     shutil.rmtree(output_dir)
 except FileNotFoundError:
@@ -109,8 +108,8 @@ source_suffix = [".rst", ".md"]
 master_doc = "index"
 
 # General information about the project.
-project = "fluves.saga_watem"
-copyright = "2024, Fluves"
+project = "saga_watem"
+copyright = "2017-2024 Johan Van de Wauw"
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -306,12 +305,12 @@ intersphinx_mapping = {
 
 print(f"loading configurations for {project} {version} ...", file=sys.stderr)
 html_context = {
-    "source_url_prefix": "https://git.fluves.net/fluves/saga_watem/src/branch/master/docs/",
+    "source_url_prefix": "https://github.com/DOV-Vlaanderen/saga-watem/blob/main/docs/",
     "display_vcs_links": 1
 }
 
 
-# create overview.md
+# create overviews per module
 
 from bs4 import BeautifulSoup
 from jinja2 import Environment, FileSystemLoader
@@ -351,6 +350,7 @@ def saga_tool_overview(library):
         file.write(soup.prettify())
 
 saga_tool_overview("watem")
+saga_tool_overview("watem_flanders")
 saga_tool_overview("topology")
 saga_tool_overview("line_direction")
 

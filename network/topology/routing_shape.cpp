@@ -7,8 +7,8 @@ routing_shape::routing_shape(void)
     Set_Author(_TL("Copyrights (c) 2018 by Johan Van de Wauw"));
 
     Set_Description(_TL(
-        "Routing to shape")
-    );
+                        "Routing to shape")
+                   );
 
     //----------------------------------------------------
 
@@ -64,10 +64,10 @@ void routing_shape::Add_Line(int col, int row, int t_col, int t_row, double dist
     t_row = system.Get_NY() - t_row;
     col = col -1;
     t_col = t_col - 1;
-	if (landuse->is_InGrid(col, row))
-		line->Set_Value("lnduSource", landuse->asDouble(col, row));
-	if (landuse->is_InGrid(t_col, t_row))
-		line->Set_Value("lnduTarg", landuse->asDouble(t_col, t_row));
+    if (landuse->is_InGrid(col, row))
+        line->Set_Value("lnduSource", landuse->asDouble(col, row));
+    if (landuse->is_InGrid(t_col, t_row))
+        line->Set_Value("lnduTarg", landuse->asDouble(t_col, t_row));
 }
 
 

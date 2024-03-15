@@ -10,8 +10,8 @@ segment_catchment::segment_catchment()
     Set_Author(_TL("Copyrights (c) 2018 by Johan Van de Wauw"));
 
     Set_Description(_TL(
-        "Routing and segments to subcatchment")
-    );
+                        "Routing and segments to subcatchment")
+                   );
 
     //----------------------------------------------------
 
@@ -86,7 +86,7 @@ bool segment_catchment::On_Execute(void)
     for (int i=0; i<segments->Get_NCells(); i++)
     {
         int seg = segments->asInt(i);
-        if (seg >0){
+        if (seg >0) {
             subcatch->Set_Value(i,seg);
             todo[seg].push(i);
         }

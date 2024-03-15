@@ -1,11 +1,11 @@
 #include "TLB_Interface.h"
 
-class Tillage_Erosion :
+class Parcel_Filter :
     public CSG_Tool_Grid
 {
     public:
-        Tillage_Erosion();
+        Parcel_Filter();
         bool On_Execute();
-        ~Tillage_Erosion();
+        ~Parcel_Filter();
 };
 

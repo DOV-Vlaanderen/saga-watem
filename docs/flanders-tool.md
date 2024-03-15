@@ -176,7 +176,7 @@ is particularly useful if several scenarios need to be executed. This takes
 the following form.
 
 ```bash
-saga_cmd watem 2 -DEM=DEM.sg-grd-z -PRC=prc.sg-grd-z -DEM_FILTER=DEM-filtered.sggrd-z
+saga_cmd watem_flanders 2 -DEM=DEM.sg-grd-z -PRC=prc.sg-grd-z -DEM_FILTER=DEM-filtered.sg-grd-z
 ```
 
 Here the first command (watem) indicates which library is used, and the second
@@ -215,20 +215,20 @@ set K=%INPUT%\K3.tif
 set GRB=D:\erosiekaart\2018\INPUTDATA\GRB
 if not exist "%OUTPUT%" (mkdir "%OUTPUT%")
 REM Tool: Aanmaak percelengrid
-saga_cmd watem 1 -PARCEL_SHAPES="%INPUT%\basis_ALBON_2018.shp" -
+saga_cmd watem_flanders 1 -PARCEL_SHAPES="%INPUT%\basis_ALBON_2018.shp" -
 LANDUSE="%INPUT%\Landgebruik_boswijzer_reclassified.sg-grd-z" -PRC="%OUTPUT%\PRC.sg-
 grd-z" -WTZ="%GRB%\wtz.shp" -WLAS="%INPUT%\VHA_09052017.shp" -SBN="%GRB%\sbn.shp" 
 WBN="%GRB%\wbn.shp" -WGA="%GRB%\wga.shp" -GBG="%GRB%\gbg.shp" -GBA="%GRB%\gba.shp" -
 TRN="%GRB%\trn.shp" -KNW="%GRB%\knw.shp"
 REM Tool: 3x3 binnen perceel
-saga_cmd watem 2 -DEM="%INPUT%\dhmv2-mosaic.sg-grd-z" -PRC="%OUTPUT%\PRC.sg-grd-z" -
+saga_cmd watem_flanders 2 -DEM="%INPUT%\dhmv2-mosaic.sg-grd-z" -PRC="%OUTPUT%\PRC.sg-grd-z" -
 DEM_FILTER="%OUTPUT%\dhmv2_parcelfilter.sg-grd-z"
 REM Tool: Complete Berekening Erosiekaart
 REM scenario 5: nieuw dem, nieuwe landuse, 3x3 filter (enkel in veld) - flow vanuit
 pit (max 4 pixels) + slope (LS) enkel binnen veld berekend
 set SCEN=%OUTPUT%\WAT30_2018
 if not exist "%SCEN%" (mkdir "%SCEN%")
-saga_cmd watem 3 -DEM="%OUTPUT%\dhmv2_parcelfilter.sg-grd-z" -PRC="%OUTPUT%\PRC.sg-
+saga_cmd watem_flanders 5 -DEM="%OUTPUT%\dhmv2_parcelfilter.sg-grd-z" -PRC="%OUTPUT%\PRC.sg-
 grd-z" -K="%K%" -PIT="%SCEN%\Pit.sg-grd-z" -UPSLOPE_AREA="%SCEN%\upslope_area_30.sg-
 grd-z" -LS="%SCEN%\ls_30.sg-grd-z" -R=880.000000 -P=1.000000 -CORR=1.400000 -
 WATER_EROSION="%SCEN%\WAT30_2018.sg-grd-z" -PCTOCROP=70.000000 -
@@ -236,7 +236,7 @@ PCTOFOREST=100.000000 -SAVE_MEMORY=1 -PIT_FLOW=1 -PIT_RADIUS=4 -LS_USE_PRC=1
 set SCEN=%OUTPUT%\WAT00_2018
 if not exist "%SCEN%" (mkdir "%SCEN%")
 REM berekening watererosie zonder connectivitiet
-saga_cmd watem 3 -DEM="%OUTPUT%\dhmv2_parcelfilter.sg-grd-z" -PRC="%OUTPUT%\PRC.sg-
+saga_cmd watem_flanders 5 -DEM="%OUTPUT%\dhmv2_parcelfilter.sg-grd-z" -PRC="%OUTPUT%\PRC.sg-
 grd-z" -K="%K%" -PIT="%SCEN%\Pit.sg-grd-z" -UPSLOPE_AREA="%SCEN%\upslope_area_00.sg-
 grd-z" -LS="%SCEN%\ls_00.sg-grd-z" -R=880.000000 -P=1.000000 -CORR=1.400000 -
 WATER_EROSION="%SCEN%\WAT00_2018.sg-grd-z" -PCTOCROP=100.000000 -

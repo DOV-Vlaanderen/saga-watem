@@ -1,7 +1,3 @@
-/**********************************************************
- * Version $Id: TLB_Interface.cpp 1921 2014-01-09 10:24:11Z oconrad $
- *********************************************************/
-
 ///////////////////////////////////////////////////////////
 //                                                       //
 //                         SAGA                          //
@@ -9,7 +5,7 @@
 //      System for Automated Geoscientific Analyses      //
 //                                                       //
 //                     Tool Library                      //
-//                       watem                           //
+//                    watem_flanders                     //
 //                                                       //
 //-------------------------------------------------------//
 //                                                       //
@@ -64,7 +60,7 @@ CSG_String Get_Info ( int i )
     {
         case TLB_INFO_Name:
         default:
-            return ( _TL ( "Watem" ) );
+            return ( _TL ( "Watem - specific modules for Flanders" ) );
 
         case TLB_INFO_Category:
             return ( _TL ( "Watem" ) );
@@ -74,10 +70,13 @@ CSG_String Get_Info ( int i )
                             "Ontwikkeld in opdracht van Vlaamse overheid, departement Omgeving." ) );
 
         case TLB_INFO_Description:
-            return ( _TL ( "SAGA Implementatie van het WATEM model (KULeuven). \n\n"
-                           "WaTEM is a spatially distributed soil erosion model that was developed at the Physical"
-                           "and Regional Geography Research Group (K.U.Leuven, Belgium)."
-                           "The development of the WaTEM/SEDEM model and this SAGA module was financed by Vlaamse overheid "
+            return ( _TL ( "SAGA Implementatie van het WATEM model (KULeuven), inclusief modules voor aanmaak invoerbestanden. \n\n"
+                           "WaTEM/SEDEM is a spatially distributed soil erosion and sediment delivery model that is developed at the Physical"
+                           "and Regional Geography Research Group (K.U.Leuven, Belgium) as a user-friendly and optimised version of the WaTEM and SEDEM models, "
+                           "which were also developed at K.U.Leuven. These models were specifically developed to simulate the impact of soil conservation and sediment "
+                           "control measures as well as land use changes in the framework of an integrated catchment management, on the local soil loss and sediment "
+                           "delivery to rivers. This model combines the WaTEM and SEDEM models and aims at providing useful information for land managers to select "
+                           "the most effective catchment management scenario. The building of an interface for the WaTEM/SEDEM model was financed by Vlaamse overheid "
                            "(Vlaams Planbureau voor de Omgeving, Departement Omgeving)."
 
                          ) );
@@ -86,7 +85,7 @@ CSG_String Get_Info ( int i )
             return ( SG_T ( "1.7.1" ) );
 
         case TLB_INFO_Menu_Path:
-            return ( _TL ( "Watem|Watem" ) );
+            return ( _TL ( "Watem|Watem - Flanders" ) );
     }
 }
 
@@ -94,10 +93,11 @@ CSG_String Get_Info ( int i )
 //---------------------------------------------------------
 // 3. Include the headers of your tools here...
 
-#include "Calculate_LS_Watem.h"
-#include "Calculate_Uparea.h"
-#include "Water_Erosion.h"
-#include "Tillage_Erosion.h"
+#include "Create_Parcel_Grid.h"
+#include "Parcel_Filter.h"
+#include "Calculate_C_Grid.h"
+#include "Parcel_C_Grid.h"
+#include "Complete.h"
 
 //---------------------------------------------------------
 // 4. Allow your tools to be created here...
@@ -114,13 +114,15 @@ CSG_Tool 		*Create_Tool ( int i )
         case 0:
             return ( TLB_INTERFACE_SKIP_TOOL );
         case 1:
-            return ( new CCalculate_Uparea );
+            return ( new Create_Parcel_Grid );
         case 2:
-            return ( new CCalculate_LS_Watem );
+            return ( new Parcel_Filter );
         case 3:
-            return ( new Water_Erosion );
+            return ( new Calculate_C_Grid );
         case 4:
-            return ( new Tillage_Erosion );
+            return ( new Parcel_C_Grid );
+        case 5:
+            return ( new Complete );
         default:
             return ( NULL );
     }

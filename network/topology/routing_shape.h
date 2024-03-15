@@ -23,7 +23,7 @@ private:
 };
 
 
-enum  class t_f{ // target fields
+enum  class t_f { // target fields
     col=0,
     row,
     target1col

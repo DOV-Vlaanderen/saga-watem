@@ -18,12 +18,17 @@ Topology <topology>
 
 ```{toctree}
 :maxdepth: 2
-:caption: Developer guide
-Development guidelines <contributing>
+:caption: Module Reference
 Watem <overview_watem>
+Watem Flanders <overview_watem_flanders>
 Topology <overview_topology>
 Line direction <overview_line_direction>
+```
 
+
+```{toctree}
+:maxdepth: 2
+:caption: Developer Guide
 Authors <authors>
 Changelog <changelog>
 License <license>
