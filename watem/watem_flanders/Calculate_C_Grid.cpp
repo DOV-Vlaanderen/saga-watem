@@ -7,14 +7,14 @@ Calculate_C_Grid::Calculate_C_Grid()
     //-----------------------------------------------------
     // Give some information about your tool...
 
-    Set_Name ( _TL ( "3.3. C calculation" ) );
+    Set_Name ( _TL ( "C calculation based on parcel grid" ) );
 
     Set_Author ( _TL ( "Copyright (c) 2017, Johan Van de Wauw" ) );
 
     Set_Version ( VERSION );
 
     Set_Description ( _TW (
-                          "Calculation of the C map based on parcel grid"
+                          "Calculation of the C (crop and management factor) map based on parcel grid. Uses fixed constants: 0.37 for cropland, 0 for rivers/built-up are, 0.001 for forests."
                       )
                     );
 
@@ -24,7 +24,7 @@ Calculate_C_Grid::Calculate_C_Grid()
 
 
     Parameters.Add_Grid (
-        NULL, "PRC", "Percelengrid",
+        NULL, "PRC", "Parcel grid file",
         "",
         PARAMETER_INPUT
     );
