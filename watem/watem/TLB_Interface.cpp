@@ -64,7 +64,7 @@ CSG_String Get_Info ( int i )
     {
         case TLB_INFO_Name:
         default:
-            return ( _TL ( "SAGA implementation of the WATEM model" ) );
+            return ( _TL ( "Watem" ) );
 
         case TLB_INFO_Category:
             return ( _TL ( "Watem" ) );
@@ -86,7 +86,7 @@ CSG_String Get_Info ( int i )
             return ( SG_T ( "1.7.1" ) );
 
         case TLB_INFO_Menu_Path:
-            return ( _TL ( "Watem/Watem" ) );
+            return ( _TL ( "Watem|Watem" ) );
     }
 }
 
