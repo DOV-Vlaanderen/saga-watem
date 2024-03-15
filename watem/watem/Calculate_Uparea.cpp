@@ -196,16 +196,11 @@ CCalculate_Uparea::~CCalculate_Uparea()
 
 void CCalculate_Uparea::CalculateUparea()
 {
-    int i, j, vlag, nvlag, rivvlag;
+    int i, j, vlag;
     double OPPCOR, AREA;
-    int maxorder = 1;
-    int a, b;
-
-    nvlag = 1;
 
     int nrow = Get_NY();
     int ncol = Get_NX();
-    double res = Get_Cellsize();
 
     FINISH = new CSG_Grid ( Get_System(), SG_DATATYPE_Bit );
 
@@ -267,8 +262,8 @@ void CCalculate_Uparea::CalculatePitStuff()
     bool check;
     double minimum;
 
-    int nrow = Get_NY();
-    int ncol = Get_NX();
+    const int nrow = Get_NY();
+    const int ncol = Get_NX();
 
     Pit->Assign ( 0.0 );
     SG_UI_Process_Set_Text ( _TL ( "Creating pit index" ) );
@@ -456,9 +451,6 @@ _Lnopit:
 
 void CCalculate_Uparea::DistributeTilDirEvent ( int i, int j, double *AREA )
 {
-    int nrow = Get_NY();
-    int ncol = Get_NX();
-
     double CSN, SN, MINIMUM, MINIMUM2;
     double PART1 = 0.0, PART2 = 0.0;
     int K1 = 0, K2 = 0, L1 = 0, L2 = 0;
@@ -467,7 +459,7 @@ void CCalculate_Uparea::DistributeTilDirEvent ( int i, int j, double *AREA )
     bool closeriver = false;
 
     double Direction;
-    int vlag, rivvlag, v, w;
+    int vlag, v, w;
 
     for ( K = -1; K <= 1; K++ )
     {
