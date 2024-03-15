@@ -27,14 +27,19 @@ CCalculate_Uparea::CCalculate_Uparea()
     );
 
     Parameters.Add_Grid (
-        NULL, "PRC", "Percelen",
-        "Parcel grid with a unique identifier per parcel (between 1 and 9999). Forest require value 10000. Built-up areas and roads -2 and rivers -1. ",
+        NULL, "PRC", "Parcels",
+        "Parcel grid with: \n"
+        "- a unique identifier per parcel: [1 and 9999] \n"
+        "- Forest = 10000  \n"
+        "- Infrastructure = -2 \n"
+        "- Rivers -1 \n"
+        ,
         PARAMETER_INPUT
     );
 
     Parameters.Add_Grid (
         NULL, "PIT", "Pit",
-        "Gridfile with pit locations",
+        "Pit id. These id's are linked to the id's in pit data.",
         PARAMETER_OUTPUT,
         true,
         SG_DATATYPE_DWord
@@ -53,22 +58,22 @@ CCalculate_Uparea::CCalculate_Uparea()
     );
 
     Parameters.Add_Value (
-        NULL, "PCTOCROP", "Parcel Connectivity to cropland",
+        NULL, "PCTOCROP", "Parcel Connectivity to cropland (%)",
         "Percentage of water that will go from a cropland to another cropland.", PARAMETER_TYPE_Double, 70, 0, 100
     );
 
     Parameters.Add_Value (
-        NULL, "PCTOFOREST", "Parcel Connectivity to forest",
+        NULL, "PCTOFOREST", "Parcel Connectivity to forest (%)",
         "Percentage of water that will go from a cropland to forest.", PARAMETER_TYPE_Double, 100, 0, 100
     );
 
     Parameters.Add_Value (
-        NULL, "PCTOROAD", "Parcel Connectivity to road/built-up areas",
+        NULL, "PCTOROAD", "Parcel Connectivity to infrastructure (%)",
         "Percentage of water that will go from cropland to built-up areas", PARAMETER_TYPE_Double, 70, 0, 100
     );
 
     Parameters.Add_Value (
-        NULL, "PIT_FLOW", "Flow from pits into closeby cells (within radius)",
+        NULL, "PIT_FLOW", "Flow from pits into closeby cells (within radius) (True/False)",
         "If pits occur (local minima in the digital elevation model) water can flow to nearby cells if they are lower and within the PIT_SEARCH radius if this option is enabled.",
         PARAMETER_TYPE_Bool, false
     );

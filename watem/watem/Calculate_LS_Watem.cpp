@@ -64,7 +64,8 @@ CCalculate_LS_Watem::CCalculate_LS_Watem ( void )
 
     Parameters.Add_Grid (
         NULL, "UPSLOPE_AREA", _TL ( "Upslope Length Factor" ),
-        "Upslope Area",
+        "Upslope Area, can be created using
+        "the 'Calculate uparea' tool (watem-1).",
         PARAMETER_INPUT
     );
 
@@ -75,8 +76,9 @@ CCalculate_LS_Watem::CCalculate_LS_Watem ( void )
                             );
 
     Parameters.Add_Grid (
-        useprc, "PRC", _TL ( "Percelen grid (PRC)" ),
-        "Parcel grid with unique identifiers per parcel of cropland (between 1 and 9999). Forests need 10000. Built-up areas -2 and rivers -1.",
+        useprc, "PRC", _TL ( "Parcels" ),
+        "Parcel grid with unique identifier per parcel, can be created using
+        "the 'create parcel grid' tool (watem-flanders-1).,
         PARAMETER_INPUT_OPTIONAL
     );
 
@@ -103,7 +105,7 @@ CCalculate_LS_Watem::CCalculate_LS_Watem ( void )
     );
 
     Parameters.Add_Choice ( "",
-                            "METHOD", _TL ( "LS Calculation" ),
+                            "METHOD", _TL ( "Method to compute LS" ),
                             _TL ( "" ),
                             CSG_String::Format ( "%s|%s|%s|%s|",
                                     _TL ( "Moore & Nieber 1989" ),
@@ -324,12 +326,12 @@ double CCalculate_LS_Watem::Get_LS ( int x, int y )
         //-----------------------------------------------------
         case 2:		// Wischmeier and Smith
             {
-                if ( Slope > 0.0505 )	// >  ca. 3°
+                if ( Slope > 0.0505 )	// >  ca. 3ï¿½
                 {
                     LS = sqrt ( Area / 22.13 )
                          * ( 65.41 * sin_Slope * sin_Slope + 4.56 * sin_Slope + 0.065 );
                 }
-                else					// <= ca. 3°
+                else					// <= ca. 3ï¿½
                 {
                     LS = pow ( Area / 22.13, 3.0 * pow ( Slope, 0.6 ) )
                          * ( 65.41 * sin_Slope * sin_Slope + 4.56 * sin_Slope + 0.065 );

@@ -15,7 +15,16 @@ Parcel_C_Grid::Parcel_C_Grid()
     Set_Version ( VERSION );
 
     Set_Description ( _TW (
-                          "Calculate C map (alternative) using shapefile with C attribute. Optionally GRB and VHA can be added. "
+                          "Calculation of the C (crop and management factor) "
+                          "map based on shapefile with attribute 'C-factor'. "
+                          "Optionally GRB and VHA can be added, geometries of "
+                          "this shapes are mapped to a C-factor value of 0. "
+                          "Only the geometry of the input shapes is used for "
+                          "mapping. Note that the input instruction refers to "
+                          "data specific attributes (i.e. GRB, VHA, in "
+                          "dutch). We refer to the GRB and VHA metadata at "
+                          "'datavindplaats' of www.vlaanderen.be for more "
+                          "information.""
                       )
                     );
 
@@ -24,8 +33,8 @@ Parcel_C_Grid::Parcel_C_Grid()
     // Define your parameters list...
 
 
-    CSG_Parameter *shapes = Parameters.Add_Shapes ( NULL, "PARCEL_SHAPES", "Percelen", "Percelen (shapefile)", PARAMETER_INPUT, SHAPE_TYPE_Polygon );
-    Parameters.Add_Table_Field ( shapes, "PARCEL_SHAPE_C_FIELD", "C Field", "Field containing C value" );
+    CSG_Parameter *shapes = Parameters.Add_Shapes ( NULL, "PARCEL_SHAPES", "Parcels", "Parcels", PARAMETER_INPUT, SHAPE_TYPE_Polygon );
+    Parameters.Add_Table_Field ( shapes, "PARCEL_SHAPE_C_FIELD", "C Field", "Field name containing C-factor value" );
     Parameters.Add_Grid (
         NULL, "LANDUSE", "Land use grid",
         "",
@@ -33,12 +42,12 @@ Parcel_C_Grid::Parcel_C_Grid()
     );
 
     Parameters.Add_Grid (
-        NULL, "C", "C Grid", "C Grid", PARAMETER_OUTPUT, true, SG_DATATYPE_Short ); // we use a short to save memory
+        NULL, "C", "C Grid", "C-factor Grid", PARAMETER_OUTPUT, true, SG_DATATYPE_Short ); // we use a short to save memory
 
-    Parameters.Add_Bool ( NULL, "GRB_VHA", "Use GRB and VHA as extra landuse", "", false );
+    Parameters.Add_Bool ( NULL, "GRB_VHA", "Use GRB and VHA as extra landuse (True/False)", "", false );
     // Optional shapes
-    Parameters.Add_Shapes ( "GRB_VHA", "WTZ", "GRB WTZ (VHA-polygoon)", "VHA (polygoon)", PARAMETER_INPUT_OPTIONAL, SHAPE_TYPE_Polygon );
-    Parameters.Add_Shapes ( "GRB_VHA", "WLAS", "VHA Lijnen", "VHA (lijnen). Eventueel kan de laag GRB Wlas gebruikt worden, deze loopt echter soms achter op de VHA.", PARAMETER_INPUT_OPTIONAL, SHAPE_TYPE_Line );
+    Parameters.Add_Shapes ( "GRB_VHA", "WTZ", "GRB WTZ (VHA-polygon)", "VHA (polygons).", PARAMETER_INPUT_OPTIONAL, SHAPE_TYPE_Polygon );
+    Parameters.Add_Shapes ( "GRB_VHA", "WLAS", "VHA lines", "VHA (lines).", PARAMETER_INPUT_OPTIONAL, SHAPE_TYPE_Line );
 
     Parameters.Add_Shapes ( "GRB_VHA", "SBN", "GRB Sbn (spoorbaan)", "GRB Sbn (spoorbaan)", PARAMETER_INPUT_OPTIONAL, SHAPE_TYPE_Polygon );
     Parameters.Add_Shapes ( "GRB_VHA", "WBN", "GRB Wbn (wegbaan)", "GRB Wbn (wegbaan)", PARAMETER_INPUT_OPTIONAL, SHAPE_TYPE_Polygon );
@@ -47,7 +56,7 @@ Parcel_C_Grid::Parcel_C_Grid()
 
     Parameters.Add_Shapes ( "GRB_VHA", "GBG", "GRB Gbg (gebouw aan de grond)", "GRB Gbg (gebouw aan de grond)", PARAMETER_INPUT_OPTIONAL, SHAPE_TYPE_Polygon );
     Parameters.Add_Shapes ( "GRB_VHA", "GBA", "GRB Gba (gebouwaanhorigheid)", "GRB Gba (gebouwaanhorigheid)", PARAMETER_INPUT_OPTIONAL, SHAPE_TYPE_Polygon );
-    Parameters.Add_Shapes ( "GRB_VHA", "TRN", "GRB Trn (terrein)", "GRB Trn (Terrein) - enkel bepaalde klassen worden gebruikt", PARAMETER_INPUT_OPTIONAL, SHAPE_TYPE_Polygon );
+    Parameters.Add_Shapes ( "GRB_VHA", "TRN", "(NOT IMPLEMENTED) GRB Trn (terrein)", "GRB Trn (Terrein) - only certain classes are used", PARAMETER_INPUT_OPTIONAL, SHAPE_TYPE_Polygon );
     Parameters.Add_Shapes ( "GRB_VHA", "KNW", "GRB Knw (Kunstwerk)", "GRB Knw (Kunstwerk)", PARAMETER_INPUT_OPTIONAL, SHAPE_TYPE_Polygon );
 
 }

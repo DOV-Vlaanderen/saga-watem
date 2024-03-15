@@ -8,61 +8,64 @@ Complete::Complete()
 
     Set_Version ( VERSION );
 
-    Set_Description ( _TW (
-                          "Volledige berekening erosiekaart in één stap. Deze module voert volgende stappen uit: Berekening upslope area, berekening LS factor, berekening C, "
-                          "berekening watererosie en optioneel de berekening van de bewerkingserosie. Maakt gebruik van standaardwaarden voor de C-factor."
+    Set_Description ( _TW ("Complete computation erosion raster in one step. "
+                           "This model executes following steps: \n "
+                           "- Calculate uparea (watem-1) \n"
+                           "- LS calculation (watem-2) \n
+                           "- C calculation based on parcel grid (watem-flanders-3) \n"
+                           "- Watererosion based on LS (RUSLE) (optional tillage erosion) (watem-3 and watem-4) \n"
                       ) );
 
-    Parameters.Add_Grid ( NULL, "DEM", _TL ( "DEM" ), _TL ( "Digitaal hoogtemodel. Eventueel met gebruik van filter." ), PARAMETER_INPUT );
-    Parameters.Add_Grid ( NULL, "PRC", _TL ( "Percelen" ), _TL ( "Percelengrid zoals aangemaakt met de tool 'aanmaak percelengrid'" ), PARAMETER_INPUT );
-    Parameters.Add_Grid ( NULL, "K", _TL ( "K: bodemerosiegevoeligheidsfactor (ton ha MJ-1 mm-1)" ), _TL ( "K: bodemerosiegevoeligheidsfactor (ton ha MJ-1 mm-1)" ), PARAMETER_INPUT );
+    Parameters.Add_Grid ( NULL, "DEM", _TL ( "DEM" ), _TL ( "Digital elevation model."), PARAMETER_INPUT );
+    Parameters.Add_Grid ( NULL, "PRC", _TL ( "Percelen" ), _TL ( "Parcels as defined by return tool 'Prepare parcel Map (watem-flanders-1)'" ), PARAMETER_INPUT );
+    Parameters.Add_Grid ( NULL, "K", _TL ("soil erodibility factor (K-factor, ton ha MJ-1 mm-1)" ), _TL ("soil erodibility factor (K-factor, ton ha MJ-1 mm-1)"), PARAMETER_INPUT );
 
-    Parameters.Add_Grid ( NULL, "PIT", _TL ( "Pit" ), _TL ( "Grid met pits zoals bepaald in de uparea berekening" ), PARAMETER_OUTPUT, true, SG_DATATYPE_DWord );
-    Parameters.Add_Grid ( NULL, "UPSLOPE_AREA", _TL ( "UPAREA" ), _TL ( "Upslope Area: oppervlakte dat afstroomt naar een pixel" ), PARAMETER_OUTPUT );
-    Parameters.Add_Grid ( NULL, "LS", _TL ( "LS" ), _TL ( "LS: de topografische hellings- en lengtefactor (dimensieloos)" ), PARAMETER_OUTPUT );
-    Parameters.Add_Grid ( NULL, "TILL", _TL ( "Tillage Erosion" ), _TL ( "Gemiddeld bodemverlies als gevolg van bodemerosie  (ton ha-1 jaar-1)" ), PARAMETER_OUTPUT_OPTIONAL );
+    Parameters.Add_Grid ( NULL, "PIT", _TL ( "Pit" ), _TL ( "Pits as defined by return tool 'Calculate uparea (watem-1)'" ), PARAMETER_OUTPUT, true, SG_DATATYPE_DWord );
+    Parameters.Add_Grid ( NULL, "UPSLOPE_AREA", _TL ( "UPAREA" ), _TL ("Upslope area as defined by return tool 'Calculate uparea (watem-1)'" ), PARAMETER_OUTPUT );
+    Parameters.Add_Grid ( NULL, "LS", _TL ( "LS" ), _TL ( "LS as defined by return tool 'LS calculation (watem-2)'" ), PARAMETER_OUTPUT );
+    Parameters.Add_Grid ( NULL, "TILL", _TL ( "Tillage Erosion" ), _TL ( "Average soil loss due to tillage erosion (ton ha-1 jaar-1)" ), PARAMETER_OUTPUT_OPTIONAL );
 
     Parameters.Add_Value (
         NULL, "R", "R",
-        "regenerosiviteitsfactor (MJ mm ha-1 jaar-1)", PARAMETER_TYPE_Double, 880, 0, 1000
+        "rainfall erosivity factor (MJ mm ha-1 jaar-1)", PARAMETER_TYPE_Double, 880, 0, 1000
     );
 
     Parameters.Add_Value (
         NULL, "P", "P",
-        "de erosiebeheersingsfactor (dimensieloos) ", PARAMETER_TYPE_Double, 1, 0, 1
+        "erosion control factor (dimensieloos) ", PARAMETER_TYPE_Double, 1, 0, 1
     );
 
     Parameters.Add_Value (
-        NULL, "CORR", "correctiefactor grid",
-        "Correctiefactor omdat de berekeningen bepaald werden op een standaard plot van 22.1 meter. 1.4 voor grids van 5x5",
+        NULL, "CORR", "Resolution correction factor",
+        "Correction factor for resolution as RUSLE was determined on resolution of 22.1 meter. This value is set to 1.4 for grids of 5x5 (see Notebaert et al. 2006)",
         PARAMETER_TYPE_Double, 1.4, 0, 20
     );
 
 
     Parameters.Add_Grid (
         NULL, "WATER_EROSION", _TL ( "Water erosion" ),
-        "A: gemiddeld bodemverlies als gevolg van geul- en intergeulerosie (ton ha-1 jaar-1)",
+        "A: Average soil loss due to rill and interrill erosion (ton ha-1 jaar-1)",
         PARAMETER_OUTPUT
     );
 
     Parameters.Add_Value (
-        NULL, "PCTOCROP", "Parcel Connectivity to cropland",
+        NULL, "PCTOCROP", "Parcel connectivity to cropland (%)",
         "", PARAMETER_TYPE_Double, 70, 0, 100
     );
 
     Parameters.Add_Value (
-        NULL, "PCTOFOREST", "Parcel Connectivity to forest",
+        NULL, "PCTOFOREST", "Parcel connectivity to forest (%)",
         "", PARAMETER_TYPE_Double, 100, 0, 100
     );
 
     Parameters.Add_Value (
         NULL, "SAVE_MEMORY", "Save memory",
-        "Optie om het geheugengebruik tijdens het uitvoeren te verminderen. Opgelet: kan de doorlooptijd sterk verhogen.",
+        "Option to reduce memory for computation. Warning: can increase computationt time.",
         PARAMETER_TYPE_Bool, false
     );
 
     Parameters.Add_Value (
-        NULL, "PIT_FLOW", "Flow from pits into closeby cells (within radius)", "", PARAMETER_TYPE_Bool, true
+        NULL, "PIT_FLOW", "Flow from pits into closeby cells (within radius) (True/False)", "", PARAMETER_TYPE_Bool, true
     );
 
     Parameters.Add_Value (
@@ -70,28 +73,28 @@ Complete::Complete()
         "Maximum radius from a pit to which upstream water can flow", PARAMETER_TYPE_Int, 4, 0 );
 
     Parameters.Add_Value (
-        NULL, "LS_USE_PRC", "Perceelsgrenzen gebruiken in LS berekening",
-        "Perceelsgrenzen gebruiken in LS berekening (slope enkel binnen veld). ", PARAMETER_TYPE_Bool, true
+        NULL, "LS_USE_PRC", "Use parcel boundary for computations ",
+        "Compute slope/LS within boundaries of parcels.", PARAMETER_TYPE_Bool, true
     );
 
     Parameters.Add_Choice ( "",
-                            "METHOD", _TL ( "LS Calculation" ),
+                            "METHOD", _TL ( "Method to compute LS" ),
                             _TL ( "" ),
                             CSG_String::Format ( "%s|%s|%s|%s|",
                                     _TL ( "Moore & Nieber 1989" ),
-                                    _TL ( "Desmet & Govers 1996 (standaard WATEM)" ),
+                                    _TL ( "Desmet & Govers 1996 (standard WaTEM)" ),
                                     _TL ( "Wischmeier & Smith 1978" ),
                                     _TL ( "Van Oost, 2003" )
                                                ), 1
                           );
 
     Parameters.Add_Value (
-        NULL, "EROSION_CROP_MAX", "Maximale erosie per pixel aftoppen",
+        NULL, "EROSION_CROP_MAX", "Use maximum allowed erosion per pixel (True/false)",
         "", PARAMETER_TYPE_Bool, 1
     );
 
     Parameters.Add_Value (
-        "EROSION_CROP_MAX", "EROSION_MAX", "Maximale erosie, hogere waarden worden afgetopt",
+        "EROSION_CROP_MAX", "EROSION_MAX", "Maximum allowed erosion per pixel, higher values are set to this value.",
         "", PARAMETER_TYPE_Double, 150, 0, 10000000
     );
 

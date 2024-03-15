@@ -10,7 +10,7 @@ Tillage_Erosion::Tillage_Erosion()
     Set_Version ( VERSION );
 
     Set_Description ( _TW (
-                          "Calculation of Tillage Erosion. Based on the code from WATEM (KU Leuven)."
+                          "Calculation of Tillage Erosion based on DTM (grid) and parcels (grid). Based on the code from WATEM (KU Leuven)."
                       )
                     );
 
@@ -21,13 +21,17 @@ Tillage_Erosion::Tillage_Erosion()
 
     Parameters.Add_Grid (
         NULL, "DEM", "Elevation",
-        "Digital Elevation Model.",
+        "Digital Elevation Model (m).",
         PARAMETER_INPUT
     );
 
     Parameters.Add_Grid (
         NULL, "PRC", "Parcels",
-        "Parcel grid with unique identifier per parcel. Forests are assigned value 10000. Built-up areas and roads -2 and rivers -1.",
+                "Parcel grid with: \n"
+        "- a unique identifier per parcel: [1 and 9999] \n"
+        "- Forest = 10000  \n"
+        "- Infrastructure = -2 \n"
+        "- Rivers -1 \n",
         PARAMETER_INPUT
     );
 
