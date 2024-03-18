@@ -41,7 +41,7 @@ CCalculate_LS_Watem::CCalculate_LS_Watem ( void )
 
     Set_Name	( _TL ( "LS calculation" ) );
 
-    Set_Author	( _TL ( "Copyright (c) 2003 Olaf Conrad. Modified by Johan Van de Wauw (2016) to make model identical to Watem" ) );
+    Set_Author	( _TL ( "Copyright (c) 2003 Olaf Conrad. Modified by Johan Van de Wauw (2016) to make model identical to WaTEM" ) );
 
     Set_Version ( VERSION );
 

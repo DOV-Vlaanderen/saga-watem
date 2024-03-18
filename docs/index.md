@@ -19,8 +19,8 @@ Topology <topology>
 ```{toctree}
 :maxdepth: 2
 :caption: Module Reference
-Watem <overview_watem>
-Watem Flanders <overview_watem_flanders>
+WaTEM <overview_watem>
+WaTEM Flanders <overview_watem_flanders>
 Topology <overview_topology>
 Line direction <overview_line_direction>
 ```

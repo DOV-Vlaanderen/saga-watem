@@ -10,7 +10,7 @@ Tillage_Erosion::Tillage_Erosion()
     Set_Version ( VERSION );
 
     Set_Description ( _TW (
-                          "Calculation of Tillage Erosion based on DTM (grid) and parcels (grid). Based on the code from WATEM (KU Leuven)."
+                          "Calculation of Tillage Erosion based on DTM (grid) and parcels (grid). Based on the code from WaTEM (KU Leuven)."
                       )
                     );
 
