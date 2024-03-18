@@ -19,20 +19,18 @@ Parcel_Filter::Parcel_Filter()
 
     //-----------------------------------------------------
     // Define your parameters list...
-
-
     Parameters.Add_Grid (
         NULL, "DEM", "Elevation",
         "Digital elevation model",
         PARAMETER_INPUT
     );
 
-    Parameters.Add_Grid (
-        NULL, "PRC", "Percelen",
-        "Parcel grid with unique identifier per parcel, can be created using "
-        "the 'create parcel grid' tool (tool 1).",
-        PARAMETER_INPUT
-    );
+    Parameters.Add_Grid ( NULL,  "PRC", "Parcels",
+        "Parcel grid with: \n"
+        "- a unique identifier per parcel: [1,9999] \n"
+        "- Forest = 10000  \n"
+        "- Infrastructure & roads = -2 \n"
+        "- Rivers -1 \n", PARAMETER_INPUT );
 
 
     Parameters.Add_Grid (

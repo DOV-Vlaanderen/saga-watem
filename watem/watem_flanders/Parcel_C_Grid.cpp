@@ -33,11 +33,16 @@ Parcel_C_Grid::Parcel_C_Grid()
     // Define your parameters list...
 
 
-    CSG_Parameter *shapes = Parameters.Add_Shapes ( NULL, "PARCEL_SHAPES", "Parcels", "Parcels", PARAMETER_INPUT, SHAPE_TYPE_Polygon );
+    CSG_Parameter *shapes = Parameters.Add_Shapes ( NULL, "PARCEL_SHAPES", "Parcels", "Polygon shape of parcels.", PARAMETER_INPUT, SHAPE_TYPE_Polygon );
+
     Parameters.Add_Table_Field ( shapes, "PARCEL_SHAPE_C_FIELD", "C Field", "Field name containing C-factor value" );
     Parameters.Add_Grid (
         NULL, "LANDUSE", "Land use grid",
-        "",
+        "Land use grid with \n"
+        "- Forest = 10000  \n"
+        "- Other = 1 \n"
+        "- Infrastructure & roads = -2 \n"
+        "- Rivers -1 \n",
         PARAMETER_INPUT
     );
 

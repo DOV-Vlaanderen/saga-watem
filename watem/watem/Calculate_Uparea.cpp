@@ -21,7 +21,7 @@ CCalculate_Uparea::CCalculate_Uparea()
                     );
 
     Parameters.Add_Grid (
-        NULL, "DEM", "Digitaal hoogtemodel",
+        NULL, "DEM", "Digital elevation model",
         "",
         PARAMETER_INPUT
     );
@@ -29,9 +29,10 @@ CCalculate_Uparea::CCalculate_Uparea()
     Parameters.Add_Grid (
         NULL, "PRC", "Parcels",
         "Parcel grid with: \n"
-        "- a unique identifier per parcel: [1 and 9999] \n"
+        "- a unique identifier per parcel: [1,9999] \n"
         "- Forest = 10000  \n"
-        "- Infrastructure = -2 \n"
+        "- Other = 1 \n"
+        "- Infrastructure & roads = -2 \n"
         "- Rivers -1 \n"
         ,
         PARAMETER_INPUT
@@ -68,8 +69,8 @@ CCalculate_Uparea::CCalculate_Uparea()
     );
 
     Parameters.Add_Value (
-        NULL, "PCTOROAD", "Parcel Connectivity to infrastructure (%)",
-        "Percentage of water that will go from cropland to built-up areas", PARAMETER_TYPE_Double, 70, 0, 100
+        NULL, "PCTOROAD", "Parcel Connectivity to infrastructure/roads (%)",
+        "Percentage of water that will go from cropland to infrastructure/roads", PARAMETER_TYPE_Double, 70, 0, 100
     );
 
     Parameters.Add_Value (

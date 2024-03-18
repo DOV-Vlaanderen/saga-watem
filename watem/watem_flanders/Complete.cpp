@@ -17,12 +17,18 @@ Complete::Complete()
                       ) );
 
     Parameters.Add_Grid ( NULL, "DEM", _TL ( "DEM" ), _TL ( "Digital elevation model."), PARAMETER_INPUT );
-    Parameters.Add_Grid ( NULL, "PRC", _TL ( "Percelen" ), _TL ( "Parcels as defined by return tool 'Prepare parcel Map (watem-flanders-1)'" ), PARAMETER_INPUT );
+    Parameters.Add_Grid ( NULL,  "PRC", "Parcels",
+        "Parcel grid with: \n"
+        "- a unique identifier per parcel: [2,9999] \n"
+        "- Forest = 10000  \n"
+        "- Other = 1 \n"
+        "- Infrastructure & roads = -2 \n"
+        "- Rivers -1 \n", PARAMETER_INPUT );
     Parameters.Add_Grid ( NULL, "K", _TL ("soil erodibility factor (K-factor, ton ha MJ-1 mm-1)" ), _TL ("soil erodibility factor (K-factor, ton ha MJ-1 mm-1)"), PARAMETER_INPUT );
 
-    Parameters.Add_Grid ( NULL, "PIT", _TL ( "Pit" ), _TL ( "Pits as defined by return tool 'Calculate uparea (watem-1)'" ), PARAMETER_OUTPUT, true, SG_DATATYPE_DWord );
-    Parameters.Add_Grid ( NULL, "UPSLOPE_AREA", _TL ( "UPAREA" ), _TL ("Upslope area as defined by return tool 'Calculate uparea (watem-1)'" ), PARAMETER_OUTPUT );
-    Parameters.Add_Grid ( NULL, "LS", _TL ( "LS" ), _TL ( "LS as defined by return tool 'LS calculation (watem-2)'" ), PARAMETER_OUTPUT );
+    Parameters.Add_Grid ( NULL, "PIT", _TL ( "Pit" ), _TL ("Pit id. These id's are linked to the id's in pit data (see watem-1 Calculate uparea)"), PARAMETER_OUTPUT, true, SG_DATATYPE_DWord );
+    Parameters.Add_Grid ( NULL, "UPSLOPE_AREA", _TL ( "UPAREA" ), _TL ("Upslope Area: area that flow to a certain pixel (see watem-1 Calculate uparea)"), PARAMETER_OUTPUT );
+    Parameters.Add_Grid ( NULL, "LS", _TL ( "LS" ), _TL ( "LS as defined by return tool (see watem-2, LS calculation)" ), PARAMETER_OUTPUT );
     Parameters.Add_Grid ( NULL, "TILL", _TL ( "Tillage Erosion" ), _TL ( "Average soil loss due to tillage erosion (ton ha-1 jaar-1)" ), PARAMETER_OUTPUT_OPTIONAL );
 
     Parameters.Add_Value (
@@ -49,13 +55,13 @@ Complete::Complete()
     );
 
     Parameters.Add_Value (
-        NULL, "PCTOCROP", "Parcel connectivity to cropland (%)",
-        "", PARAMETER_TYPE_Double, 70, 0, 100
+        NULL, "PCTOCROP", "Parcel Connectivity to cropland (%)",
+        "Percentage of water that will go from a cropland to another cropland.", PARAMETER_TYPE_Double, 70, 0, 100
     );
 
     Parameters.Add_Value (
-        NULL, "PCTOFOREST", "Parcel connectivity to forest (%)",
-        "", PARAMETER_TYPE_Double, 100, 0, 100
+        NULL, "PCTOFOREST", "Parcel Connectivity to forest (%)",
+        "Percentage of water that will go from a cropland to forest.", PARAMETER_TYPE_Double, 100, 0, 100
     );
 
     Parameters.Add_Value (
@@ -89,14 +95,15 @@ Complete::Complete()
                           );
 
     Parameters.Add_Value (
-        NULL, "EROSION_CROP_MAX", "Use maximum allowed erosion per pixel (True/false)",
-        "", PARAMETER_TYPE_Bool, 1
+        NULL, "EROSION_CROP_MAX", "Flag maximum gross erosion",
+        "Use maximum allowed erosion per pixel (True/false)", PARAMETER_TYPE_Bool, 1
     );
 
     Parameters.Add_Value (
-        "EROSION_CROP_MAX", "EROSION_MAX", "Maximum allowed erosion per pixel, higher values are set to this value.",
-        "", PARAMETER_TYPE_Double, 150, 0, 10000000
+        "EROSION_CROP_MAX", "EROSION_MAX", "Maximum allower gross erosion.",
+        "Maximum allowed erosion per pixel, higher values are set to this value.", PARAMETER_TYPE_Double, 150, 0, 10000000
     );
+
 
 
 };

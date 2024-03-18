@@ -16,10 +16,9 @@ Create_Parcel_Grid::Create_Parcel_Grid()
                             "'Vlaams Hydrologische Atlas' (VHA) and "
                             "Landuse map. Returns parcels with codes: \n"
                             "\n"
-                            " - infrastructure: -2 \n"
+                            " - infrastructure and roads: -2 \n"
                             " - water (open water / river): -1 \n"
-                            " - other: 1 \n"
-                            " - parcels: [2,9999] \n"
+                            " - parcels: [1,9999] \n"
                             " - forest: 10000 \n"
                             "\n"
                             "Only the geometry of the input shapes is used for "
@@ -30,10 +29,14 @@ Create_Parcel_Grid::Create_Parcel_Grid()
                             "information."
                           ) );
 
-    Parameters.Add_Shapes ( NULL, "PARCEL_SHAPES", "Parcels", "Parcels", PARAMETER_INPUT, SHAPE_TYPE_Polygon );
+    Parameters.Add_Shapes ( NULL, "PARCEL_SHAPES", "Parcels", "Polygon shape of parcels.", PARAMETER_INPUT, SHAPE_TYPE_Polygon );
     Parameters.Add_Grid ( NULL, "LANDUSE", "Landuse", "Landuse with values 10000, 1 and -2.", PARAMETER_INPUT );
 
-    Parameters.Add_Grid ( NULL, "PRC", "Parcels grid", "Output grid.", PARAMETER_OUTPUT, true, SG_DATATYPE_Short );
+    Parameters.Add_Grid ( NULL, "PRC", "Parcel grid with: \n"
+        "- a unique identifier per parcel: [1,9999] \n"
+        "- Forest = 10000  \n"
+        "- Infrastructure & roads = -2 \n"
+        "- Rivers -1 \n", "Output grid.", PARAMETER_OUTPUT, true, SG_DATATYPE_Short );
     Parameters.Add_Shapes ( NULL, "WTZ", "GRB WTZ (VHA-polygon)", "VHA (polygons).", PARAMETER_INPUT, SHAPE_TYPE_Polygon );
     Parameters.Add_Shapes ( NULL, "WLAS", "VHA lines", "VHA (lines).", PARAMETER_INPUT, SHAPE_TYPE_Line );
 

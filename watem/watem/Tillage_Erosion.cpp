@@ -27,10 +27,10 @@ Tillage_Erosion::Tillage_Erosion()
 
     Parameters.Add_Grid (
         NULL, "PRC", "Parcels",
-                "Parcel grid with: \n"
-        "- a unique identifier per parcel: [1 and 9999] \n"
+        "Parcel grid with: \n"
+        "- a unique identifier per parcel: [1,9999] \n"
         "- Forest = 10000  \n"
-        "- Infrastructure = -2 \n"
+        "- Infrastructure & roads = -2 \n"
         "- Rivers -1 \n",
         PARAMETER_INPUT
     );

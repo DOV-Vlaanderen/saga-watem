@@ -53,8 +53,9 @@ Water_Erosion::Water_Erosion()
     );
 
     Parameters.Add_Value (
-        NULL, "CORR", "correctiefactor grid",
-        "Correction factor for resolution as RUSLE was determined on resolution of 22.1 meter. This value is set to 1.4 for grids of 5x5 (see Notebaert et al. 2006)", PARAMETER_TYPE_Double, 1.4, 0, 20
+        NULL, "CORR", "Resolution correction factor",
+        "Correction factor for resolution as RUSLE was determined on resolution of 22.1 meter. This value is set to 1.4 for grids of 5x5 (see Notebaert et al. 2006)",
+        PARAMETER_TYPE_Double, 1.4, 0, 20
     );
 
     Parameters.Add_Grid (
@@ -65,13 +66,13 @@ Water_Erosion::Water_Erosion()
 
 
     Parameters.Add_Value (
-        NULL, "EROSION_CROP_MAX", "Use maximum allowed erosion per pixel (True/false)",
-        "", PARAMETER_TYPE_Bool, 1
+        NULL, "EROSION_CROP_MAX", "Flag maximum gross erosion",
+        "Use maximum allowed erosion per pixel (True/false)", PARAMETER_TYPE_Bool, 1
     );
 
     Parameters.Add_Value (
-        "EROSION_CROP_MAX", "EROSION_MAX", "Maximum allowed erosion per pixel, higher values are set to this value.",
-        "", PARAMETER_TYPE_Double, 150, 0, 10000000
+        "EROSION_CROP_MAX", "EROSION_MAX", "Maximum allower gross erosion.",
+        "Maximum allowed erosion per pixel, higher values are set to this value.", PARAMETER_TYPE_Double, 150, 0, 10000000
     );
 
 

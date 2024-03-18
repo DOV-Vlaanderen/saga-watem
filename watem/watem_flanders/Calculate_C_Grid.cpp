@@ -17,7 +17,7 @@ Calculate_C_Grid::Calculate_C_Grid()
                           "Calculation of the C-factor (crop and management factor) "
                           "map based on parcel grid. Uses fixed constants: \n"
                           "- 0.37 for cropland (code in [2,9999] \n"
-                          "- 0 for rivers infrastructure (code = -1 and -2)\n"
+                          "- 0 for rivers infrastructure/roads (code = -1 and -2)\n"
                           "- 0.001 for forests (code = 10000)"
                       )
                     );
@@ -28,8 +28,13 @@ Calculate_C_Grid::Calculate_C_Grid()
 
 
     Parameters.Add_Grid (
-        NULL, "PRC", "Parcel grid file (see output tool 1).",
-        "",
+        NULL,  "PRC", "Parcels",
+        "Parcel grid with: \n"
+        "- a unique identifier per parcel: [2,9999] \n"
+        "- Forest = 10000  \n"
+        "- Other = 1 \n"
+        "- Infrastructure & roads = -2 \n"
+        "- Rivers -1 \n",
         PARAMETER_INPUT
     );
 
