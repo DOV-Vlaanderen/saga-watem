@@ -46,8 +46,12 @@ CCalculate_LS_Watem::CCalculate_LS_Watem ( void )
     Set_Version ( VERSION );
 
     Set_Description	( _TW (
-                          "LS calculation using parcel boundaries"
-                      )
+                          "This module computes the LS-factor given a digital "
+                          "elevation model, parcel grid and upslope area (see "
+                          "calculate uparea. The slope at boundaries is "
+                          "calculated perpendicular to parcel boundaries. "
+                          "Different methods can be used to compute the LS "
+                          "(see 'Method to compute LS').")
                     );
 
 
@@ -56,8 +60,8 @@ CCalculate_LS_Watem::CCalculate_LS_Watem ( void )
 
 
     Parameters.Add_Grid (
-        NULL, "DEM", "Elevation",
-        "Digital elevation model",
+        NULL, "DEM", "Digital elevation model",
+        "Digital elevation model (m)",
         PARAMETER_INPUT
     );
 
@@ -76,7 +80,7 @@ CCalculate_LS_Watem::CCalculate_LS_Watem ( void )
                             );
 
     Parameters.Add_Grid (
-        useprc, "PRC", "Parcels",
+        useprc, "PRC", "Parcel grid",
         "Parcel grid with: \n"
         "- a unique identifier per parcel: [1,9999] \n"
         "- Forest = 10000  \n"

@@ -28,7 +28,7 @@ Calculate_C_Grid::Calculate_C_Grid()
 
 
     Parameters.Add_Grid (
-        NULL,  "PRC", "Parcels",
+        NULL,  "PRC", "Parcel grid",
         "Parcel grid with: \n"
         "- a unique identifier per parcel: [2,9999] \n"
         "- Forest = 10000  \n"

@@ -2,7 +2,8 @@
 
 Complete::Complete()
 {
-    Set_Name ( _TL ( "Complete Calculation Erosion map (combines all steps)" ) );
+    Set_Name ( _TL ( "Complete Calculation Erosion map (combines all steps). "
+                    "See submodules for more information." ) );
 
     Set_Author ( "Based on Watem (KULeuven). Converted to SAGA by Johan Van de Wauw (2016-2017)" );
 
@@ -10,34 +11,34 @@ Complete::Complete()
 
     Set_Description ( _TW ("Complete computation erosion raster in one step. "
                            "This model executes following steps: \n "
-                           "- Calculate uparea (watem-1) \n"
+                           "- Calculate upslope area (watem-1) \n"
                            "- LS calculation (watem-2) \n"
                            "- C calculation based on parcel grid (watem-flanders-3) \n"
                            "- Watererosion based on LS (RUSLE) (optional tillage erosion) (watem-3 and watem-4) \n"
                       ) );
 
     Parameters.Add_Grid ( NULL, "DEM", _TL ( "DEM" ), _TL ( "Digital elevation model."), PARAMETER_INPUT );
-    Parameters.Add_Grid ( NULL,  "PRC", "Parcels",
+    Parameters.Add_Grid ( NULL,  "PRC", "Parcel grid",
         "Parcel grid with: \n"
         "- a unique identifier per parcel: [2,9999] \n"
         "- Forest = 10000  \n"
         "- Other = 1 \n"
         "- Infrastructure & roads = -2 \n"
         "- Rivers -1 \n", PARAMETER_INPUT );
-    Parameters.Add_Grid ( NULL, "K", _TL ("soil erodibility factor (K-factor, ton ha MJ-1 mm-1)" ), _TL ("soil erodibility factor (K-factor, ton ha MJ-1 mm-1)"), PARAMETER_INPUT );
+    Parameters.Add_Grid ( NULL, "K", _TL ("K-factor grid" ), _TL ("soil erodibility factor (K-factor, ton ha MJ-1 mm-1)"), PARAMETER_INPUT );
 
     Parameters.Add_Grid ( NULL, "PIT", _TL ( "Pit" ), _TL ("Pit id. These id's are linked to the id's in pit data (see watem-1 Calculate uparea)"), PARAMETER_OUTPUT, true, SG_DATATYPE_DWord );
-    Parameters.Add_Grid ( NULL, "UPSLOPE_AREA", _TL ( "UPAREA" ), _TL ("Upslope Area: area that flow to a certain pixel (see watem-1 Calculate uparea)"), PARAMETER_OUTPUT );
+    Parameters.Add_Grid ( NULL, "UPSLOPE_AREA", _TL ( "Upslope area" ), _TL ("Upslope Area: area that flow to a certain pixel (see watem-1 Calculate uparea)"), PARAMETER_OUTPUT );
     Parameters.Add_Grid ( NULL, "LS", _TL ( "LS" ), _TL ( "LS as defined by return tool (see watem-2, LS calculation)" ), PARAMETER_OUTPUT );
     Parameters.Add_Grid ( NULL, "TILL", _TL ( "Tillage Erosion" ), _TL ( "Average soil loss due to tillage erosion (ton ha-1 jaar-1)" ), PARAMETER_OUTPUT_OPTIONAL );
 
     Parameters.Add_Value (
-        NULL, "R", "R",
+        NULL, "R", "R-factor value",
         "rainfall erosivity factor (MJ mm ha-1 jaar-1)", PARAMETER_TYPE_Double, 880, 0, 1000
     );
 
     Parameters.Add_Value (
-        NULL, "P", "P",
+        NULL, "P", "P-factor value",
         "erosion control factor (dimensieloos) ", PARAMETER_TYPE_Double, 1, 0, 1
     );
 

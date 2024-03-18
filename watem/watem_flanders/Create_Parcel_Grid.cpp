@@ -26,17 +26,18 @@ Create_Parcel_Grid::Create_Parcel_Grid()
                             "data specific attributes (i.e. GRB, VHA, in "
                             "dutch). We refer to the GRB and VHA metadata at "
                             "'datavindplaats' of www.vlaanderen.be for more "
-                            "information."
+                            "information. GRB overwrites parcel, river "
+                            "overwrites GRB. "
                           ) );
 
     Parameters.Add_Shapes ( NULL, "PARCEL_SHAPES", "Parcels", "Polygon shape of parcels.", PARAMETER_INPUT, SHAPE_TYPE_Polygon );
     Parameters.Add_Grid ( NULL, "LANDUSE", "Landuse", "Landuse with values 10000, 1 and -2.", PARAMETER_INPUT );
 
-    Parameters.Add_Grid ( NULL, "PRC", "Parcel grid with: \n"
+    Parameters.Add_Grid ( NULL, "PRC", "Parcel grid", "Output grid  with: \n"
         "- a unique identifier per parcel: [1,9999] \n"
         "- Forest = 10000  \n"
         "- Infrastructure & roads = -2 \n"
-        "- Rivers -1 \n", "Output grid.", PARAMETER_OUTPUT, true, SG_DATATYPE_Short );
+        "- Rivers -1 \n", PARAMETER_OUTPUT, true, SG_DATATYPE_Short );
     Parameters.Add_Shapes ( NULL, "WTZ", "GRB WTZ (VHA-polygon)", "VHA (polygons).", PARAMETER_INPUT, SHAPE_TYPE_Polygon );
     Parameters.Add_Shapes ( NULL, "WLAS", "VHA lines", "VHA (lines).", PARAMETER_INPUT, SHAPE_TYPE_Line );
 

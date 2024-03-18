@@ -14,7 +14,13 @@ Water_Erosion::Water_Erosion()
     Set_Version ( VERSION );
 
     Set_Description ( _TW (
-                          "Determine watererosion based on LS(grid)-, K(grid)-, C(grid)-, R(value)- and P(value)-factor. " )
+                          "Determine watererosion based on LS(grid)-, "
+                          "K(grid)-, C(grid)-, R(value)- and P(value)-factor. "
+                          "A correction for accounting differences in "
+                          "resolution can be used (see 'Resolution correction "
+                          "factor'). In addition the RUSLE values can be "
+                          "limited to a maximum value (see 'Flag maximum "
+                          "gross erosion').")
                     );
 
 
@@ -30,7 +36,7 @@ Water_Erosion::Water_Erosion()
     );
 
     Parameters.Add_Grid (
-        NULL, "K", "soil erodibility factor (K-factor, ton ha MJ-1 mm-1)",
+        NULL, "K", "K-factor grid",
         "soil erodibility factor (K-factor, ton ha MJ-1 mm-1)",
         PARAMETER_INPUT
     );
@@ -43,13 +49,13 @@ Water_Erosion::Water_Erosion()
     );
 
     Parameters.Add_Value (
-        NULL, "R", "rainfall erosivity factor (MJ mm ha-1 year-1)",
-        "", PARAMETER_TYPE_Double, 880, 0, 1000
+        NULL, "R", "R-factor value", "rainfall erosivity factor (MJ mm ha-1 year-1)"
+        , PARAMETER_TYPE_Double, 880, 0, 1000
     );
 
     Parameters.Add_Value (
-        NULL, "P", "erosion control factor (dimensionless, between 0 and 1) ",
-        "erosion control factor (dimensionless) ", PARAMETER_TYPE_Double, 1, 0, 1
+        NULL, "P", "P-factor value", "erosion control factor (dimensionless, between 0 and 1) ",
+         PARAMETER_TYPE_Double, 1, 0, 1
     );
 
     Parameters.Add_Value (

@@ -24,7 +24,9 @@ Parcel_C_Grid::Parcel_C_Grid()
                           "data specific attributes (i.e. GRB, VHA, in "
                           "dutch). We refer to the GRB and VHA metadata at "
                           "'datavindplaats' of www.vlaanderen.be for more "
-                          "information."
+                          "information. For a mapping table, we refer to  "
+                          "'Prepare parcel Map' and 'C calculation based on "
+                          " parcel grid"'. GRB overwrites landuse."
                       )
                     );
 
@@ -33,7 +35,7 @@ Parcel_C_Grid::Parcel_C_Grid()
     // Define your parameters list...
 
 
-    CSG_Parameter *shapes = Parameters.Add_Shapes ( NULL, "PARCEL_SHAPES", "Parcels", "Polygon shape of parcels.", PARAMETER_INPUT, SHAPE_TYPE_Polygon );
+    CSG_Parameter *shapes = Parameters.Add_Shapes ( NULL, "PARCEL_SHAPES", "Parcels", "Polygon shape of parcels. Should contain 'C Field'.", PARAMETER_INPUT, SHAPE_TYPE_Polygon );
 
     Parameters.Add_Table_Field ( shapes, "PARCEL_SHAPE_C_FIELD", "C Field", "Field name containing C-factor value" );
     Parameters.Add_Grid (

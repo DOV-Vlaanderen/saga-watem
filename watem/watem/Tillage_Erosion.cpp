@@ -10,7 +10,8 @@ Tillage_Erosion::Tillage_Erosion()
     Set_Version ( VERSION );
 
     Set_Description ( _TW (
-                          "Calculation of Tillage Erosion based on DTM (grid) and parcels (grid). Based on the code from WaTEM (KU Leuven)."
+                          "Calculation of Tillage Erosion based on DTM (grid) and parcels (grid). Based on the code from WaTEM (KU Leuven). "
+                          "Tillage erosion, or soil translocation by tillage, is calculated according to the method of Van Oost et al. (2000)."
                       )
                     );
 
@@ -20,13 +21,13 @@ Tillage_Erosion::Tillage_Erosion()
 
 
     Parameters.Add_Grid (
-        NULL, "DEM", "Elevation",
+        NULL, "DEM", "Digital elevation model",
         "Digital Elevation Model (m).",
         PARAMETER_INPUT
     );
 
     Parameters.Add_Grid (
-        NULL, "PRC", "Parcels",
+        NULL, "PRC", "Parcel grid",
         "Parcel grid with: \n"
         "- a unique identifier per parcel: [1,9999] \n"
         "- Forest = 10000  \n"

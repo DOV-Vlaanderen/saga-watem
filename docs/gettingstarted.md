@@ -29,7 +29,7 @@ And functionalities specific to Flanders:
 
 ![img8](img/gui-watem-flanders-tool.png)
 *Figure 2: Calling the WaTEM (flanders) module from the menu*
-
+****
 It is also possible to launch the same modules from the tools tab in the 
 "manager" window. The description tab then also displays the module's 
 documentation.
@@ -63,7 +63,7 @@ inputs, outputs and options, we refer to the module reference).
 ![img14](img/gui-watem.png)
 *Figure 5: Water erosion calculation based on LS*
 
-- Treatment erosion calculation (tool 'watem-3', used to be module 3.5, 
+- Tillage erosion calculation (tool 'watem-3', used to be module 3.5, 
   see legacy). Tillage erosion is not included in the annual Potential soil 
   erosion map per plot.
 

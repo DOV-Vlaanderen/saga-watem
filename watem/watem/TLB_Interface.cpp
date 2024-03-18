@@ -77,7 +77,7 @@ CSG_String Get_Info ( int i )
             return ( _TL ( "SAGA Implementatie van het WaTEM model (KULeuven). \n\n"
                            "WaTEM is a spatially distributed soil erosion model that was developed at the Physical"
                            "and Regional Geography Research Group (K.U.Leuven, Belgium)."
-                           "The development of the WaTEM/SEDEM model and this SAGA module was financed by Vlaamse overheid "
+                           "The development of the SAGA-WaTEM module was financed by Vlaamse overheid "
                            "(Vlaams Planbureau voor de Omgeving, Departement Omgeving)."
 
                          ) );

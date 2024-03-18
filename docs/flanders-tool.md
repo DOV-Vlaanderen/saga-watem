@@ -59,7 +59,7 @@ layers)
 - GRB layers(geopoint - dataset GRBgis)
 
   - GBG (building to land), GBA (building attachment), WGA (road attachment), 
-    KNW (structure), TRN (terrain): infrastructure (-2)
+    KNW (structure): infrastructure (-2)
 
 - Parcel map
 
@@ -68,9 +68,7 @@ layers)
 - Waterways and roads
 
   - SBN (railway line), WBN (road line) (-2)
-  - WLas (VHA lines) [For the erosion map 2018, the shape 'VHA_09052017.shp' was used 
-    was used and not WLas from GRB (because VHA was more recent)], WTZ (VHA polygons) 
-    (-1)
+  - WLas (VHA lines), WTZ (VHA polygons) (-1)
 
 ![img5](img/gui-prepareparcelgrid.png)
 *Figure 1: module 'Creation of parcel grid (PRC)'.*
@@ -90,9 +88,7 @@ filter per plot.
 A second optional step is to perform a 3x3 filter on the DTM. This filters
 the DTM but only considers cells that lie within the same 
 plot. This filter can be done in SAGA using the tool '3x3 filter within 
-plot boundaries'. This option is on by default because in 2017 it was decided 
-to use this option to be used starting from the calculation of the erosion 
-map 2018.
+plot boundaries'. 
 
 ![img7](img/gui-3x3filter.png)
 *Figure 2: 3x3 filter within plot boundaries*
@@ -107,7 +103,6 @@ A C-factor grid can be computed from:
 The second one uses the translation from the section 'Parcels map' on this 
 page, and a C-factor specifically defined as a parcels shape attribute (see C 
 Field, Figure 4) 
-
 
 ![img13](img/gui-cgrid.png)
 *Figure 3: C calculation from parcel raster*
@@ -207,13 +202,13 @@ This information can be derived from the tools' documentation given earlier:
 
 The tool performs a 3x3 filter on a digital elevation model using only cells within the plot.
 
-| Name         | Type          | Identifier | Description                                                  | Constraints |
-| ------------ | ------------- | :--------: | ------------------------------------------------------------ | ----------- |
-|              |               | **Input**  |                                                              |             |
-| Elevation    | Grid (input)  |    DEM     | Digital elevation model.                                     |             |
-| Percelen     | Grid (input)  |    PRC     | Plot grid with unique identifier per plot, can be created with the tool 'create plot grid' |             |
-|              |               | **Output** |                                                              |             |
-| Filtered DEM | Grid (output) | DEM_FILTER | DEM filtered with a 3x3 filter active only within the plot boundaries. |             |
+| Name                          | Type          | Identifier | Description                                                                                | Constraints |
+|-------------------------------| ------------- | :--------: |--------------------------------------------------------------------------------------------| ----------- |
+|                               |               | **Input**  |                                                                                            |             |
+| Digital elevation model (DEM) | Grid (input)  |    DEM     | Digital elevation model (m).                                                               |             |
+| Parcel grid                   | Grid (input)  |    PRC     | Plot grid with unique identifier per plot, can be created with the tool 'create plot grid' |             |
+|                               |               | **Output** |                                                                                            |             |
+| Filtered DEM                  | Grid (output) | DEM_FILTER | DEM filtered with a 3x3 filter active only within the plot boundaries.                     |             |
 
 ## Complete tool
 
@@ -232,12 +227,12 @@ will not be performed.
 
 ```shell
 @ECHO OFF
-REM SET SAGA_MLB=C:\SAGA\Tools
-SET PATH=D:\erosiekaart\2018\saga_watem_1.7\saga_vc_x64
-set OUTPUT=D:\erosiekaart\2018\RESULTS
-set INPUT=D:\erosiekaart\2018\INPUTDATA
-set K=%INPUT%\K3.tif
-set GRB=D:\erosiekaart\2018\INPUTDATA\GRB
+REM SET SAGA_MLB="YOUR_SAGA_FOLDER"
+SET PATH="WORKING_DIRECTORY"
+set OUTPUT="OUTPUT_FOLDER"
+set INPUT="INPUT_FOLDER"
+set K="%INPUT%\K3.tif" #FILE
+set GRB="%INPUT\GRB" #FOLDER!
 if not exist "%OUTPUT%" (mkdir "%OUTPUT%")
 REM Tool: Aanmaak percelengrid
 saga_cmd watem_flanders 1 -PARCEL_SHAPES="%INPUT%\basis_ALBON_2018.shp" -
