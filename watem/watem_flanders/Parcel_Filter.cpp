@@ -10,31 +10,33 @@ Parcel_Filter::Parcel_Filter()
 
     Set_Version ( VERSION );
 
-    Set_Description ( _TW ( "The tool performs a 3x3 filter on a digital elevation model using only cells within the parcel."
+    Set_Description ( _TW ( "The tool performs a 3x3-mean filter on a digital "
+                            "elevation model using only cells within a "
+                            "singular parcel."
                           )
                     );
 
 
     //-----------------------------------------------------
     // Define your parameters list...
-
-
     Parameters.Add_Grid (
-        NULL, "DEM", "Elevation",
-        "Digital elevation model",
+        NULL, "DEM", "Digital elevation model (DEM)",
+        "Digital elevation model (m)",
         PARAMETER_INPUT
     );
 
-    Parameters.Add_Grid (
-        NULL, "PRC", "Percelen",
-        "Parcel grid with unique identifier per parcel, can be created using the 'create parcel grid' tool.",
-        PARAMETER_INPUT
-    );
+    Parameters.Add_Grid ( NULL,  "PRC", "Parcel grid",
+        "Parcel grid with: \n"
+        "- a unique identifier per parcel: [1,9999] \n"
+        "- Forest = 10000  \n"
+        "- Infrastructure & roads = -2 \n"
+        "- Rivers -1 \n", PARAMETER_INPUT );
 
 
     Parameters.Add_Grid (
         NULL, "DEM_FILTER", "Filtered DEM",
-        "DEM filtered with a 3x3 filter that is active only within parcel boundaries.",
+        "DEM filtered with a 3x3-mean filter that is active only within "
+        "parcel boundaries.",
         PARAMETER_OUTPUT
     );
 

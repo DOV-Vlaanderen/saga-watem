@@ -10,7 +10,7 @@
 //      System for Automated Geoscientific Analyses      //
 //                                                       //
 //                     Tool Library                      //
-//                        Watem                          //
+//                        WaTEM                          //
 //                                                       //
 //-------------------------------------------------------//
 //                                                       //

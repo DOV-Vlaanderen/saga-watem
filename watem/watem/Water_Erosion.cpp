@@ -14,7 +14,13 @@ Water_Erosion::Water_Erosion()
     Set_Version ( VERSION );
 
     Set_Description ( _TW (
-                          "Determine watererosion based on LS and crop (C) factor. " )
+                          "Determine watererosion based on LS(grid)-, "
+                          "K(grid)-, C(grid)-, R(value)- and P(value)-factor. "
+                          "A correction for accounting differences in "
+                          "resolution can be used (see 'Resolution correction "
+                          "factor'). In addition the RUSLE values can be "
+                          "limited to a maximum value (see 'Flag maximum "
+                          "gross erosion').")
                     );
 
 
@@ -24,35 +30,38 @@ Water_Erosion::Water_Erosion()
 
     Parameters.Add_Grid (
         NULL, "LS", "LS",
-        "LS: topographic slope and length factor (dimensionless)",
+        "LS: topographic slope and length factor (dimensionless), can be created using "
+        "the 'LS calculations' tool (watem-2).",
         PARAMETER_INPUT
     );
 
     Parameters.Add_Grid (
-        NULL, "K", "K: soil erosion sensitivity factor (ton ha MJ-1 mm-1)",
-        "K: soil erosion sensitivity factor (ton ha MJ-1 mm-1)",
+        NULL, "K", "K-factor grid",
+        "soil erodibility factor (K-factor, ton ha MJ-1 mm-1)",
         PARAMETER_INPUT
     );
 
     Parameters.Add_Grid (
-        NULL, "C", "C: crop and management factor (dimensionless)",
-        "Grid containing the crop and management factor.",
+        NULL, "C", "C-factor Grid",
+        "Grid containing the crop and management factor. Should be defined as "
+        "a grid with values between 0 and 1.",
         PARAMETER_INPUT
     );
 
     Parameters.Add_Value (
-        NULL, "R", "rainfall erosivity factor (MJ mm ha-1 year-1)",
-        "", PARAMETER_TYPE_Double, 880, 0, 1000
+        NULL, "R", "R-factor value", "rainfall erosivity factor (MJ mm ha-1 year-1)"
+        , PARAMETER_TYPE_Double, 880, 0, 1000
     );
 
     Parameters.Add_Value (
-        NULL, "P", "erosion control factor (dimensionless) ",
-        "erosion control factor (dimensionless) ", PARAMETER_TYPE_Double, 1, 0, 1
+        NULL, "P", "P-factor value", "erosion control factor (dimensionless, between 0 and 1) ",
+         PARAMETER_TYPE_Double, 1, 0, 1
     );
 
     Parameters.Add_Value (
-        NULL, "CORR", "correctiefactor grid",
-        "Correction factor because LS calculations should use plots of 22.1 meters. 1.4 for grids of 5x5", PARAMETER_TYPE_Double, 1.4, 0, 20
+        NULL, "CORR", "Resolution correction factor",
+        "Correction factor for resolution as RUSLE was determined on resolution of 22.1 meter. This value is set to 1.4 for grids of 5x5 (see Notebaert et al. 2006)",
+        PARAMETER_TYPE_Double, 1.4, 0, 20
     );
 
     Parameters.Add_Grid (
@@ -63,13 +72,13 @@ Water_Erosion::Water_Erosion()
 
 
     Parameters.Add_Value (
-        NULL, "EROSION_CROP_MAX", "Cap maximum erosion per pixel",
-        "", PARAMETER_TYPE_Bool, 1
+        NULL, "EROSION_CROP_MAX", "Flag maximum gross erosion",
+        "Use maximum allowed erosion per pixel (True/false)", PARAMETER_TYPE_Bool, 1
     );
 
     Parameters.Add_Value (
-        "EROSION_CROP_MAX", "EROSION_MAX", "Maximum erosion, higher values will be capped.",
-        "", PARAMETER_TYPE_Double, 150, 0, 10000000
+        "EROSION_CROP_MAX", "EROSION_MAX", "Maximum allower gross erosion.",
+        "Maximum allowed erosion per pixel, higher values are set to this value.", PARAMETER_TYPE_Double, 150, 0, 10000000
     );
 
 

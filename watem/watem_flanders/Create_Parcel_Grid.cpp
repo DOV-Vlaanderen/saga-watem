@@ -10,26 +10,45 @@ Create_Parcel_Grid::Create_Parcel_Grid()
 
     Set_Version ( VERSION );
 
-    Set_Description ( _TW ( "Flanders specific: Creates a parcel grid for creating the erosion map based on parcel map, "
-                            " GRB and Landuse map. "
-                            "Hierbij krijgen percelen een code tussen 2 en 9999, bos 10000, rivieren en open water -1, bebouwing -2"
+    Set_Description ( _TW ( "Flanders specific: Creates a parcel grid for "
+                            "creating the erosion map based on parcel map, "
+                            "'Grootschalig Referentie Bestand' (GRB), the "
+                            "'Vlaams Hydrologische Atlas' (VHA) and "
+                            "Landuse map. Returns parcels with codes: \n"
+                            "\n"
+                            " - infrastructure and roads: -2 \n"
+                            " - water (open water / river): -1 \n"
+                            " - parcels: [1,9999] \n"
+                            " - forest: 10000 \n"
+                            "\n"
+                            "Only the geometry of the input shapes is used for "
+                            "mapping. Note that the input instruction refers to "
+                            "data specific attributes (i.e. GRB, VHA, in "
+                            "dutch). We refer to the GRB and VHA metadata at "
+                            "'datavindplaats' of www.vlaanderen.be for more "
+                            "information. GRB overwrites parcel, river "
+                            "overwrites GRB. "
                           ) );
 
-    Parameters.Add_Shapes ( NULL, "PARCEL_SHAPES", "Percelen", "Percelen (shapefile)", PARAMETER_INPUT, SHAPE_TYPE_Polygon );
-    Parameters.Add_Grid ( NULL, "LANDUSE", "Landgebruik", "Landgebruik (grid)", PARAMETER_INPUT );
+    Parameters.Add_Shapes ( NULL, "PARCEL_SHAPES", "Parcels", "Polygon shape of parcels.", PARAMETER_INPUT, SHAPE_TYPE_Polygon );
+    Parameters.Add_Grid ( NULL, "LANDUSE", "Landuse", "Landuse with values 10000, 1 and -2.", PARAMETER_INPUT );
 
-    Parameters.Add_Grid ( NULL, "PRC", "Percelen grid", "Percelengridkaart gecodeerd volgens watem ", PARAMETER_OUTPUT, true, SG_DATATYPE_Short );
-    Parameters.Add_Shapes ( NULL, "WTZ", "GRB WTZ (VHA-polygoon)", "VHA (polygoon)", PARAMETER_INPUT, SHAPE_TYPE_Polygon );
-    Parameters.Add_Shapes ( NULL, "WLAS", "VHA Lijnen", "VHA (lijnen). Eventueel kan de laag GRB Wlas gebruikt worden, deze loopt echter soms achter op de VHA.", PARAMETER_INPUT, SHAPE_TYPE_Line );
+    Parameters.Add_Grid ( NULL, "PRC", "Parcel grid", "Output grid  with: \n"
+        "- a unique identifier per parcel: [1,9999] \n"
+        "- Forest = 10000  \n"
+        "- Infrastructure & roads = -2 \n"
+        "- Rivers -1 \n", PARAMETER_OUTPUT, true, SG_DATATYPE_Short );
+    Parameters.Add_Shapes ( NULL, "WTZ", "GRB WTZ (VHA-polygon)", "VHA (polygons).", PARAMETER_INPUT, SHAPE_TYPE_Polygon );
+    Parameters.Add_Shapes ( NULL, "WLAS", "VHA lines", "VHA (lines).", PARAMETER_INPUT, SHAPE_TYPE_Line );
 
-    Parameters.Add_Shapes ( NULL, "SBN", "GRB Sbn (spoorbaan)", "GRB Sbn (spoorbaan)", PARAMETER_INPUT, SHAPE_TYPE_Polygon );
-    Parameters.Add_Shapes ( NULL, "WBN", "GRB Wbn (wegbaan)", "GRB Wbn (wegbaan)", PARAMETER_INPUT, SHAPE_TYPE_Polygon );
+    Parameters.Add_Shapes ( NULL, "SBN", "GRB Sbn (spoorbaan)", "GRB Sbn (spoorbaan).", PARAMETER_INPUT, SHAPE_TYPE_Polygon );
+    Parameters.Add_Shapes ( NULL, "WBN", "GRB Wbn (wegbaan)", "GRB Wbn (wegbaan).", PARAMETER_INPUT, SHAPE_TYPE_Polygon );
 
-    Parameters.Add_Shapes ( NULL, "WGA", "GRB Wga (wegaanhorigheid)", "GRB Wga (wegaanhorigheid)", PARAMETER_INPUT, SHAPE_TYPE_Polygon );
+    Parameters.Add_Shapes ( NULL, "WGA", "GRB Wga (wegaanhorigheid)", "GRB Wga (wegaanhorigheid).", PARAMETER_INPUT, SHAPE_TYPE_Polygon );
 
-    Parameters.Add_Shapes ( NULL, "GBG", "GRB Gbg (gebouw aan de grond)", "GRB Gbg (gebouw aan de grond)", PARAMETER_INPUT, SHAPE_TYPE_Polygon );
-    Parameters.Add_Shapes ( NULL, "GBA", "GRB Gba (gebouwaanhorigheid)", "GRB Gba (gebouwaanhorigheid)", PARAMETER_INPUT, SHAPE_TYPE_Polygon );
-    Parameters.Add_Shapes ( NULL, "TRN", "GRB Trn (terrein)", "GRB Trn (Terrein) - enkel bepaalde klassen worden gebruikt", PARAMETER_INPUT, SHAPE_TYPE_Polygon );
+    Parameters.Add_Shapes ( NULL, "GBG", "GRB Gbg (gebouw aan de grond)", "GRB Gbg (gebouw aan de grond).", PARAMETER_INPUT, SHAPE_TYPE_Polygon );
+    Parameters.Add_Shapes ( NULL, "GBA", "GRB Gba (gebouwaanhorigheid)", "GRB Gba (gebouwaanhorigheid).", PARAMETER_INPUT, SHAPE_TYPE_Polygon );
+    Parameters.Add_Shapes ( NULL, "TRN", "(NOT IMPLEMENTED) GRB Trn (terrein)", "GRB Trn (Terrein) - only certain classes are used", PARAMETER_INPUT, SHAPE_TYPE_Polygon );
     Parameters.Add_Shapes ( NULL, "KNW", "GRB Knw (Kunstwerk)", "GRB Knw (Kunstwerk)", PARAMETER_INPUT, SHAPE_TYPE_Polygon );
 
 }

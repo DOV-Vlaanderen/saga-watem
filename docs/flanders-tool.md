@@ -8,6 +8,7 @@ defined:
 - Generation of landuse parcels maps (next two sections). 
 - Processing of digital elevation model (section 'digital elevation model')
 - Definition of the K-grid (section 'K-grid')
+- Definition of the C-grid (section 'C-frid')
 - Compute erosion map: see [Getting started](gettingstarted.md)
 - Postprocessing of the results
 
@@ -17,6 +18,10 @@ In addition, an examples of :
 - script for Flanders
 
 are found on this page. 
+
+This page is developed serving as an application with example data. Note 
+that the modules referred to in this page are explained in detail in the 
+module reference. 
 
 ## Landuse map
 
@@ -41,23 +46,20 @@ Note: value -2 remains -2 in the new map and is therefore not converted.
 
 ## Parcels map
 
-The plot grid can be created in SAGA using the module '1. 
-(PRC)'. The plot grid is created from the files listed below. The 
+The plot grid can be created in SAGA using the watem-flanders 
+'Prepare parcel Map'. The plot grid is created from the files listed below. The 
 order used is this: (where later map layers are superimposed on previous map 
 layers)
 
 - Land use map 'Land use_forest_reclassified' (see next section)
 
   - 10000: forest
-
-  - 1: other land use
-
-  - -2: built-up 
+  - -2: infrastructure / roads
 
 - GRB layers(geopoint - dataset GRBgis)
 
   - GBG (building to land), GBA (building attachment), WGA (road attachment), 
-    KNW (structure), TRN (terrain): built-up (-2)
+    KNW (structure): infrastructure (-2)
 
 - Parcel map
 
@@ -66,13 +68,10 @@ layers)
 - Waterways and roads
 
   - SBN (railway line), WBN (road line) (-2)
-  - WLas (VHA lines) [For the erosion map 2018, the shape 'VHA_09052017.shp' was used 
-    was used and not WLas from GRB (because VHA was more recent)], WTZ (VHA polygons) 
-    (-1)
+  - WLas (VHA lines), WTZ (VHA polygons) (-1)
 
-![img5](img/erosiekaart-img5.png)
-
-*Figure 4: module '1. Creation of parcel grid (PRC)'.*
+![img5](img/gui-prepareparcelgrid.png)
+*Figure 1: module 'Creation of parcel grid (PRC)'.*
 
 ## Digital elevation model
 
@@ -88,14 +87,28 @@ filter per plot.
 
 A second optional step is to perform a 3x3 filter on the DTM. This filters
 the DTM but only considers cells that lie within the same 
-plot. This filter can be done in SAGA using the tool '2. 3x3 filter within 
-plot boundaries'. This option is on by default because in 2017 it was decided 
-to use this option to be used starting from the calculation of the erosion 
-map 2018.
+plot. This filter can be done in SAGA using the tool '3x3 filter within 
+plot boundaries'. 
 
-![img7](img/erosiekaart-img7.png)
+![img7](img/gui-3x3filter.png)
+*Figure 2: 3x3 filter within plot boundaries*
 
-*Figure 6: Module 2. 3x3 filter within plot boundaries*
+## C-grid
+
+A C-factor grid can be computed from:
+
+- a parcel raster (C calculation based on parcel grid)
+- a parcel shape with an attribute (C calculation shape attribute)
+
+The second one uses the translation from the section 'Parcels map' on this 
+page, and a C-factor specifically defined as a parcels shape attribute (see C 
+Field, Figure 4) 
+
+![img13](img/gui-cgrid.png)
+*Figure 3: C calculation from parcel raster*
+
+![img13](img/gui-cshape.png)
+*Figure 4: C calculation from parcel shape*
 
 ## K-grid
 
@@ -184,35 +197,42 @@ Here the first command (watem) indicates which library is used, and the second
 example, the tool 3x3 filter within plot boundaries is called (identifier 2). 
 This information can be derived from the tools' documentation given earlier:
 
-![img19](img/erosiekaart-img19.png)
+![img19](img/id-tool.png)
+*Figure 5: example of id of tool, see also module reference*
 
 The tool performs a 3x3 filter on a digital elevation model using only cells within the plot.
 
-| Name         | Type          | Identifier | Description                                                  | Constraints |
-| ------------ | ------------- | :--------: | ------------------------------------------------------------ | ----------- |
-|              |               | **Input**  |                                                              |             |
-| Elevation    | Grid (input)  |    DEM     | Digital elevation model.                                     |             |
-| Percelen     | Grid (input)  |    PRC     | Plot grid with unique identifier per plot, can be created with the tool 'create plot grid' |             |
-|              |               | **Output** |                                                              |             |
-| Filtered DEM | Grid (output) | DEM_FILTER | DEM filtered with a 3x3 filter active only within the plot boundaries. |             |
+| Name                          | Type          | Identifier | Description                                                                                | Constraints |
+|-------------------------------| ------------- | :--------: |--------------------------------------------------------------------------------------------| ----------- |
+|                               |               | **Input**  |                                                                                            |             |
+| Digital elevation model (DEM) | Grid (input)  |    DEM     | Digital elevation model (m).                                                               |             |
+| Parcel grid                   | Grid (input)  |    PRC     | Plot grid with unique identifier per plot, can be created with the tool 'create plot grid' |             |
+|                               |               | **Output** |                                                                                            |             |
+| Filtered DEM                  | Grid (output) | DEM_FILTER | DEM filtered with a 3x3 filter active only within the plot boundaries.                     |             |
 
-It is also possible to create a sample script from the tool manager in the 
-graphical interface (save to script file or copy to clipboard).
+## Complete tool
 
-![img20](img/erosiekaart-img20.png)
+There is also a single tool that can be used to compute the erosion map with 
+one command  
 
-*Figure 17: A script can also be created from the graphical interface*
+![img16](img/gui-complete.png)
+*Figure 6: Erosion map calculation for Flanders (complete).*
+
+Initially, under "Grid system" you need to select the correct system. Then the 
+other grids can be selected. In this module, the machining erosion can 
+optionally also be calculated. If no value is given here, this calculation 
+will not be performed.
 
 ## Example script for Flanders
 
 ```shell
 @ECHO OFF
-REM SET SAGA_MLB=C:\SAGA\Tools
-SET PATH=D:\erosiekaart\2018\saga_watem_1.7\saga_vc_x64
-set OUTPUT=D:\erosiekaart\2018\RESULTS
-set INPUT=D:\erosiekaart\2018\INPUTDATA
-set K=%INPUT%\K3.tif
-set GRB=D:\erosiekaart\2018\INPUTDATA\GRB
+REM SET SAGA_MLB="YOUR_SAGA_FOLDER"
+SET PATH="WORKING_DIRECTORY"
+set OUTPUT="OUTPUT_FOLDER"
+set INPUT="INPUT_FOLDER"
+set K="%INPUT%\K3.tif" #FILE
+set GRB="%INPUT\GRB" #FOLDER!
 if not exist "%OUTPUT%" (mkdir "%OUTPUT%")
 REM Tool: Aanmaak percelengrid
 saga_cmd watem_flanders 1 -PARCEL_SHAPES="%INPUT%\basis_ALBON_2018.shp" -

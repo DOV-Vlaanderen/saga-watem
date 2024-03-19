@@ -14,27 +14,37 @@ CCalculate_Uparea::CCalculate_Uparea()
     Set_Author ( _TL ( "Copyright (c) 2006 - 2016 by KULeuven. Converted to SAGA/C++ by Johan Van de Wauw" ) );
 
     Set_Description ( _TW (
-                          "This module converts a digital elevation model grid and a parcel grid and converts it to an upslope area.\n\n"
-                          "The method takes into account parcel borders, rivers (grid value -1) and landuse (forest has value 10000).\n"
-                          "Pits are taken into account. Optionally a grid with Pits and a table with pit information can be generated. "
+                          "This module converts a digital elevation model grid and a parcel grid and converts it to an upslope area."
+                          "The method takes into account parcel borders, rivers (grid value -1) and landuse (forest has value 10000)."
+                          "The upstream area  is computed from higher to lower pixels, within the boundaries of a parceL. At "
+                          "parcel/forest-, parcel/parcel-, parcel/infr-boundaries, the upstream area is reduced with the connectivity  (1-x) "
+                          "parameters. Pits are taken into account, such that flow is transported over maximum number of pixels (PIT_RADIUS) "
+                          "(otherwise ignored). Optionally a grid with Pits and a table with pit information can be generated. "
+                          "No river routing is considered, such that the upland routing 'ends' at the river boundary."
                       )
                     );
 
     Parameters.Add_Grid (
-        NULL, "DEM", "Digitaal hoogtemodel",
+        NULL, "DEM", "Digital elevation model",
         "",
         PARAMETER_INPUT
     );
 
     Parameters.Add_Grid (
-        NULL, "PRC", "Percelen",
-        "Parcel grid with a unique identifier per parcel (between 1 and 9999). Forest require value 10000. Built-up areas and roads -2 and rivers -1. ",
+        NULL, "PRC", "Parcel grid",
+        "Parcel grid with: \n"
+        "- a unique identifier per parcel: [1,9999] \n"
+        "- Forest = 10000  \n"
+        "- Other = 1 \n"
+        "- Infrastructure & roads = -2 \n"
+        "- Rivers -1 \n"
+        ,
         PARAMETER_INPUT
     );
 
     Parameters.Add_Grid (
         NULL, "PIT", "Pit",
-        "Gridfile with pit locations",
+        "Pit id. These id's are linked to the id's in pit data.",
         PARAMETER_OUTPUT,
         true,
         SG_DATATYPE_DWord
@@ -53,22 +63,22 @@ CCalculate_Uparea::CCalculate_Uparea()
     );
 
     Parameters.Add_Value (
-        NULL, "PCTOCROP", "Parcel Connectivity to cropland",
+        NULL, "PCTOCROP", "Parcel Connectivity to cropland (%)",
         "Percentage of water that will go from a cropland to another cropland.", PARAMETER_TYPE_Double, 70, 0, 100
     );
 
     Parameters.Add_Value (
-        NULL, "PCTOFOREST", "Parcel Connectivity to forest",
+        NULL, "PCTOFOREST", "Parcel Connectivity to forest (%)",
         "Percentage of water that will go from a cropland to forest.", PARAMETER_TYPE_Double, 100, 0, 100
     );
 
     Parameters.Add_Value (
-        NULL, "PCTOROAD", "Parcel Connectivity to road/built-up areas",
-        "Percentage of water that will go from cropland to built-up areas", PARAMETER_TYPE_Double, 70, 0, 100
+        NULL, "PCTOROAD", "Parcel Connectivity to infrastructure/roads (%)",
+        "Percentage of water that will go from cropland to infrastructure/roads", PARAMETER_TYPE_Double, 70, 0, 100
     );
 
     Parameters.Add_Value (
-        NULL, "PIT_FLOW", "Flow from pits into closeby cells (within radius)",
+        NULL, "PIT_FLOW", "Flow from pits into closeby cells (within radius) (True/False)",
         "If pits occur (local minima in the digital elevation model) water can flow to nearby cells if they are lower and within the PIT_SEARCH radius if this option is enabled.",
         PARAMETER_TYPE_Bool, false
     );

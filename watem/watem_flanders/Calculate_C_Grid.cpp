@@ -14,7 +14,11 @@ Calculate_C_Grid::Calculate_C_Grid()
     Set_Version ( VERSION );
 
     Set_Description ( _TW (
-                          "Calculation of the C (crop and management factor) map based on parcel grid. Uses fixed constants: 0.37 for cropland, 0 for rivers/built-up are, 0.001 for forests."
+                          "Calculation of the C-factor (crop and management factor) "
+                          "map based on parcel grid. Uses fixed constants: \n"
+                          "- 0.37 for cropland (code in [2,9999] \n"
+                          "- 0 for rivers infrastructure/roads (code = -1 and -2)\n"
+                          "- 0.001 for forests (code = 10000)"
                       )
                     );
 
@@ -24,13 +28,18 @@ Calculate_C_Grid::Calculate_C_Grid()
 
 
     Parameters.Add_Grid (
-        NULL, "PRC", "Parcel grid file",
-        "",
+        NULL,  "PRC", "Parcel grid",
+        "Parcel grid with: \n"
+        "- a unique identifier per parcel: [2,9999] \n"
+        "- Forest = 10000  \n"
+        "- Other = 1 \n"
+        "- Infrastructure & roads = -2 \n"
+        "- Rivers -1 \n",
         PARAMETER_INPUT
     );
 
     Parameters.Add_Grid (
-        NULL, "C", "C Grid", "C Grid", PARAMETER_OUTPUT, true, SG_DATATYPE_Short ); // we use a short to save memory
+        NULL, "C", "C Grid", "C-factor Grid", PARAMETER_OUTPUT, true, SG_DATATYPE_Short ); // we use a short to save memory
 }
 
 bool Calculate_C_Grid::On_Execute()

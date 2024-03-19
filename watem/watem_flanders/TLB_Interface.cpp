@@ -70,14 +70,13 @@ CSG_String Get_Info ( int i )
                             "Ontwikkeld in opdracht van Vlaamse overheid, departement Omgeving." ) );
 
         case TLB_INFO_Description:
-            return ( _TL ( "SAGA Implementatie van het WATEM model (KULeuven), inclusief modules voor aanmaak invoerbestanden. \n\n"
+            return ( _TL ( "SAGA implementation of WaTEM model (KULeuven), with modules for processing inputfiles. \n\n"
                            "WaTEM/SEDEM is a spatially distributed soil erosion and sediment delivery model that is developed at the Physical"
                            "and Regional Geography Research Group (K.U.Leuven, Belgium) as a user-friendly and optimised version of the WaTEM and SEDEM models, "
                            "which were also developed at K.U.Leuven. These models were specifically developed to simulate the impact of soil conservation and sediment "
                            "control measures as well as land use changes in the framework of an integrated catchment management, on the local soil loss and sediment "
                            "delivery to rivers. This model combines the WaTEM and SEDEM models and aims at providing useful information for land managers to select "
-                           "the most effective catchment management scenario. The building of an interface for the WaTEM/SEDEM model was financed by Vlaamse overheid "
-                           "(Vlaams Planbureau voor de Omgeving, Departement Omgeving)."
+                           "the most effective catchment management scenario.)."
 
                          ) );
 
