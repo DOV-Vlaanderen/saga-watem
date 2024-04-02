@@ -1,11 +1,6 @@
-name: 'Build documentation in linux'
+name: 'Publish documentation'
 
 on:
-  push:
-    branches: ["main","publish-docs-site" ]
-    pull-request:
-      branches: ["main"]
-  workflow_call:
   workflow_dispatch:
 
 jobs:
@@ -38,7 +33,6 @@ jobs:
         name: Upload docs
         Path: docs/_build
     - name: publish to github pages
-      if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/publish-docs-site')
       uses: peaceiris/actions-gh-pages@v3 # github actions need to be restricted
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
