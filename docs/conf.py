@@ -305,8 +305,12 @@ intersphinx_mapping = {
 
 print(f"loading configurations for {project} {version} ...", file=sys.stderr)
 html_context = {
-    "source_url_prefix": "https://github.com/DOV-Vlaanderen/saga-watem/blob/main/docs/",
-    "display_vcs_links": 1
+    # "source_url_prefix": "https://github.com/DOV-Vlaanderen/saga-watem/blob/main/docs/",
+    # "display_vcs_links": 1
+    "display_github": True,
+    "github_user": "DOV-Vlaanderen"
+    "github_repo": "saga-watem"
+    "github_version": "main/docs"
 }
 
 
