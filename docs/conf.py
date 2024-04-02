@@ -310,7 +310,7 @@ html_context = {
     "display_github": True,
     "github_user": "DOV-Vlaanderen",
     "github_repo": "saga-watem",
-    "github_version": "main/docs",
+    "github_version": "main/docs/",
 }
 
 
