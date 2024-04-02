@@ -12,7 +12,7 @@
 ```
 
 
-## Topologize Polylines [0]
+## [0] Topologize Polylines
 
 ```{raw} html
 :file: tool_html/topology/topology_0.html
@@ -22,7 +22,7 @@
 ```
 
 
-## Upstream Edges [1]
+## [1] Upstream Edges
 
 ```{raw} html
 :file: tool_html/topology/topology_1.html
@@ -32,7 +32,7 @@
 ```
 
 
-## Routing to shape [2]
+## [2] Routing to shape
 
 ```{raw} html
 :file: tool_html/topology/topology_2.html
@@ -42,7 +42,7 @@
 ```
 
 
-## Segment to subcatchments [3]
+## [3] Segment to subcatchments
 
 ```{raw} html
 :file: tool_html/topology/topology_3.html

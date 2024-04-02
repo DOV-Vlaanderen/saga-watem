@@ -1,0 +1,62 @@
+# watem_flanders Tool Library
+
+```{raw} html
+:file: tool_html/watem_flanders/watem_flanders_parsed.html
+
+```
+
+```{contents}
+:local:
+:depth: 1
+
+```
+
+
+## [1] Prepare parcel Map
+
+```{raw} html
+:file: tool_html/watem_flanders/watem_flanders_1.html
+```
+```{raw} html
+<br />
+```
+
+
+## [2] 3x3 filter within parcel boundaries
+
+```{raw} html
+:file: tool_html/watem_flanders/watem_flanders_2.html
+```
+```{raw} html
+<br />
+```
+
+
+## [3] C calculation based on parcel grid
+
+```{raw} html
+:file: tool_html/watem_flanders/watem_flanders_3.html
+```
+```{raw} html
+<br />
+```
+
+
+## [4] C calculation shape attribute
+
+```{raw} html
+:file: tool_html/watem_flanders/watem_flanders_4.html
+```
+```{raw} html
+<br />
+```
+
+
+## [5] Complete Calculation Erosion map (combines all steps). See submodules for more information.
+
+```{raw} html
+:file: tool_html/watem_flanders/watem_flanders_5.html
+```
+```{raw} html
+<br />
+```
