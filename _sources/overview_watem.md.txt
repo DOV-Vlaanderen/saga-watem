@@ -12,7 +12,7 @@
 ```
 
 
-## 1. Aanmaak percelengrid (PRC) [1]
+## [1] Calculate uparea
 
 ```{raw} html
 :file: tool_html/watem/watem_1.html
@@ -22,7 +22,7 @@
 ```
 
 
-## 2. 3x3 filter binnen perceelsgrenzen [2]
+## [2] LS calculation
 
 ```{raw} html
 :file: tool_html/watem/watem_2.html
@@ -32,7 +32,7 @@
 ```
 
 
-## 3. Berekening Erosiekaart (compleet) [3]
+## [3] Watererosion based on LS (RUSLE)
 
 ```{raw} html
 :file: tool_html/watem/watem_3.html
@@ -42,60 +42,10 @@
 ```
 
 
-## 3.1. Uparea berekening [4]
+## [4] Tillage erosion calculation
 
 ```{raw} html
 :file: tool_html/watem/watem_4.html
-```
-```{raw} html
-<br />
-```
-
-
-## 3.2. LS berekening [5]
-
-```{raw} html
-:file: tool_html/watem/watem_5.html
-```
-```{raw} html
-<br />
-```
-
-
-## 3.4. Watererosie berekening op basis van LS [6]
-
-```{raw} html
-:file: tool_html/watem/watem_6.html
-```
-```{raw} html
-<br />
-```
-
-
-## 3.5. Tillage erosion berekening [7]
-
-```{raw} html
-:file: tool_html/watem/watem_7.html
-```
-```{raw} html
-<br />
-```
-
-
-## 3.3. C berekening [8]
-
-```{raw} html
-:file: tool_html/watem/watem_8.html
-```
-```{raw} html
-<br />
-```
-
-
-## 3.6. C berekening attribuut [9]
-
-```{raw} html
-:file: tool_html/watem/watem_9.html
 ```
 ```{raw} html
 <br />

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Application in the context of Flanders (extra tooling) &mdash; fluves.saga_watem unknown documentation</title>
+  <title>Application in the context of Flanders (extra tooling) &mdash; saga_watem unknown documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -38,7 +38,7 @@
           
           
           <a href="index.html" class="icon icon-home">
-            fluves.saga_watem
+            saga_watem
           </a>
               <div class="version">
                 unknown
@@ -60,20 +60,26 @@
 <li class="toctree-l2"><a class="reference internal" href="#landuse-map">Landuse map</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#parcels-map">Parcels map</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#digital-elevation-model">Digital elevation model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#c-grid">C-grid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#k-grid">K-grid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#postprocessing">Postprocessing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#run-in-command-line">Run in command line</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#complete-tool">Complete tool</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#example-script-for-flanders">Example script for Flanders</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#extra-information">Extra information</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="topology.html">Topology</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Developer guide</span></p>
+<p class="caption" role="heading"><span class="caption-text">Module Reference</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="overview_watem.html">Watem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview_watem.html">WaTEM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview_watem_flanders.html">WaTEM Flanders</a></li>
 <li class="toctree-l1"><a class="reference internal" href="overview_topology.html">Topology</a></li>
 <li class="toctree-l1"><a class="reference internal" href="overview_line_direction.html">Line direction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="authors.html">Authors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
@@ -85,7 +91,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">fluves.saga_watem</a>
+          <a href="index.html">saga_watem</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -95,7 +101,7 @@
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">Application in the context of Flanders (extra tooling)</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="https://git.fluves.net/fluves/saga_watem/src/branch/master/docs/flanders-tool.md">View page source</a>
+            <a href="https://github.com/DOV-Vlaanderen/saga-watem/blob/main/docs/flanders-tool.md">View page source</a>
       </li>
   </ul>
   <hr/>
@@ -113,6 +119,7 @@ defined:</p>
 <li><p>Generation of landuse parcels maps (next two sections).</p></li>
 <li><p>Processing of digital elevation model (section ‘digital elevation model’)</p></li>
 <li><p>Definition of the K-grid (section ‘K-grid’)</p></li>
+<li><p>Definition of the C-grid (section ‘C-frid’)</p></li>
 <li><p>Compute erosion map: see <a class="reference internal" href="gettingstarted.html"><span class="std std-doc">Getting started</span></a></p></li>
 <li><p>Postprocessing of the results</p></li>
 </ul>
@@ -122,6 +129,9 @@ defined:</p>
 <li><p>script for Flanders</p></li>
 </ul>
 <p>are found on this page.</p>
+<p>This page is developed serving as an application with example data. Note
+that the modules referred to in this page are explained in detail in the
+module reference.</p>
 <section id="landuse-map">
 <h2>Landuse map<a class="headerlink" href="#landuse-map" title="Link to this heading">¶</a></h2>
 <p>The land use map is created based on the reclassified land use map with forest
@@ -164,22 +174,21 @@ find this tool under ‘Tool &gt; Grid &gt; Tools &gt; Reclassify Grid Values’
 </section>
 <section id="parcels-map">
 <h2>Parcels map<a class="headerlink" href="#parcels-map" title="Link to this heading">¶</a></h2>
-<p>The plot grid can be created in SAGA using the module ‘1.
-(PRC)’. The plot grid is created from the files listed below. The
+<p>The plot grid can be created in SAGA using the watem-flanders
+‘Prepare parcel Map’. The plot grid is created from the files listed below. The
 order used is this: (where later map layers are superimposed on previous map
 layers)</p>
 <ul class="simple">
 <li><p>Land use map ‘Land use_forest_reclassified’ (see next section)</p>
 <ul>
 <li><p>10000: forest</p></li>
-<li><p>1: other land use</p></li>
-<li><p>-2: built-up</p></li>
+<li><p>-2: infrastructure / roads</p></li>
 </ul>
 </li>
 <li><p>GRB layers(geopoint - dataset GRBgis)</p>
 <ul>
 <li><p>GBG (building to land), GBA (building attachment), WGA (road attachment),
-KNW (structure), TRN (terrain): built-up (-2)</p></li>
+KNW (structure): infrastructure (-2)</p></li>
 </ul>
 </li>
 <li><p>Parcel map</p>
@@ -190,14 +199,12 @@ KNW (structure), TRN (terrain): built-up (-2)</p></li>
 <li><p>Waterways and roads</p>
 <ul>
 <li><p>SBN (railway line), WBN (road line) (-2)</p></li>
-<li><p>WLas (VHA lines) [For the erosion map 2018, the shape ‘VHA_09052017.shp’ was used
-was used and not WLas from GRB (because VHA was more recent)], WTZ (VHA polygons)
-(-1)</p></li>
+<li><p>WLas (VHA lines), WTZ (VHA polygons) (-1)</p></li>
 </ul>
 </li>
 </ul>
-<p><img alt="img5" src="_images/erosiekaart-img5.png" /></p>
-<p><em>Figure 4: module ‘1. Creation of parcel grid (PRC)’.</em></p>
+<p><img alt="img5" src="_images/gui-prepareparcelgrid.png" />
+<em>Figure 1: module ‘Creation of parcel grid (PRC)’.</em></p>
 </section>
 <section id="digital-elevation-model">
 <h2>Digital elevation model<a class="headerlink" href="#digital-elevation-model" title="Link to this heading">¶</a></h2>
@@ -211,12 +218,25 @@ was abandoned in the final creation of the erosion map to proceed with a grid
 filter per plot.</p>
 <p>A second optional step is to perform a 3x3 filter on the DTM. This filters
 the DTM but only considers cells that lie within the same
-plot. This filter can be done in SAGA using the tool ‘2. 3x3 filter within
-plot boundaries’. This option is on by default because in 2017 it was decided
-to use this option to be used starting from the calculation of the erosion
-map 2018.</p>
-<p><img alt="img7" src="_images/erosiekaart-img7.png" /></p>
-<p><em>Figure 6: Module 2. 3x3 filter within plot boundaries</em></p>
+plot. This filter can be done in SAGA using the tool ‘3x3 filter within
+plot boundaries’.</p>
+<p><img alt="img7" src="_images/gui-3x3filter.png" />
+<em>Figure 2: 3x3 filter within plot boundaries</em></p>
+</section>
+<section id="c-grid">
+<h2>C-grid<a class="headerlink" href="#c-grid" title="Link to this heading">¶</a></h2>
+<p>A C-factor grid can be computed from:</p>
+<ul class="simple">
+<li><p>a parcel raster (C calculation based on parcel grid)</p></li>
+<li><p>a parcel shape with an attribute (C calculation shape attribute)</p></li>
+</ul>
+<p>The second one uses the translation from the section ‘Parcels map’ on this
+page, and a C-factor specifically defined as a parcels shape attribute (see C
+Field, Figure 4)</p>
+<p><img alt="img13" src="_images/gui-cgrid.png" />
+<em>Figure 3: C calculation from parcel raster</em></p>
+<p><img alt="img13" src="_images/gui-cshape.png" />
+<em>Figure 4: C calculation from parcel shape</em></p>
 </section>
 <section id="k-grid">
 <h2>K-grid<a class="headerlink" href="#k-grid" title="Link to this heading">¶</a></h2>
@@ -345,14 +365,15 @@ wise (cell centres)).</p>
 <p>It is also possible to run the module(s) from the command line. This
 is particularly useful if several scenarios need to be executed. This takes
 the following form.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>saga_cmd<span class="w"> </span>watem<span class="w"> </span><span class="m">2</span><span class="w"> </span>-DEM<span class="o">=</span>DEM.sg-grd-z<span class="w"> </span>-PRC<span class="o">=</span>prc.sg-grd-z<span class="w"> </span>-DEM_FILTER<span class="o">=</span>DEM-filtered.sggrd-z
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>saga_cmd<span class="w"> </span>watem_flanders<span class="w"> </span><span class="m">2</span><span class="w"> </span>-DEM<span class="o">=</span>DEM.sg-grd-z<span class="w"> </span>-PRC<span class="o">=</span>prc.sg-grd-z<span class="w"> </span>-DEM_FILTER<span class="o">=</span>DEM-filtered.sg-grd-z
 </pre></div>
 </div>
 <p>Here the first command (watem) indicates which library is used, and the second
 (in this case 2) indicates which tool within the library is used. In this
 example, the tool 3x3 filter within plot boundaries is called (identifier 2).
 This information can be derived from the tools’ documentation given earlier:</p>
-<p><img alt="img19" src="_images/erosiekaart-img19.png" /></p>
+<p><img alt="img19" src="_images/id-tool.png" />
+<em>Figure 5: example of id of tool, see also module reference</em></p>
 <p>The tool performs a 3x3 filter on a digital elevation model using only cells within the plot.</p>
 <table class="docutils align-default">
 <thead>
@@ -370,13 +391,13 @@ This information can be derived from the tools’ documentation given earlier:</
 <td><p></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>Elevation</p></td>
+<tr class="row-odd"><td><p>Digital elevation model (DEM)</p></td>
 <td><p>Grid (input)</p></td>
 <td class="text-center"><p>DEM</p></td>
-<td><p>Digital elevation model.</p></td>
+<td><p>Digital elevation model (m).</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>Percelen</p></td>
+<tr class="row-even"><td><p>Parcel grid</p></td>
 <td><p>Grid (input)</p></td>
 <td class="text-center"><p>PRC</p></td>
 <td><p>Plot grid with unique identifier per plot, can be created with the tool ‘create plot grid’</p></td>
@@ -396,36 +417,43 @@ This information can be derived from the tools’ documentation given earlier:</
 </tr>
 </tbody>
 </table>
-<p>It is also possible to create a sample script from the tool manager in the
-graphical interface (save to script file or copy to clipboard).</p>
-<p><img alt="img20" src="_images/erosiekaart-img20.png" /></p>
-<p><em>Figure 17: A script can also be created from the graphical interface</em></p>
+</section>
+<section id="complete-tool">
+<h2>Complete tool<a class="headerlink" href="#complete-tool" title="Link to this heading">¶</a></h2>
+<p>There is also a single tool that can be used to compute the erosion map with
+one command</p>
+<p><img alt="img16" src="_images/gui-complete.png" />
+<em>Figure 6: Erosion map calculation for Flanders (complete).</em></p>
+<p>Initially, under “Grid system” you need to select the correct system. Then the
+other grids can be selected. In this module, the machining erosion can
+optionally also be calculated. If no value is given here, this calculation
+will not be performed.</p>
 </section>
 <section id="example-script-for-flanders">
 <h2>Example script for Flanders<a class="headerlink" href="#example-script-for-flanders" title="Link to this heading">¶</a></h2>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>@ECHO<span class="w"> </span>OFF
-REM<span class="w"> </span>SET<span class="w"> </span><span class="nv">SAGA_MLB</span><span class="o">=</span>C:<span class="se">\S</span>AGA<span class="se">\T</span>ools
-SET<span class="w"> </span><span class="nv">PATH</span><span class="o">=</span>D:<span class="se">\e</span>rosiekaart<span class="se">\2</span><span class="m">018</span><span class="se">\s</span>aga_watem_1.7<span class="se">\s</span>aga_vc_x64
-<span class="nb">set</span><span class="w"> </span><span class="nv">OUTPUT</span><span class="o">=</span>D:<span class="se">\e</span>rosiekaart<span class="se">\2</span><span class="m">018</span><span class="se">\R</span>ESULTS
-<span class="nb">set</span><span class="w"> </span><span class="nv">INPUT</span><span class="o">=</span>D:<span class="se">\e</span>rosiekaart<span class="se">\2</span><span class="m">018</span><span class="se">\I</span>NPUTDATA
-<span class="nb">set</span><span class="w"> </span><span class="nv">K</span><span class="o">=</span>%INPUT%<span class="se">\K</span><span class="m">3</span>.tif
-<span class="nb">set</span><span class="w"> </span><span class="nv">GRB</span><span class="o">=</span>D:<span class="se">\e</span>rosiekaart<span class="se">\2</span><span class="m">018</span><span class="se">\I</span>NPUTDATA<span class="se">\G</span>RB
+REM<span class="w"> </span>SET<span class="w"> </span><span class="nv">SAGA_MLB</span><span class="o">=</span><span class="s2">&quot;YOUR_SAGA_FOLDER&quot;</span>
+SET<span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;WORKING_DIRECTORY&quot;</span>
+<span class="nb">set</span><span class="w"> </span><span class="nv">OUTPUT</span><span class="o">=</span><span class="s2">&quot;OUTPUT_FOLDER&quot;</span>
+<span class="nb">set</span><span class="w"> </span><span class="nv">INPUT</span><span class="o">=</span><span class="s2">&quot;INPUT_FOLDER&quot;</span>
+<span class="nb">set</span><span class="w"> </span><span class="nv">K</span><span class="o">=</span><span class="s2">&quot;%INPUT%\K3.tif&quot;</span><span class="w"> </span><span class="c1">#FILE</span>
+<span class="nb">set</span><span class="w"> </span><span class="nv">GRB</span><span class="o">=</span><span class="s2">&quot;%INPUT\GRB&quot;</span><span class="w"> </span><span class="c1">#FOLDER!</span>
 <span class="k">if</span><span class="w"> </span>not<span class="w"> </span>exist<span class="w"> </span><span class="s2">&quot;%OUTPUT%&quot;</span><span class="w"> </span><span class="o">(</span>mkdir<span class="w"> </span><span class="s2">&quot;%OUTPUT%&quot;</span><span class="o">)</span>
 REM<span class="w"> </span>Tool:<span class="w"> </span>Aanmaak<span class="w"> </span>percelengrid
-saga_cmd<span class="w"> </span>watem<span class="w"> </span><span class="m">1</span><span class="w"> </span>-PARCEL_SHAPES<span class="o">=</span><span class="s2">&quot;%INPUT%\basis_ALBON_2018.shp&quot;</span><span class="w"> </span>-
+saga_cmd<span class="w"> </span>watem_flanders<span class="w"> </span><span class="m">1</span><span class="w"> </span>-PARCEL_SHAPES<span class="o">=</span><span class="s2">&quot;%INPUT%\basis_ALBON_2018.shp&quot;</span><span class="w"> </span>-
 <span class="nv">LANDUSE</span><span class="o">=</span><span class="s2">&quot;%INPUT%\Landgebruik_boswijzer_reclassified.sg-grd-z&quot;</span><span class="w"> </span>-PRC<span class="o">=</span><span class="s2">&quot;%OUTPUT%\PRC.sg-</span>
 <span class="s2">grd-z&quot;</span><span class="w"> </span>-WTZ<span class="o">=</span><span class="s2">&quot;%GRB%\wtz.shp&quot;</span><span class="w"> </span>-WLAS<span class="o">=</span><span class="s2">&quot;%INPUT%\VHA_09052017.shp&quot;</span><span class="w"> </span>-SBN<span class="o">=</span><span class="s2">&quot;%GRB%\sbn.shp&quot;</span><span class="w"> </span>
 <span class="nv">WBN</span><span class="o">=</span><span class="s2">&quot;%GRB%\wbn.shp&quot;</span><span class="w"> </span>-WGA<span class="o">=</span><span class="s2">&quot;%GRB%\wga.shp&quot;</span><span class="w"> </span>-GBG<span class="o">=</span><span class="s2">&quot;%GRB%\gbg.shp&quot;</span><span class="w"> </span>-GBA<span class="o">=</span><span class="s2">&quot;%GRB%\gba.shp&quot;</span><span class="w"> </span>-
 <span class="nv">TRN</span><span class="o">=</span><span class="s2">&quot;%GRB%\trn.shp&quot;</span><span class="w"> </span>-KNW<span class="o">=</span><span class="s2">&quot;%GRB%\knw.shp&quot;</span>
 REM<span class="w"> </span>Tool:<span class="w"> </span>3x3<span class="w"> </span>binnen<span class="w"> </span>perceel
-saga_cmd<span class="w"> </span>watem<span class="w"> </span><span class="m">2</span><span class="w"> </span>-DEM<span class="o">=</span><span class="s2">&quot;%INPUT%\dhmv2-mosaic.sg-grd-z&quot;</span><span class="w"> </span>-PRC<span class="o">=</span><span class="s2">&quot;%OUTPUT%\PRC.sg-grd-z&quot;</span><span class="w"> </span>-
+saga_cmd<span class="w"> </span>watem_flanders<span class="w"> </span><span class="m">2</span><span class="w"> </span>-DEM<span class="o">=</span><span class="s2">&quot;%INPUT%\dhmv2-mosaic.sg-grd-z&quot;</span><span class="w"> </span>-PRC<span class="o">=</span><span class="s2">&quot;%OUTPUT%\PRC.sg-grd-z&quot;</span><span class="w"> </span>-
 <span class="nv">DEM_FILTER</span><span class="o">=</span><span class="s2">&quot;%OUTPUT%\dhmv2_parcelfilter.sg-grd-z&quot;</span>
 REM<span class="w"> </span>Tool:<span class="w"> </span>Complete<span class="w"> </span>Berekening<span class="w"> </span>Erosiekaart
 REM<span class="w"> </span>scenario<span class="w"> </span><span class="m">5</span>:<span class="w"> </span>nieuw<span class="w"> </span>dem,<span class="w"> </span>nieuwe<span class="w"> </span>landuse,<span class="w"> </span>3x3<span class="w"> </span>filter<span class="w"> </span><span class="o">(</span>enkel<span class="w"> </span><span class="k">in</span><span class="w"> </span>veld<span class="o">)</span><span class="w"> </span>-<span class="w"> </span>flow<span class="w"> </span>vanuit
 pit<span class="w"> </span><span class="o">(</span>max<span class="w"> </span><span class="m">4</span><span class="w"> </span>pixels<span class="o">)</span><span class="w"> </span>+<span class="w"> </span>slope<span class="w"> </span><span class="o">(</span>LS<span class="o">)</span><span class="w"> </span>enkel<span class="w"> </span>binnen<span class="w"> </span>veld<span class="w"> </span>berekend
 <span class="nb">set</span><span class="w"> </span><span class="nv">SCEN</span><span class="o">=</span>%OUTPUT%<span class="se">\W</span>AT30_2018
 <span class="k">if</span><span class="w"> </span>not<span class="w"> </span>exist<span class="w"> </span><span class="s2">&quot;%SCEN%&quot;</span><span class="w"> </span><span class="o">(</span>mkdir<span class="w"> </span><span class="s2">&quot;%SCEN%&quot;</span><span class="o">)</span>
-saga_cmd<span class="w"> </span>watem<span class="w"> </span><span class="m">3</span><span class="w"> </span>-DEM<span class="o">=</span><span class="s2">&quot;%OUTPUT%\dhmv2_parcelfilter.sg-grd-z&quot;</span><span class="w"> </span>-PRC<span class="o">=</span><span class="s2">&quot;%OUTPUT%\PRC.sg-</span>
+saga_cmd<span class="w"> </span>watem_flanders<span class="w"> </span><span class="m">5</span><span class="w"> </span>-DEM<span class="o">=</span><span class="s2">&quot;%OUTPUT%\dhmv2_parcelfilter.sg-grd-z&quot;</span><span class="w"> </span>-PRC<span class="o">=</span><span class="s2">&quot;%OUTPUT%\PRC.sg-</span>
 <span class="s2">grd-z&quot;</span><span class="w"> </span>-K<span class="o">=</span><span class="s2">&quot;%K%&quot;</span><span class="w"> </span>-PIT<span class="o">=</span><span class="s2">&quot;%SCEN%\Pit.sg-grd-z&quot;</span><span class="w"> </span>-UPSLOPE_AREA<span class="o">=</span><span class="s2">&quot;%SCEN%\upslope_area_30.sg-</span>
 <span class="s2">grd-z&quot;</span><span class="w"> </span>-LS<span class="o">=</span><span class="s2">&quot;%SCEN%\ls_30.sg-grd-z&quot;</span><span class="w"> </span>-R<span class="o">=</span><span class="m">880</span>.000000<span class="w"> </span>-P<span class="o">=</span><span class="m">1</span>.000000<span class="w"> </span>-CORR<span class="o">=</span><span class="m">1</span>.400000<span class="w"> </span>-
 <span class="nv">WATER_EROSION</span><span class="o">=</span><span class="s2">&quot;%SCEN%\WAT30_2018.sg-grd-z&quot;</span><span class="w"> </span>-PCTOCROP<span class="o">=</span><span class="m">70</span>.000000<span class="w"> </span>-
@@ -433,7 +461,7 @@ saga_cmd<span class="w"> </span>watem<span class="w"> </span><span class="m">3</
 <span class="nb">set</span><span class="w"> </span><span class="nv">SCEN</span><span class="o">=</span>%OUTPUT%<span class="se">\W</span>AT00_2018
 <span class="k">if</span><span class="w"> </span>not<span class="w"> </span>exist<span class="w"> </span><span class="s2">&quot;%SCEN%&quot;</span><span class="w"> </span><span class="o">(</span>mkdir<span class="w"> </span><span class="s2">&quot;%SCEN%&quot;</span><span class="o">)</span>
 REM<span class="w"> </span>berekening<span class="w"> </span>watererosie<span class="w"> </span>zonder<span class="w"> </span>connectivitiet
-saga_cmd<span class="w"> </span>watem<span class="w"> </span><span class="m">3</span><span class="w"> </span>-DEM<span class="o">=</span><span class="s2">&quot;%OUTPUT%\dhmv2_parcelfilter.sg-grd-z&quot;</span><span class="w"> </span>-PRC<span class="o">=</span><span class="s2">&quot;%OUTPUT%\PRC.sg-</span>
+saga_cmd<span class="w"> </span>watem_flanders<span class="w"> </span><span class="m">5</span><span class="w"> </span>-DEM<span class="o">=</span><span class="s2">&quot;%OUTPUT%\dhmv2_parcelfilter.sg-grd-z&quot;</span><span class="w"> </span>-PRC<span class="o">=</span><span class="s2">&quot;%OUTPUT%\PRC.sg-</span>
 <span class="s2">grd-z&quot;</span><span class="w"> </span>-K<span class="o">=</span><span class="s2">&quot;%K%&quot;</span><span class="w"> </span>-PIT<span class="o">=</span><span class="s2">&quot;%SCEN%\Pit.sg-grd-z&quot;</span><span class="w"> </span>-UPSLOPE_AREA<span class="o">=</span><span class="s2">&quot;%SCEN%\upslope_area_00.sg-</span>
 <span class="s2">grd-z&quot;</span><span class="w"> </span>-LS<span class="o">=</span><span class="s2">&quot;%SCEN%\ls_00.sg-grd-z&quot;</span><span class="w"> </span>-R<span class="o">=</span><span class="m">880</span>.000000<span class="w"> </span>-P<span class="o">=</span><span class="m">1</span>.000000<span class="w"> </span>-CORR<span class="o">=</span><span class="m">1</span>.400000<span class="w"> </span>-
 <span class="nv">WATER_EROSION</span><span class="o">=</span><span class="s2">&quot;%SCEN%\WAT00_2018.sg-grd-z&quot;</span><span class="w"> </span>-PCTOCROP<span class="o">=</span><span class="m">100</span>.000000<span class="w"> </span>-
@@ -463,7 +491,7 @@ PAUSE
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2024, Fluves.</p>
+    <p>&#169; Copyright 2017-2024 Johan Van de Wauw.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
