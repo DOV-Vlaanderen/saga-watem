@@ -26,7 +26,7 @@ Parcel_C_Grid::Parcel_C_Grid()
                           "'datavindplaats' of www.vlaanderen.be for more "
                           "information. For a mapping table, we refer to  "
                           "'Prepare parcel Map' and 'C calculation based on "
-                          " parcel grid"'. GRB overwrites landuse."
+                          " parcel grid'. GRB overwrites landuse."
                       )
                     );
 
