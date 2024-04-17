@@ -28,7 +28,7 @@ jobs:
         saga_cmd --create-docs=tool_html
         make html
     - name: upload_docs
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: Upload docs
         Path: docs/_build
