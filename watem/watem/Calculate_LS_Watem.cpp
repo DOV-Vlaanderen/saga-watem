@@ -116,8 +116,8 @@ CCalculate_LS_Watem::CCalculate_LS_Watem ( void )
                             "METHOD", _TL ( "Method to compute LS" ),
                             _TL ( "There are four options available: \n "
                                   " - Moore & Nieber (1989):  see model description-page."
-                                  " - Desmet & Govers (1996): see model description-page.\n"
-                                  " - Van Oost (2003): same as Desmet & Govers, but with a different computation model for the parameters m. \n"
+                                  " - Desmet & Govers (1996): see model description-page. Using McCool et al. (1989, 1987) for the parameter m. \n"
+                                  " - Van Oost (2003): same as Desmet & Govers, but with a different computation model for the parameter m. \n"
                                   " - Wishmeier a Smith (1978): see model description-page.\n"
                                   " - \n."),
                             CSG_String::Format ( "%s|%s|%s|%s|",
