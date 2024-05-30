@@ -2,10 +2,10 @@
 
 The aim of this page is to explain how the water erosion is computed. The 
 water erosion is derived from the RUSLE-equation 
-($E = \frac{\text{kg}}{\text{m}^{2}.\text{year}}$) (Revised
+($A = \frac{\text{kg}}{\text{m}^{2}.\text{year}}$) (Revised
 Universal Soil Loss Equation, Renard et al., 1997):
 
-$$ E = R \cdot K \cdot LS \cdot C \cdot P $$
+$$ A = R \cdot K \cdot LS \cdot C \cdot P $$
 
 with
 
@@ -29,11 +29,11 @@ The L-factor can be computed according a number of formula's
 
 ### Desmet & Govers (1996):
 
-$$ L = \frac{(A+D^2)^{m+1}-A^{m+1}}{D^{m+2}.x^m.22,13^m} $$
+$$ L = \frac{(A_U+D^2)^{m+1}-A_U^{m+1}}{D^{m+2}.x^m.22,13^m} $$
 
 with: 
 
-- $A$: upstream area (m$^2$) (see next section).
+- $A_U$: upstream area (m$^2$) (see next section).
 - $m$: exponent (-).
 - $D$: grid resolution (m).
 - $x$: factor incorporating the flow direction (-).
@@ -68,10 +68,10 @@ $$ S = 3.0 * \text{slope}^{0.8} + 0.56 $$
 ### Van Oost, 2003
 
 Van Oost et al. (2003) uses an depending on the surface of the upstream area 
-$A$ (see Desmet & Govers (1996)). If the upstream area ($A_{\text{ref}}$) is 
+$A$ (see Desmet & Govers (1996)). If the upstream area ($A_{U,\text{ref}}$) is 
 smaller than 10 000 ha, then $m$ is calculated as:
 
-$$ m = 0.3+\frac{A}{A_{\text{ref}}}^c $$
+$$ m = 0.3+\frac{A_U}{A_{U,\text{ref}}}^c $$
 
 otherwise $m$ is set to 0.72. In the model $c$ is ‘hard coded’ as 0.8, meaning 
 that this value is fixed for this model and cannot be changed by the user.
@@ -80,7 +80,7 @@ that this value is fixed for this model and cannot be changed by the user.
 
 The upslope or upstream area is computed as:
 
-$$ A = {\sum_1^n{\text{influx}_i}} $$
+$$ A_U = {\sum_1^n{\text{influx}_i}} $$
 
 with:
 - $n$: number of neighbors

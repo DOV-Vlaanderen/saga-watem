@@ -51,7 +51,7 @@ Complete::Complete()
 
     Parameters.Add_Grid (
         NULL, "WATER_EROSION", _TL ( "Water erosion" ),
-        "A: Average soil loss due to rill and interrill erosion (ton ha-1 jaar-1)",
+        "Average soil loss due to rill and interrill erosion (ton ha-1 jaar-1)",
         PARAMETER_OUTPUT
     );
 
