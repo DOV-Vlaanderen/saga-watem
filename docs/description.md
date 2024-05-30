@@ -106,7 +106,25 @@ pixel. Following rules are defined:
   this case. Between two parcels, only 30% of the water flows through. Towards 
   a forest, this is only 0%. These values are adjustable (connectivity).
 
-  
+
+## Connectivity
+
+Three additional parameters are introduced to account for the concept of
+connectivity between landuses 'road', 'forest' and 'cropland': 
+
+- Parcel connectivity to cropland (%)
+- Parcel connectivity to forest (%)
+- Parcel connectivity to road (%).
+
+The values defined in this parameter are used to multiply the computed 
+upstream area:
+
+$$ A_U = A_U * (100-\text{connectivity})/100 $$.
+
+The default values are 70, 100 and 70, for the connectivity defined for roads, 
+forest and cropland. It is important to note that this connectivity is defined
+based on the landuse of the **target** pixel.
+
 ## Tillage erosion
 
 Tillage erosion, or soil translocation by tillage, is calculated according to
