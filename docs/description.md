@@ -15,7 +15,7 @@ with
 - $C$: crop management factor (-, $$\in [0,1]$$)
 - $P$: erosion control factor (-, $$\in [0,1]$$)
 
-In SAGA-WaTEM, an adjusted formula is used to compensate for:
+In SAGA-WaTEM, additional parameters can be set:
 
 - Very high RUSLE-values: values above 150 are set equal to 150, this value 
   can be adapted in the code.
@@ -138,9 +138,9 @@ upstream area:
 
 $$ A_U = A_U * (100-\text{connectivity})/100 $$
 
-The default values are 70, 100 and 70, for the connectivity defined for roads, 
-forest and cropland. It is important to note that this connectivity is defined
-based on the landuse of the **target** pixel.
+The default values are 70, 100 and 70, for respectively the connectivity 
+defined for roads, forest and cropland. It is important to note that this 
+connectivity is defined based on the landuse of the **target** pixel.
 
 ## Tillage erosion
 
