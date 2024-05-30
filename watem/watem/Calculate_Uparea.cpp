@@ -64,17 +64,17 @@ CCalculate_Uparea::CCalculate_Uparea()
 
     Parameters.Add_Value (
         NULL, "PCTOCROP", "Parcel Connectivity to cropland (%)",
-        "Percentage of water that will go from a cropland to another cropland.", PARAMETER_TYPE_Double, 70, 0, 100
+        "Percentage of water that will be reduced from a cropland (parcel) to another cropland (parcel).", PARAMETER_TYPE_Double, 70, 0, 100
     );
 
     Parameters.Add_Value (
         NULL, "PCTOFOREST", "Parcel Connectivity to forest (%)",
-        "Percentage of water that will go from a cropland to forest.", PARAMETER_TYPE_Double, 100, 0, 100
+        "Percentage of water that will be reduced from a cropland (parcel) to forest.", PARAMETER_TYPE_Double, 100, 0, 100
     );
 
     Parameters.Add_Value (
         NULL, "PCTOROAD", "Parcel Connectivity to infrastructure/roads (%)",
-        "Percentage of water that will go from cropland to infrastructure/roads", PARAMETER_TYPE_Double, 70, 0, 100
+        "Percentage of water that will be reduced from a cropland (parcel) to infrastructure/roads", PARAMETER_TYPE_Double, 70, 0, 100
     );
 
     Parameters.Add_Value (

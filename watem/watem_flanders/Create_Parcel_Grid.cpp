@@ -31,7 +31,7 @@ Create_Parcel_Grid::Create_Parcel_Grid()
                           ) );
 
     Parameters.Add_Shapes ( NULL, "PARCEL_SHAPES", "Parcels", "Polygon shape of parcels.", PARAMETER_INPUT, SHAPE_TYPE_Polygon );
-    Parameters.Add_Grid ( NULL, "LANDUSE", "Landuse", "Landuse with values 10000, 1 and -2.", PARAMETER_INPUT );
+    Parameters.Add_Grid ( NULL, "LANDUSE", "Landuse", "Landuse with values 10000, -1 and -2.", PARAMETER_INPUT );
 
     Parameters.Add_Grid ( NULL, "PRC", "Parcel grid", "Output grid  with: \n"
         "- a unique identifier per parcel: [1,9999] \n"

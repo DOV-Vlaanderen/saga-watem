@@ -51,18 +51,18 @@ Complete::Complete()
 
     Parameters.Add_Grid (
         NULL, "WATER_EROSION", _TL ( "Water erosion" ),
-        "A: Average soil loss due to rill and interrill erosion (ton ha-1 jaar-1)",
+        "Average soil loss due to rill and interrill erosion (ton ha-1 jaar-1)",
         PARAMETER_OUTPUT
     );
 
     Parameters.Add_Value (
         NULL, "PCTOCROP", "Parcel Connectivity to cropland (%)",
-        "Percentage of water that will go from a cropland to another cropland.", PARAMETER_TYPE_Double, 70, 0, 100
+        "Percentage of water that will be reduced to go from a cropland to another cropland.", PARAMETER_TYPE_Double, 70, 0, 100
     );
 
     Parameters.Add_Value (
         NULL, "PCTOFOREST", "Parcel Connectivity to forest (%)",
-        "Percentage of water that will go from a cropland to forest.", PARAMETER_TYPE_Double, 100, 0, 100
+        "Percentage of water that will be reduced to go from a cropland to forest.", PARAMETER_TYPE_Double, 100, 0, 100
     );
 
     Parameters.Add_Value (

@@ -77,8 +77,8 @@ Water_Erosion::Water_Erosion()
     );
 
     Parameters.Add_Value (
-        "EROSION_CROP_MAX", "EROSION_MAX", "Maximum allower gross erosion.",
-        "Maximum allowed erosion per pixel, higher values are set to this value.", PARAMETER_TYPE_Double, 150, 0, 10000000
+        "EROSION_CROP_MAX", "EROSION_MAX", "Maximum allowed gross erosion.",
+        "Maximum allowed erosion per pixel, higher values are set to the specific defined value (default 150).", PARAMETER_TYPE_Double, 150, 0, 10000000
     );
 
 
