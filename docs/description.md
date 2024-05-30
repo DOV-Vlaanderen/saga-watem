@@ -17,7 +17,8 @@ with
 
 In SAGA-WaTEM, an adjusted formula is used to compensate for:
 
-- Very high RUSLE-values: values above 150 are set equal to 150.
+- Very high RUSLE-values: values above 150 are set equal to 150, this value 
+  can be adapted in the code.
 - Difference in resolution: the S-values are compensated by 
   dividing them by 1.4 (see Notebaert et al. 2006).
 
@@ -27,9 +28,13 @@ In the following text, it is explained how the subfactors are calculated.
 
 The L-factor can be computed according a number of formula's
 
-### Desmet & Govers (1996):
+### Moore & Nieber (1989)
 
-$$ L = \frac{(A_U+D^2)^{m+1}-A_U^{m+1}}{D^{m+2}.x^m.22,13^m} $$
+$$LS = (0.4 + 1) * (A_U / 22.13)^{0.4}*\frac{sin(\text{slope})}{0.0896}^{1.3} $$
+
+### Desmet & Govers (1996)
+
+$$ L = \frac{(A_U+D^2)^{m+1}-A_U^{m+1}}{D^{m+2}.x^m.22.13^m} $$
 
 with: 
 
@@ -65,7 +70,7 @@ smaller than 25 m$^2$:
 
 $$ S = 3.0 * \text{slope}^{0.8} + 0.56 $$
  
-### Van Oost, 2003
+### Van Oost et al. (2003)
 
 Van Oost et al. (2003) uses an depending on the surface of the upstream area 
 $A$ (see Desmet & Govers (1996)). If the upstream area ($A_{U,\text{ref}}$) is 
@@ -75,6 +80,18 @@ $$ m = 0.3+\frac{A_U}{A_{U,\text{ref}}}^c $$
 
 otherwise $m$ is set to 0.72. In the model $c$ is ‘hard coded’ as 0.8, meaning 
 that this value is fixed for this model and cannot be changed by the user.
+
+
+### Wischmeier and Smith (1978)
+
+If slope higher than 3 % (0.050 rad):
+
+$$ LS = \frac{A_U}{22.13} * (65.41 * sin(\text{slope})^2 + 4.56*sin(\text{slope}) + 0.065) $$
+
+Else:
+
+$$ LS = (\frac{A_U}{22.13})^{3*\text{slope}^{0.6}} * (65.41 * sin(\text{slope})^2 + 4.56*sin(\text{slope}) + 0.065 )$$
+
 
 ## Upslope area
 
@@ -119,7 +136,7 @@ connectivity between landuses 'road', 'forest' and 'cropland':
 The values defined in this parameter are used to multiply the computed 
 upstream area:
 
-$$ A_U = A_U * (100-\text{connectivity})/100 $$.
+$$ A_U = A_U * (100-\text{connectivity})/100 $$
 
 The default values are 70, 100 and 70, for the connectivity defined for roads, 
 forest and cropland. It is important to note that this connectivity is defined
@@ -178,3 +195,7 @@ Ecology 15, 577–589. https://doi.org/10.1023/A:1008198215674
 
 Van Oost, K., 2003. Spatial modeling of soil redistribution processes in 
 agricultural landscapes. (PhD thesis). KU Leuven, Leuven.
+
+Wischmeier, W.H. and Smith, D.D. (1978) Predicting Rainfall Erosion Losses. 
+A Guide to Conservation Planning. The USDA Agricultural Handbook No. 537, 
+Maryland.
