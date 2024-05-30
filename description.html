@@ -58,11 +58,14 @@
 <li class="toctree-l1"><a class="reference internal" href="index.html">Installation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Model description</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#ls-factor">LS-factor</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#desmet-govers-1996">Desmet &amp; Govers (1996):</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#van-oost-2003">Van Oost, 2003</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moore-nieber-1989">Moore &amp; Nieber (1989)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#desmet-govers-1996">Desmet &amp; Govers (1996)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#van-oost-et-al-2003">Van Oost et al. (2003)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wischmeier-and-smith-1978">Wischmeier and Smith (1978)</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#upslope-area">Upslope area</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#connectivity">Connectivity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#tillage-erosion">Tillage erosion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
 </ul>
@@ -113,10 +116,10 @@
 <h1>Model description<a class="headerlink" href="#model-description" title="Link to this heading">¶</a></h1>
 <p>The aim of this page is to explain how the water erosion is computed. The
 water erosion is derived from the RUSLE-equation
-(<span class="math notranslate nohighlight">\(E = \frac{\text{kg}}{\text{m}^{2}.\text{year}}\)</span>) (Revised
+(<span class="math notranslate nohighlight">\(A = \frac{\text{kg}}{\text{m}^{2}.\text{year}}\)</span>) (Revised
 Universal Soil Loss Equation, Renard et al., 1997):</p>
 <div class="math notranslate nohighlight">
-\[ E = R \cdot K \cdot LS \cdot C \cdot P \]</div>
+\[ A = R \cdot K \cdot LS \cdot C \cdot P \]</div>
 <p>with</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(R\)</span>: rainfall erosivity factor (<span class="math notranslate nohighlight">\(\frac{\text{MJ.mm}}{\text{m}^2.\text{h.year}}\)</span>)</p></li>
@@ -127,7 +130,8 @@ Universal Soil Loss Equation, Renard et al., 1997):</p>
 </ul>
 <p>In SAGA-WaTEM, an adjusted formula is used to compensate for:</p>
 <ul class="simple">
-<li><p>Very high RUSLE-values: values above 150 are set equal to 150.</p></li>
+<li><p>Very high RUSLE-values: values above 150 are set equal to 150, this value
+can be adapted in the code.</p></li>
 <li><p>Difference in resolution: the S-values are compensated by
 dividing them by 1.4 (see Notebaert et al. 2006).</p></li>
 </ul>
@@ -135,13 +139,18 @@ dividing them by 1.4 (see Notebaert et al. 2006).</p></li>
 <section id="ls-factor">
 <h2>LS-factor<a class="headerlink" href="#ls-factor" title="Link to this heading">¶</a></h2>
 <p>The L-factor can be computed according a number of formula’s</p>
-<section id="desmet-govers-1996">
-<h3>Desmet &amp; Govers (1996):<a class="headerlink" href="#desmet-govers-1996" title="Link to this heading">¶</a></h3>
+<section id="moore-nieber-1989">
+<h3>Moore &amp; Nieber (1989)<a class="headerlink" href="#moore-nieber-1989" title="Link to this heading">¶</a></h3>
 <div class="math notranslate nohighlight">
-\[ L = \frac{(A+D^2)^{m+1}-A^{m+1}}{D^{m+2}.x^m.22,13^m} \]</div>
+\[LS = (0.4 + 1) * (A_U / 22.13)^{0.4}*\frac{sin(\text{slope})}{0.0896}^{1.3} \]</div>
+</section>
+<section id="desmet-govers-1996">
+<h3>Desmet &amp; Govers (1996)<a class="headerlink" href="#desmet-govers-1996" title="Link to this heading">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[ L = \frac{(A_U+D^2)^{m+1}-A_U^{m+1}}{D^{m+2}.x^m.22.13^m} \]</div>
 <p>with:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(A\)</span>: upstream area (m<span class="math notranslate nohighlight">\(^2\)</span>) (see next section).</p></li>
+<li><p><span class="math notranslate nohighlight">\(A_U\)</span>: upstream area (m<span class="math notranslate nohighlight">\(^2\)</span>) (see next section).</p></li>
 <li><p><span class="math notranslate nohighlight">\(m\)</span>: exponent (-).</p></li>
 <li><p><span class="math notranslate nohighlight">\(D\)</span>: grid resolution (m).</p></li>
 <li><p><span class="math notranslate nohighlight">\(x\)</span>: factor incorporating the flow direction (-).</p></li>
@@ -167,22 +176,31 @@ smaller than 25 m<span class="math notranslate nohighlight">\(^2\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[ S = 3.0 * \text{slope}^{0.8} + 0.56 \]</div>
 </section>
-<section id="van-oost-2003">
-<h3>Van Oost, 2003<a class="headerlink" href="#van-oost-2003" title="Link to this heading">¶</a></h3>
+<section id="van-oost-et-al-2003">
+<h3>Van Oost et al. (2003)<a class="headerlink" href="#van-oost-et-al-2003" title="Link to this heading">¶</a></h3>
 <p>Van Oost et al. (2003) uses an depending on the surface of the upstream area
-<span class="math notranslate nohighlight">\(A\)</span> (see Desmet &amp; Govers (1996)). If the upstream area (<span class="math notranslate nohighlight">\(A_{\text{ref}}\)</span>) is
+<span class="math notranslate nohighlight">\(A\)</span> (see Desmet &amp; Govers (1996)). If the upstream area (<span class="math notranslate nohighlight">\(A_{U,\text{ref}}\)</span>) is
 smaller than 10 000 ha, then <span class="math notranslate nohighlight">\(m\)</span> is calculated as:</p>
 <div class="math notranslate nohighlight">
-\[ m = 0.3+\frac{A}{A_{\text{ref}}}^c \]</div>
+\[ m = 0.3+\frac{A_U}{A_{U,\text{ref}}}^c \]</div>
 <p>otherwise <span class="math notranslate nohighlight">\(m\)</span> is set to 0.72. In the model <span class="math notranslate nohighlight">\(c\)</span> is ‘hard coded’ as 0.8, meaning
 that this value is fixed for this model and cannot be changed by the user.</p>
+</section>
+<section id="wischmeier-and-smith-1978">
+<h3>Wischmeier and Smith (1978)<a class="headerlink" href="#wischmeier-and-smith-1978" title="Link to this heading">¶</a></h3>
+<p>If slope higher than 3 % (0.050 rad):</p>
+<div class="math notranslate nohighlight">
+\[ LS = \frac{A_U}{22.13} * (65.41 * sin(\text{slope})^2 + 4.56*sin(\text{slope}) + 0.065) \]</div>
+<p>Else:</p>
+<div class="math notranslate nohighlight">
+\[ LS = (\frac{A_U}{22.13})^{3*\text{slope}^{0.6}} * (65.41 * sin(\text{slope})^2 + 4.56*sin(\text{slope}) + 0.065 )\]</div>
 </section>
 </section>
 <section id="upslope-area">
 <h2>Upslope area<a class="headerlink" href="#upslope-area" title="Link to this heading">¶</a></h2>
 <p>The upslope or upstream area is computed as:</p>
 <div class="math notranslate nohighlight">
-\[ A = {\sum_1^n{\text{influx}_i}} \]</div>
+\[ A_U = {\sum_1^n{\text{influx}_i}} \]</div>
 <p>with:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(n\)</span>: number of neighbors</p></li>
@@ -208,6 +226,23 @@ the lowest adjacent pixel. Not all water flows to the adjacent parcel in
 this case. Between two parcels, only 30% of the water flows through. Towards
 a forest, this is only 0%. These values are adjustable (connectivity).</p></li>
 </ul>
+</section>
+<section id="connectivity">
+<h2>Connectivity<a class="headerlink" href="#connectivity" title="Link to this heading">¶</a></h2>
+<p>Three additional parameters are introduced to account for the concept of
+connectivity between landuses ‘road’, ‘forest’ and ‘cropland’:</p>
+<ul class="simple">
+<li><p>Parcel connectivity to cropland (%)</p></li>
+<li><p>Parcel connectivity to forest (%)</p></li>
+<li><p>Parcel connectivity to road (%).</p></li>
+</ul>
+<p>The values defined in this parameter are used to multiply the computed
+upstream area:</p>
+<div class="math notranslate nohighlight">
+\[ A_U = A_U * (100-\text{connectivity})/100 \]</div>
+<p>The default values are 70, 100 and 70, for the connectivity defined for roads,
+forest and cropland. It is important to note that this connectivity is defined
+based on the landuse of the <strong>target</strong> pixel.</p>
 </section>
 <section id="tillage-erosion">
 <h2>Tillage erosion<a class="headerlink" href="#tillage-erosion" title="Link to this heading">¶</a></h2>
@@ -254,6 +289,9 @@ in landscape structure on soil erosion by water and tillage. Landscape
 Ecology 15, 577–589. <a class="reference external" href="https://doi.org/10.1023/A:1008198215674">https://doi.org/10.1023/A:1008198215674</a></p>
 <p>Van Oost, K., 2003. Spatial modeling of soil redistribution processes in
 agricultural landscapes. (PhD thesis). KU Leuven, Leuven.</p>
+<p>Wischmeier, W.H. and Smith, D.D. (1978) Predicting Rainfall Erosion Losses.
+A Guide to Conservation Planning. The USDA Agricultural Handbook No. 537,
+Maryland.</p>
 </section>
 </section>
 
