@@ -26,7 +26,8 @@ In the following text, it is explained how the subfactors are calculated.
 
 ## LS-factor
 
-The L-factor can be computed according a number of formula's
+The L-factor can be computed according a number of formula's, these are explained below.
+The formula for the computation of the Upslope Area is given at the end of this section. 
 
 ### Moore & Nieber (1989)
 
@@ -93,7 +94,7 @@ Else:
 $$ LS = (\frac{A_U}{22.13})^{3*\text{slope}^{0.6}} * (65.41 * sin(\text{slope})^2 + 4.56*sin(\text{slope}) + 0.065 )$$
 
 
-## Upslope area
+### Upslope area
 
 The upslope or upstream area is computed as:
 
