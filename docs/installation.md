@@ -1,7 +1,7 @@
 # Installation
 
 ## Installing SAGA
-## On windows
+### On windows
 On windows, download version SAGA 8.5.1 from the website, a direct link to 
 the file is here 
 [saga-8.5.1_x64.zip](https://sourceforge.net/projects/saga-gis/files/SAGA%20-%208/SAGA%20-%208.5.1/saga-8.5.1_x64.zip/download). 
@@ -16,12 +16,12 @@ If you want to test unreleased version of SAGA, go to the github action page
 for [windows builds](https://github.com/DOV-Vlaanderen/saga-watem/actions/workflows/cmake-windows.yml). 
 You can find snapshots of the dll here.
 
-## On linux
+### On linux
 Packages are built for Debian Linux (Bullseye) and Ubuntu LTS (Focal). The
 packages can be grabbed from the release page.
 
-# Building saga
-## On windows
+## Building saga
+### On windows
 
 Download SAGA (compiled version, 8.5.1 using the link above) and create an 
 environmental variable `SAGA` containing the path where saga was 
@@ -37,7 +37,7 @@ This will create a solution that can be opened with visual studio, or can be
 built using msbuild. 
 
 
-## On debian/ubuntu linux:
+### On debian/ubuntu linux:
 
 Make sure you have build-essential, cmake and libsaga-dev installed
 
@@ -68,7 +68,7 @@ make html
 ```
 
 
-## Running automated tests
+### Running automated tests
 
 A few automated tests are written in python. To run these under linux, run 
 the compilation as mentioned above. Next install the dependencies either in
@@ -78,3 +78,19 @@ an environment or as apt packages and run
 sudo apt install python-pytest python-rasterio python-geopandas
 pytest-3
 ```
+
+### Command line interface
+
+Equal to SAGA, the tools can be run in the command line:
+
+```shell
+saga_cmd watem 1 ...
+```
+
+For running WaTEM (four tools in total)
+
+```shell
+saga_cmd watem_flanders 1 ... 
+```
+
+For running application Flanders (five tools in total)

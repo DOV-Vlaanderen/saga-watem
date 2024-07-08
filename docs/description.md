@@ -1,6 +1,5 @@
 # Model description
 
-In this page, it is described what the model structure is of SAGA/WaTEM. 
 There are two main output variables computed by WaTEM:
 
 - Water erosion: soil erosion occurring by natural rainfall water.
@@ -11,8 +10,7 @@ The aim of this page is to explain how water and tillage erosion are
 computed in WaTEM and to describe the implemented formulas. 
 
 ## Water erosion
-The aim of this page is to explain how the water erosion is computed. The 
-water erosion is derived from the RUSLE-equation 
+Water erosion is computed by using the RUSLE-equation 
 ($A = \frac{\text{kg}}{\text{m}^{2}.\text{year}}$) (Revised
 Universal Soil Loss Equation, Renard et al., 1997):
 
@@ -59,14 +57,14 @@ The functional equation implies that tillage erosion is controlled by the
 change in slope gradient, not by the slope gradient itself, so that erosion 
 takes place on convexities while soil accumulation occurs in concavities. 
 The intensity of the process is controlled by the value of a single constant,
-and is set to a uniform value (ktil = 600 kg/m).  
+and is set to a uniform value (in current code ktil is equal to 600 kg/m).  
 
 ## Subfactors
 
 ### R-factor
 
 The erosive power of rainfall is quantified via the rainfall erosivity
-factor (-factor). The R-factor quantifies the mean annual average 
+factor (R-factor). The R-factor quantifies the mean annual average 
 rainfall erosivity, calculated by combining rainfall events over 
 multiple years (22 years according to the USLE definition) and is 
 expressed in $\frac{MJ.mm}{m^2.h.year}$. In the current module, one can 
@@ -75,27 +73,28 @@ define one singular value for the R-factor.
 
 ### K-factor
 
-The soil erodibility factor, quantifies the change in the soil loss per unit
-of rainfall energy. The unit of is expressed in soil loss per rainfall erosion 
-index unit, in this case (Renard et al., 1997). Soil erodibility can be
-calculated from the USLE nomograph or using empirical equations predicting
-the K-factor from the geometric mean particle diameter and organic matter 
-content. The K-factor has large temporal variations, so the values always 
-represent a long term average. In the module, the K-factor
-is defined as an input raster (grid) (expressed in $\frac{ton.ha}{MJ.mm}$^).
+The soil erodibility factor quantifies the change in the soil loss per unit
+of rainfall energy. The unit of soil erodibility factor is expressed in soil 
+loss per rainfall erosion index unit following Renard et al. (1997). 
+Soil erodibility can be calculated from the USLE nomograph or using empirical
+equations predicting the K-factor from the geometric mean particle diameter 
+and organic matter content. The K-factor has large temporal variations, so 
+the values always represent a long term average. In the module, the K-factor
+is defined as an input raster (grid) (expressed in $\frac{ton.ha}{MJ.mm}$).
 
 
 ### LS-factor
 
-The L-factor can be computed using several formula's, these are 
-explained below. The formula for the computation of the Upslope Area is given 
-in the next section. It is important to note one computes the L- and S-factor
-in one submodule (see below and also module reference). Computations are 
-done based on a digital elevation model (raster).
-
-#### Moore & Nieber (1989)
-
-$$LS = (0.4 + 1) * (A_U / 22.13)^{0.4}*\frac{sin(\text{slope})}{0.0896}^{1.3} $$
+The LS-factor can be computed using several formula's, these are 
+explained below. The formula for the computation of the upslope area is also
+given in this section. It is important to note that LS-factor is computed in 
+one tool. Although the output can be given for S and L seperatly, the formula's
+are always applicable to the LS-factor (see below and also 
+[tool 6 in the module reference](overview_watem)). Computations are 
+done based on a digital elevation model (raster) and parcels if one only wants 
+pixels inside the same parcels to be used for slope calculation, to avoid high
+incorrect slopes due to border effects such as sunken roads and embankments
+(see also tool 6).
 
 #### Desmet & Govers (1996)
 
@@ -133,14 +132,14 @@ $$ S = 16.8 * sin(\text{slope}) - 0.5 $$
 Note another formula for S is used in the case that the upstream area is 
 smaller than 25 m$^2$: 
 
-$$ S'= \min{3.0 * \text{sin(slope)}^{0.8} + 0.56, S}$$  
+$$ S'= \text{minimum}(3.0 * \text{sin(slope)}^{0.8} + 0.56, S)$$  
  
 #### Van Oost et al. (2003)
 
 The formula's for Van Oost et al. (2023) are equal to those of 
 Desmet & Govers (1996), except Van Oost et al. (2003) defines $m$ as a 
 function of the upstream area 
-$A$ (see Desmet & Govers (1996)). If the upstream area ($A_{U,\text{ref}}$) is 
+$A_U$ (see Desmet & Govers (1996)). If the upstream area ($A_{U,\text{ref}}$) is 
 smaller than 10 000 ha, than $m$ is calculated as:
 
 $$ m = 0.3+\frac{A_U}{A_{U,\text{ref}}}^c $$
@@ -148,13 +147,17 @@ $$ m = 0.3+\frac{A_U}{A_{U,\text{ref}}}^c $$
 otherwise $m$ is set to 0.72. In the model $c$ is ‘hard coded’ as 0.8, meaning 
 that this value is fixed for this model and cannot be changed by the user.
 
+#### Moore & Nieber (1989)
+
+$$LS = (0.4 + 1) * (A_U / 22.13)^{0.4}*\frac{sin(\text{slope})}{0.0896}^{1.3} $$
+
 #### Wischmeier and Smith (1978)
 
-If slope higher than 3 % (0.050 rad):
+If the slope is higher than 3 % (0.050 rad):
 
 $$ LS = \frac{A_U}{22.13} * (65.41 * sin(\text{slope})^2 + 4.56*sin(\text{slope}) + 0.065) $$
 
-Else:
+Otherwise:
 
 $$ LS = (\frac{A_U}{22.13})^{3*\text{slope}^{0.6}} * (65.41 * sin(\text{slope})^2 + 4.56*sin(\text{slope}) + 0.065 )$$
 
@@ -185,12 +188,10 @@ pixel. Following rules are defined:
 - At the edge of a parcel: the water will primarily stay within the parcel, 
   i.e. the water flows to the lowest pixel in the parcel next to the current 
   pixel. Only if there is no lower pixel within the field, the water flows to 
-  the lowest adjacent pixel. Not all water flows to the adjacent parcel in
-  this case. Between two parcels, only 30% of the water flows through. Towards 
-  a forest, this is only 0%. These values are adjustable (connectivity).
+  the lowest adjacent pixel. 
 
 Three additional parameters are introduced to account for the concept of
-connectivity between landuses 'road', 'forest' and 'cropland': 
+connectivity between land uses 'road', 'forest' and 'cropland': 
 
 - Parcel connectivity to cropland (%)
 - Parcel connectivity to forest (%)
@@ -219,19 +220,20 @@ The support practice factor is a dimensionless factor that represents the
 ratio of soil loss for a field with structural soil and water conservation 
 (SWC) measures compared to a situation without. In the current module, one can 
 define one singular value for the P-factor, between 0 and 1. Alternatively, 
-of one wishes to vary the P-factor over space, can set the P-factor by
+if one wishes to vary the P-factor over space, one can set the P-factor by
 including it in the C-factor raster / grid (i.e. multiply input C-factor 
 with desired P-factor in preprocesing).
 
 ## Implementation
 
 WaTEM is implemented on a grid (raster). It computes the RUSLE based on the 
-grid values for LS, K and C, together with the input singular value for P 
-and R. In the core module, it relies on the used to define the K- and C-factor
-raster, whereas preprocessing modules for Flanders can be used to help define
-the input for C and K. When a singular cell contains a NODATA value for K, C 
-or LS (computed based on DTM, so NODATA in DTM), then no value is given for 
-the RUSLE equation.
+grid values for LS, K and C together with the input singular value for P 
+([0,1]) and R ($\frac{\text{MJ.mm}}{\text{m}^2.\text{h.year}}$). In the core
+module, it relies on the user-defined defined the K- ($\frac{ton.ha}{MJ.mm}$) and
+C-factor ([0,1]) rasters, whereas preprocessing modules for Flanders can be 
+used to help define the input for C-raster. When a singular cell 
+contains a NODATA value for K, C or LS (computed based on DTM, so NODATA in 
+DTM), then a no value is computed for the RUSLE equation (equal to NODATA).
 
 ## References
 

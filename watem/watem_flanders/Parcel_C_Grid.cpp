@@ -16,9 +16,11 @@ Parcel_C_Grid::Parcel_C_Grid()
 
     Set_Description ( _TW (
                           "Calculation of the C (crop and management factor) "
-                          "map based on shapefile with attribute 'C-factor'. "
+                          "map based on landuse raster.'. "
                           "Optionally GRB and VHA can be added, geometries of "
                           "this shapes are mapped to a C-factor value of 0. "
+                          "The C-factor for parcels are set to 0.37. The "
+                          "C-factor for Landuse forest is converted 0.01. "
                           "Only the geometry of the input shapes is used for "
                           "mapping. Note that the input instruction refers to "
                           "data specific attributes (i.e. GRB, VHA, in "
@@ -42,7 +44,6 @@ Parcel_C_Grid::Parcel_C_Grid()
         NULL, "LANDUSE", "Land use grid",
         "Land use grid with \n"
         "- Forest = 10000  \n"
-        "- Other = 1 \n"
         "- Infrastructure & roads = -2 \n"
         "- Rivers -1 \n",
         PARAMETER_INPUT

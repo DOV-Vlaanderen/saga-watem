@@ -14,15 +14,16 @@ Complete::Complete()
                            "- Calculate upslope area (watem-1) \n"
                            "- LS calculation (watem-2) \n"
                            "- C calculation based on parcel grid (watem-flanders-3) \n"
-                           "- Watererosion based on LS (RUSLE) (optional tillage erosion) (watem-3 and watem-4) \n"
+                           "- Watererosion based on LS (RUSLE) (optional "
+                           " tillage erosion) (watem-3 and watem-4). \n"
+                           "A NULL value in K, C or LS return a NULL value. \n"
                       ) );
 
     Parameters.Add_Grid ( NULL, "DEM", _TL ( "DEM" ), _TL ( "Digital elevation model."), PARAMETER_INPUT );
     Parameters.Add_Grid ( NULL,  "PRC", "Parcel grid",
         "Parcel grid with: \n"
-        "- a unique identifier per parcel: [2,9999] \n"
+        "- a unique identifier per parcel: [1,9999] \n"
         "- Forest = 10000  \n"
-        "- Other = 1 \n"
         "- Infrastructure & roads = -2 \n"
         "- Rivers -1 \n", PARAMETER_INPUT );
     Parameters.Add_Grid ( NULL, "K", _TL ("K-factor grid" ), _TL ("soil erodibility factor (K-factor, ton ha MJ-1 mm-1)"), PARAMETER_INPUT );

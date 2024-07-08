@@ -35,7 +35,6 @@ CCalculate_Uparea::CCalculate_Uparea()
         "Parcel grid with: \n"
         "- a unique identifier per parcel: [1,9999] \n"
         "- Forest = 10000  \n"
-        "- Other = 1 \n"
         "- Infrastructure & roads = -2 \n"
         "- Rivers -1 \n"
         ,

@@ -20,7 +20,8 @@ Water_Erosion::Water_Erosion()
                           "resolution can be used (see 'Resolution correction "
                           "factor'). In addition the RUSLE values can be "
                           "limited to a maximum value (see 'Flag maximum "
-                          "gross erosion').")
+                          "gross erosion'). A NULL value in K, C or LS return "
+                          "a NULL value")
                     );
 
 

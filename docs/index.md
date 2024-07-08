@@ -10,8 +10,8 @@
 :caption: User guide
 
 Introduction <self>
-Installation <installation>
 Model description <description>
+Installation <installation>
 Getting started <gettingstarted>
 Flanders application <flanders-tool>
 Topology <topology>

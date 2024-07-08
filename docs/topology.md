@@ -73,9 +73,7 @@ When creating a grid, you may want to sort by `sort_order` to make sure lower ly
 
 
 
-### Special cases
-
-
+## Special cases
 
 ### Split paths
 
@@ -112,8 +110,6 @@ in the drawing below, the direction of line d has been flipped (from 2 to 1). Th
 
 ![circular route](img/topology-circle.png)
 
-##### Topology
-
 |line_id|startpt_id|endpt_id|length|shreve_order|sort_order|
 |----:|----:|----:|----:|----:|----:|
 |1.000000|1|2|1860.523352|1|1|
@@ -122,8 +118,6 @@ in the drawing below, the direction of line d has been flipped (from 2 to 1). Th
 |4.000000|3|5|245.821802|3|3|
 |5.000000|3|2|649.657639|1|1|
 
-
-##### Upstream edges
 
 For calculating the upstream edges this circular edge is split 
 
@@ -137,8 +131,6 @@ For calculating the upstream edges this circular edge is split
 |4|3|1.000000|
 |4|5|1.000000|
 
-
-### Complete circle
 
 Upstream segments are determined starting from points which have no downstream nodes. If a circle occurs without any nodes downstream of the circle, no upstream edges will be determined. Eg in the example below adjecant edges will contain all links, but upstream edges will be empty.
 
