@@ -1,5 +1,16 @@
 # Model description
 
+In this page, it is described what the model structure is of SAGA/WaTEM. 
+There are two main output variables computed by WaTEM:
+
+- Water erosion: soil erosion occurring by natural rainfall water.
+- Tillage erosion: soil erosion occurring in cultivated fields due to the
+  movement of soil by tillage. 
+
+The aim of this page is to explain how water and tillage erosion are 
+computed in WaTEM and to describe the implemented formulas. 
+
+## Water erosion
 The aim of this page is to explain how the water erosion is computed. The 
 water erosion is derived from the RUSLE-equation 
 ($A = \frac{\text{kg}}{\text{m}^{2}.\text{year}}$) (Revised
@@ -22,18 +33,71 @@ In SAGA-WaTEM, additional parameters can be set:
 - Difference in resolution: the S-values are compensated by 
   dividing them by 1.4 (see Notebaert et al. 2006).
 
-In the following text, it is explained how the subfactors are calculated.
+The explanation on how the subfactors are calculated are described in below.
 
-## LS-factor
+## Tillage erosion
 
-The L-factor can be computed according a number of formula's, these are explained below.
-The formula for the computation of the Upslope Area is given at the end of this section. 
+Tillage erosion, or soil translocation by tillage, is calculated according to
+the method of Van Oost et al. (2000). For every pixel the outgoing flux
+$Q_{s,t}$ (kg.m$^{-1}$) due to tillage translocation is calculated as (
+slope as gradient = dx/dh)
 
-### Moore & Nieber (1989)
+$$ Q_{s,t} = k_{til} \cdot \text{slope} $$
+
+with
+
+- $ktil$: tillage transport coefficient (kg.m$^{-1}$)
+
+The local erosion or deposition rate by tillage ($E_t$) can be calculated 
+as:
+
+$$ E_t = - \frac{Q_{s,t}}{dx} $$
+
+Soil redistribution by tillage only takes place within agricultural fields.
+In these areas, tillage may be modelled as a diffusion process.
+The functional equation implies that tillage erosion is controlled by the 
+change in slope gradient, not by the slope gradient itself, so that erosion 
+takes place on convexities while soil accumulation occurs in concavities. 
+The intensity of the process is controlled by the value of a single constant,
+and is set to a uniform value (ktil = 600 kg/m).  
+
+## Subfactors
+
+### R-factor
+
+The erosive power of rainfall is quantified via the rainfall erosivity
+factor (-factor). The R-factor quantifies the mean annual average 
+rainfall erosivity, calculated by combining rainfall events over 
+multiple years (22 years according to the USLE definition) and is 
+expressed in $\frac{MJ.mm}{m^2.h.year}$. In the current module, one can 
+define one singular value for the R-factor. 
+
+
+### K-factor
+
+The soil erodibility factor, quantifies the change in the soil loss per unit
+of rainfall energy. The unit of is expressed in soil loss per rainfall erosion 
+index unit, in this case (Renard et al., 1997). Soil erodibility can be
+calculated from the USLE nomograph or using empirical equations predicting
+the K-factor from the geometric mean particle diameter and organic matter 
+content. The K-factor has large temporal variations, so the values always 
+represent a long term average. In the module, the K-factor
+is defined as an input raster (grid) (expressed in $\frac{ton.ha}{MJ.mm}$^).
+
+
+### LS-factor
+
+The L-factor can be computed using several formula's, these are 
+explained below. The formula for the computation of the Upslope Area is given 
+in the next section. It is important to note one computes the L- and S-factor
+in one submodule (see below and also module reference). Computations are 
+done based on a digital elevation model (raster).
+
+#### Moore & Nieber (1989)
 
 $$LS = (0.4 + 1) * (A_U / 22.13)^{0.4}*\frac{sin(\text{slope})}{0.0896}^{1.3} $$
 
-### Desmet & Govers (1996)
+#### Desmet & Govers (1996)
 
 $$ L = \frac{(A_U+D^2)^{m+1}-A_U^{m+1}}{D^{m+2}.x^m.22.13^m} $$
 
@@ -64,26 +128,27 @@ $$ S = 10.8 * sin(\text{slope}) + 0.03 $$
 
 Otherwise (larger than or equal to 9 %):
 
-$$ S = 16.8 * \text{slope} - 0.5 $$
+$$ S = 16.8 * sin(\text{slope}) - 0.5 $$
 
 Note another formula for S is used in the case that the upstream area is 
 smaller than 25 m$^2$: 
 
-$$ S = 3.0 * \text{slope}^{0.8} + 0.56 $$
+$$ S'= \min{3.0 * \text{sin(slope)}^{0.8} + 0.56, S}$$  
  
-### Van Oost et al. (2003)
+#### Van Oost et al. (2003)
 
-Van Oost et al. (2003) uses an depending on the surface of the upstream area 
+The formula's for Van Oost et al. (2023) are equal to those of 
+Desmet & Govers (1996), except Van Oost et al. (2003) defines $m$ as a 
+function of the upstream area 
 $A$ (see Desmet & Govers (1996)). If the upstream area ($A_{U,\text{ref}}$) is 
-smaller than 10 000 ha, then $m$ is calculated as:
+smaller than 10 000 ha, than $m$ is calculated as:
 
 $$ m = 0.3+\frac{A_U}{A_{U,\text{ref}}}^c $$
 
 otherwise $m$ is set to 0.72. In the model $c$ is ‘hard coded’ as 0.8, meaning 
 that this value is fixed for this model and cannot be changed by the user.
 
-
-### Wischmeier and Smith (1978)
+#### Wischmeier and Smith (1978)
 
 If slope higher than 3 % (0.050 rad):
 
@@ -94,7 +159,7 @@ Else:
 $$ LS = (\frac{A_U}{22.13})^{3*\text{slope}^{0.6}} * (65.41 * sin(\text{slope})^2 + 4.56*sin(\text{slope}) + 0.065 )$$
 
 
-### Upslope area
+#### Upslope area
 
 The upslope or upstream area is computed as:
 
@@ -124,9 +189,6 @@ pixel. Following rules are defined:
   this case. Between two parcels, only 30% of the water flows through. Towards 
   a forest, this is only 0%. These values are adjustable (connectivity).
 
-
-## Connectivity
-
 Three additional parameters are introduced to account for the concept of
 connectivity between landuses 'road', 'forest' and 'cropland': 
 
@@ -143,26 +205,33 @@ The default values are 70, 100 and 70, for respectively the connectivity
 defined for roads, forest and cropland. It is important to note that this 
 connectivity is defined based on the landuse of the **target** pixel.
 
-## Tillage erosion
+### C-factor
 
-Tillage erosion, or soil translocation by tillage, is calculated according to
-the method of Van Oost et al. (2000). For every pixel the outgoing flux
-$Q_{s,t}$ (kg.m$^{-1}$) due to tillage translocation is calculated as (
-slope as gradient = dx/dh)
+The crop management factor (C-factor) is a dimensionless factor (0 – 1) 
+that represents the erosional susceptibility of a given land use type 
+compared to a non-vegetated or bare land cover. Within WaTEM, the
+user can provide a C-factor grid (raster) representing the spatial variability 
+in land use, e.g. on a field parcel basis.
 
-$$ Q_{s,t} = k_{til} \cdot \text{slope} $$
+### P-factor
 
-with
+The support practice factor is a dimensionless factor that represents the
+ratio of soil loss for a field with structural soil and water conservation 
+(SWC) measures compared to a situation without. In the current module, one can 
+define one singular value for the P-factor, between 0 and 1. Alternatively, 
+of one wishes to vary the P-factor over space, can set the P-factor by
+including it in the C-factor raster / grid (i.e. multiply input C-factor 
+with desired P-factor in preprocesing).
 
-- $ktil$: tillage transport coefficient (kg.m$^{-1}$)
+## Implementation
 
-The local erosion or deposition rate by tillage ($E_t$) can be calculated 
-as:
-
-$$ E_t = - \frac{Q_{s,t}}{dx} $$
-
-The outgoing sediment volume of a cell is distributed to one or two target 
-pixels.
+WaTEM is implemented on a grid (raster). It computes the RUSLE based on the 
+grid values for LS, K and C, together with the input singular value for P 
+and R. In the core module, it relies on the used to define the K- and C-factor
+raster, whereas preprocessing modules for Flanders can be used to help define
+the input for C and K. When a singular cell contains a NODATA value for K, C 
+or LS (computed based on DTM, so NODATA in DTM), then no value is given for 
+the RUSLE equation.
 
 ## References
 

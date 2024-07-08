@@ -10,8 +10,14 @@ Tillage_Erosion::Tillage_Erosion()
     Set_Version ( VERSION );
 
     Set_Description ( _TW (
-                          "Calculation of Tillage Erosion based on DTM (grid) and parcels (grid). Based on the code from WaTEM (KU Leuven). "
-                          "Tillage erosion, or soil translocation by tillage, is calculated according to the method of Van Oost et al. (2000)."
+                          "Calculation of Tillage Erosion based on DTM (grid)
+                          "and parcels (grid). Based on the code from WaTEM "
+                          "(KU Leuven). Tillage erosion, or soil translocation "
+                          "by tillage, is calculated according to the method "
+                          "of Van Oost et al. (2000). "
+                          "See model description for more information on "
+                          "the formula's. Note that the tillage transport "
+                          "coefficient is hardcoded being 600 kg/m."
                       )
                     );
 
