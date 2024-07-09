@@ -24,14 +24,10 @@ with
 - $C$: crop management factor (-, $$\in [0,1]$$)
 - $P$: erosion control factor (-, $$\in [0,1]$$)
 
-In SAGA-WaTEM, additional parameters can be set:
-
-- Very high RUSLE-values: values above 150 are set equal to 150, this value 
-  can be adapted in the code.
-- Difference in resolution: the S-values are compensated by 
-  dividing them by 1.4 (see Notebaert et al. 2006).
-
-The explanation on how the subfactors are calculated are described in below.
+In SAGA-WaTEM, additional parameters can be set to compensate for very high 
+RUSLE-values: values above 150 are set equal to 150, this value can be adapted
+in the code. The explanation on how the subfactors are calculated are 
+described in below.
 
 ## Tillage erosion
 
@@ -206,6 +202,25 @@ The default values are 70, 100 and 70, for respectively the connectivity
 defined for roads, forest and cropland. It is important to note that this 
 connectivity is defined based on the landuse of the **target** pixel.
 
+#### LS correction
+Notebaert et al. (2005) describes that changes in spatial resolution have 
+major scaling effects on topographic variables like the L and S-factor. The
+LS-factor will decrease on a higher resolution (smaller pixels, more height
+information) and extreme LS values will occur more. To be able to compare the
+calculated RUSLE values on different spatial resolutions, a correction factor
+can be calculated. This correction factor is calculated as:
+
+$$ LS_{corr} = \frac{LS_{avg,x}}{LS_{avg,y}} $$
+
+with
+
+- $LS_{avg,x}$: the average LS factor in a catchment on resolution x m.
+- $LS_{avg,y}$: the average LS factor in a catchment on resolution y m.
+
+The input variable is a float (default value 1, i.e. no correction). The 
+LS-factor in the model is divided by this variable. The value is set to 1.4 
+by Notebaert et al. (2005) for an application for Flanders.
+
 ### C-factor
 
 The crop management factor (C-factor) is a dimensionless factor (0 – 1) 
@@ -236,7 +251,6 @@ contains a NODATA value for K, C or LS (computed based on DTM, so NODATA in
 DTM), then a no value is computed for the RUSLE equation (equal to NODATA).
 
 ## References
-
 Desmet, P.J.J., Govers, G., 1996, A gis procedure for automatically
 calculating the USLE LS factor on topographically complex landscapes.
 Journal of Soil and Water Conservation 51, 427–433.
@@ -250,10 +264,9 @@ McCool, D.K., Foster, G.R., Mutchler, K.C., Meyer, D.L., 1989. Revised Slope
 Length Factor for the Universal Soil Loss Equation. Transactions of the 
 ASAE 32, 1571–1576. https://doi.org/10.13031/2013.31192
 
-Notebaert, B., Govers, G., Verstraeten, G., Van Oost, K., Poesen, J., Van
-Rompaey, A., 2006, Verfijnde erosiekaart Vlaanderen: eindrapport. K.U.
-Leuven, Leuven.
-https://omgeving.vlaanderen.be/sites/default/files/atoms/files/Verfijnde_erosiekaart.pdf
+Notebaert, B,. Govers, G.n Verstraeten, G., Van Oost, K., Ruysschaert, G., 
+Poesen, J., Van Rompay, A. (2005): Verfijnde ersoiekaart Vlaanderen: 
+eindrapport, Departement Omgeving, Brussel, 53 pp.
 
 Renard, K.G., Foster, G.R., Weesies, G.A., McCool, D.K., Yoder, D.C.,
 1997, Predicting soil erosion by water: a guide to conservation planning with
