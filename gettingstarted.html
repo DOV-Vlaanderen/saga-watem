@@ -22,11 +22,13 @@
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="_static/copybutton.js?v=f281be69"></script>
+        <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Application in the context of Flanders (extra tooling)" href="flanders-tool.html" />
-    <link rel="prev" title="Model description" href="description.html" /> 
+    <link rel="next" title="Processing with input data Flanders" href="flanders-tool.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -53,11 +55,13 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">User guide</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="description.html">Model description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Getting started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#the-watem-module">The WaTEM module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#compute-water-erosion">Compute water erosion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#compute-tillage-erosion">Compute tillage erosion</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="flanders-tool.html">Flanders application</a></li>
@@ -103,29 +107,32 @@
              
   <section class="tex2jax_ignore mathjax_ignore" id="getting-started">
 <span id="gettingstarted"></span><h1>Getting started<a class="headerlink" href="#getting-started" title="Link to this heading">¶</a></h1>
-<p>The current module contains a number of tools to compute the <strong>erosion map</strong>.
-The available tools can be categorized in three categories:</p>
+<p>The current module contains a number of tools to compute an erosion map.
+The available tools can be categorized in three submodules:</p>
 <ol class="arabic simple">
-<li><p>Core functionalities to compute the erosion map with WaTEM.</p></li>
-<li><p>Extra tools to prepare input data for core computations.</p></li>
-<li><p>Topology-tooling: used to topologize river networks (not used in the
-Flanders application).</p></li>
+<li><p>Core Functionalities: for the computation of the erosion map with WaTEM</p></li>
+<li><p>Flanders Functionalities: for the preparation of input data as used in
+Flanders. Note that we sometimes refer to this as ‘extra’ or ‘additional’
+tooling.</p></li>
+<li><p>Topology Tooling: for creating river network topologies (used in
+WaTEM/SEDEM)</p></li>
 </ol>
-<p>The main aim of this page is to illustrate with the SAGA-GUI how the erosion
+<p>The main aim of this page is to illustrate how the erosion
 map can be computed.  It is important to note that the extra tooling was
 developed to process input data available in Flanders
 (see <a class="reference internal" href="flanders-tool.html"><span class="std std-doc">Application to Flanders</span></a>).</p>
-<p>The information for the tolopogy-tool is found <a class="reference internal" href="topology.html"><span class="std std-doc">here</span></a></p>
 <section id="the-watem-module">
 <h2>The WaTEM module<a class="headerlink" href="#the-watem-module" title="Link to this heading">¶</a></h2>
-<p>In SAGA GIS, all modules can be called from the “Geoprocessing” menu, in the
-‘Watem’ submenu, holding core functionalities:</p>
+<p>The WaTEM module can be run in the command line or it can be used in the SAGA
+GUI. For the GUI, one can find all modules in the
+“Geoprocessing” menu, in the ‘Watem’ submenu, holding core functionalities
+(check the <a class="reference internal" href="installation.html"><span class="std std-doc">Installation page</span></a>).</p>
 <p><img alt="img1" src="_images/gui-watem-tool.png" />
 <em>Figure 1: Calling the WaTEM (core) module from the menu</em></p>
-<p>And functionalities specific to Flanders:</p>
+<p>And functionalities specific to Flanders (for further information see
+<a class="reference internal" href="flanders-tool.html"><span class="std std-doc">here</span></a>):</p>
 <p><img alt="img8" src="_images/gui-watem-flanders-tool.png" />
 <em>Figure 2: Calling the WaTEM (flanders) module from the menu</em></p>
-<hr class="docutils" />
 <p>It is also possible to launch the same modules from the tools tab in the
 “manager” window. The description tab then also displays the module’s
 documentation.</p>
@@ -134,35 +141,68 @@ documentation.</p>
 <p>The import grids are displayed in the interface with “&gt;&gt;” This means that they
 are mandatory for import. Output grids (or shapefiles) start by default with
 “&lt;&lt;” for mandatory output and “&lt;” for optional output.</p>
+<p>The WaTEM/SAGA module can also be run in the command line, similar to SAGA:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>saga_cmd<span class="w"> </span>watem<span class="w"> </span><span class="m">1</span><span class="w"> </span>...
+</pre></div>
+</div>
+<p>For running WaTEM (four tools in total)</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>saga_cmd<span class="w"> </span>watem_flanders<span class="w"> </span><span class="m">1</span><span class="w"> </span>...<span class="w"> </span>
+</pre></div>
+</div>
+<p>For running application Flanders (five tools in total).</p>
+<p>An example of a running a tool in cmd is given below:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>saga_cmd<span class="w"> </span>watem-1<span class="w"> </span>-DEM<span class="w"> </span>%YOUR_DEM_INPUT<span class="w"> </span>-PRC<span class="w"> </span>%YOUR_PARCEL_INPUT<span class="w"> </span>
+-PIT<span class="w"> </span>%YOUR_PIT_OUTPUT<span class="w"> </span>-UPSLOPE_AREA<span class="w"> </span>%YOUR_UPSLOPE_OUTPUT<span class="w"> </span>-PITDATA
+%YOUR_PIT_TABLE_OUTPUT
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">%YOUR_...</span></code> are references to saga grids or files. Consult the
+<a class="reference internal" href="overview_watem.html"><span class="doc std std-doc">model reference</span></a> for additional instructions.</p>
 </section>
 <section id="compute-water-erosion">
 <h2>Compute water erosion<a class="headerlink" href="#compute-water-erosion" title="Link to this heading">¶</a></h2>
 <p>A short introduction to the tools is given. For a detailed overview on the
-inputs, outputs and options, we refer to the module reference).</p>
-<ul class="simple">
-<li><p>Calculation of the upslope area (tool ‘watem-1’, used to be module 3.1,
-see legacy). You need to define a digital elevation model, parcels rasters.
-You will obtain a pits (unique id per pit) anbd upslope area raster (see
-Figure 3)</p></li>
-<li><p>LS Calculation (tool ‘watem-2’, used to be module 3.2,
-see legacy). Different definitions can be used.</p></li>
-</ul>
-<p><img alt="img12" src="_images/gui-ls.png" />
-<em>Figure 4: LS calculation</em></p>
-<ul class="simple">
+inputs, outputs and options, we refer to the
+<a class="reference internal" href="overview_watem.html"><span class="doc std std-doc">module reference</span></a>. The computation works in the consequential
+use of different tools:</p>
+<ol class="arabic simple">
+<li><p>Compute the uparea (tool ‘watem-1’, used to be module 3.1,
+see legacy). You need to define a digital elevation model and a parcels
+rasters. You will obtain a pits raster and table (unique id per pit) and
+upslope area raster. One can adjust the parameters ‘connectivities’ and
+‘search radius from pit’ parameters. The pits can be used to analyse
+filling pattern.</p></li>
+<li><p>The output from the uparea tool is used as an input for the LS
+Calculation (tool ‘watem-2’, used to be module 3.2,
+see legacy). A DTM and the computed uparea from step one are needed as
+input. An optional input ‘parcels’ can be used: this input is used when one
+wants to do the slope calculations within parcel boundaries (see
+‘Use parcel borders in slope calculation’ parameter). Different
+formulations to compute the LS-factor can be used (see also the
+<a class="reference internal" href="description.html"><span class="std std-doc">model description</span></a>)</p></li>
 <li><p>Water erosion calculation based on LS (tool ‘watem-4’, used to be module 3.4,
-see legacy). Note that a LS-, C- and K-grid needs to defined. Otherwise R-
-and P-factor need to be defined as numbers (floats).</p></li>
-</ul>
-<p><img alt="img14" src="_images/gui-watem.png" />
-<em>Figure 5: Water erosion calculation based on LS</em></p>
+see legacy). Note that an LS-, C- ([0,1]) and K-grid
+(<span class="math notranslate nohighlight">\(\frac{\text{kg.h}}{\text{MJ.mm}}\)</span>) to be defined. R-
+(<span class="math notranslate nohighlight">\(\frac{\text{MJ.mm}}{\text{m}^2.\text{h.year}}\)</span>) and P-factor ([0,1]) need to be defined as
+numbers (floats). Note that a maximum gross erosion can be defined as an
+upper boundary condition. In addition, a resolution correction factor can be
+defined, this is a value with which  the RUSLE value is divided
+(for the <a class="reference internal" href="flanders-tool.html"><span class="std std-doc">flanders application</span></a>, this is 1.4).</p></li>
+</ol>
+<p>The format for the parcel map is (see also in
+<a class="reference internal" href="overview_watem.html"><span class="doc std std-doc">module reference</span></a>):</p>
 <ul class="simple">
-<li><p>Tillage erosion calculation (tool ‘watem-3’, used to be module 3.5,
-see legacy). Tillage erosion is not included in the annual Potential soil
-erosion map per plot.</p></li>
+<li><p>a unique identifier per parcel: [1,9999]</p></li>
+<li><p>Forest = 10000</p></li>
+<li><p>Infrastructure &amp; roads = -2</p></li>
+<li><p>Rivers -1</p></li>
 </ul>
-<p><img alt="img15" src="_images/gui-tillage.png" /></p>
-<p><em>Figure 7: Module 3.5. Tillage erosion calculation</em></p>
+</section>
+<section id="compute-tillage-erosion">
+<h2>Compute tillage erosion<a class="headerlink" href="#compute-tillage-erosion" title="Link to this heading">¶</a></h2>
+<p>The tillage erosion calculations can be done with the tool ‘watem-3’ (prior
+module 3.5, see legacy). The input fo this module is a parcel grid and a
+digital elevation model. The <em>ktil</em> parameter is hardcoded as 600 kg/m</p>
 </section>
 </section>
 
@@ -170,8 +210,8 @@ erosion map per plot.</p></li>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="description.html" class="btn btn-neutral float-left" title="Model description" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="flanders-tool.html" class="btn btn-neutral float-right" title="Application in the context of Flanders (extra tooling)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="flanders-tool.html" class="btn btn-neutral float-right" title="Processing with input data Flanders" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

@@ -27,8 +27,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Getting started" href="gettingstarted.html" />
-    <link rel="prev" title="SAGA GIS WaTEM module" href="index.html" /> 
+    <link rel="next" title="Installation" href="installation.html" />
+    <link rel="prev" title="SAGA GIS WaTEM module (SAGA-WaTEM)" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -55,21 +55,30 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">User guide</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Model description</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#ls-factor">LS-factor</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#moore-nieber-1989">Moore &amp; Nieber (1989)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#desmet-govers-1996">Desmet &amp; Govers (1996)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#van-oost-et-al-2003">Van Oost et al. (2003)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#wischmeier-and-smith-1978">Wischmeier and Smith (1978)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#water-erosion">Water erosion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tillage-erosion">Tillage erosion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#subfactors">Subfactors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#r-factor">R-factor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#k-factor">K-factor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ls-factor">LS-factor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#desmet-govers-1996">Desmet &amp; Govers (1996)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#van-oost-et-al-2003">Van Oost et al. (2003)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#moore-nieber-1989">Moore &amp; Nieber (1989)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#wischmeier-and-smith-1978">Wischmeier and Smith (1978)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#upslope-area">Upslope area</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#upslope-area">Upslope area</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#connectivity">Connectivity</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#tillage-erosion">Tillage erosion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c-factor">C-factor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#p-factor">P-factor</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#implementation">Implementation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gettingstarted.html">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="flanders-tool.html">Flanders application</a></li>
 <li class="toctree-l1"><a class="reference internal" href="topology.html">Topology</a></li>
@@ -114,8 +123,17 @@
              
   <section class="tex2jax_ignore mathjax_ignore" id="model-description">
 <h1>Model description<a class="headerlink" href="#model-description" title="Link to this heading">¶</a></h1>
-<p>The aim of this page is to explain how the water erosion is computed. The
-water erosion is derived from the RUSLE-equation
+<p>There are two main output variables computed by WaTEM:</p>
+<ul class="simple">
+<li><p>Water erosion: soil erosion occurring by natural rainfall water.</p></li>
+<li><p>Tillage erosion: soil erosion occurring in cultivated fields due to the
+movement of soil by tillage.</p></li>
+</ul>
+<p>The aim of this page is to explain how water and tillage erosion are
+computed in WaTEM and to describe the implemented formulas.</p>
+<section id="water-erosion">
+<h2>Water erosion<a class="headerlink" href="#water-erosion" title="Link to this heading">¶</a></h2>
+<p>Water erosion is computed by using the RUSLE-equation
 (<span class="math notranslate nohighlight">\(A = \frac{\text{kg}}{\text{m}^{2}.\text{year}}\)</span>) (Revised
 Universal Soil Loss Equation, Renard et al., 1997):</p>
 <div class="math notranslate nohighlight">
@@ -128,24 +146,75 @@ Universal Soil Loss Equation, Renard et al., 1997):</p>
 <li><p><span class="math notranslate nohighlight">\(C\)</span>: crop management factor (-, $<span class="math notranslate nohighlight">\(\in [0,1]\)</span>$)</p></li>
 <li><p><span class="math notranslate nohighlight">\(P\)</span>: erosion control factor (-, $<span class="math notranslate nohighlight">\(\in [0,1]\)</span>$)</p></li>
 </ul>
-<p>In SAGA-WaTEM, an adjusted formula is used to compensate for:</p>
+<p>In SAGA-WaTEM, additional parameters can be set:</p>
 <ul class="simple">
 <li><p>Very high RUSLE-values: values above 150 are set equal to 150, this value
 can be adapted in the code.</p></li>
 <li><p>Difference in resolution: the S-values are compensated by
 dividing them by 1.4 (see Notebaert et al. 2006).</p></li>
 </ul>
-<p>In the following text, it is explained how the subfactors are calculated.</p>
-<section id="ls-factor">
-<h2>LS-factor<a class="headerlink" href="#ls-factor" title="Link to this heading">¶</a></h2>
-<p>The L-factor can be computed according a number of formula’s</p>
-<section id="moore-nieber-1989">
-<h3>Moore &amp; Nieber (1989)<a class="headerlink" href="#moore-nieber-1989" title="Link to this heading">¶</a></h3>
-<div class="math notranslate nohighlight">
-\[LS = (0.4 + 1) * (A_U / 22.13)^{0.4}*\frac{sin(\text{slope})}{0.0896}^{1.3} \]</div>
+<p>The explanation on how the subfactors are calculated are described in below.</p>
 </section>
+<section id="tillage-erosion">
+<h2>Tillage erosion<a class="headerlink" href="#tillage-erosion" title="Link to this heading">¶</a></h2>
+<p>Tillage erosion, or soil translocation by tillage, is calculated according to
+the method of Van Oost et al. (2000). For every pixel the outgoing flux
+<span class="math notranslate nohighlight">\(Q_{s,t}\)</span> (kg.m<span class="math notranslate nohighlight">\(^{-1}\)</span>) due to tillage translocation is calculated as (
+slope as gradient = dx/dh)</p>
+<div class="math notranslate nohighlight">
+\[ Q_{s,t} = k_{til} \cdot \text{slope} \]</div>
+<p>with</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(ktil\)</span>: tillage transport coefficient (kg.m<span class="math notranslate nohighlight">\(^{-1}\)</span>)</p></li>
+</ul>
+<p>The local erosion or deposition rate by tillage (<span class="math notranslate nohighlight">\(E_t\)</span>) can be calculated
+as:</p>
+<div class="math notranslate nohighlight">
+\[ E_t = - \frac{Q_{s,t}}{dx} \]</div>
+<p>Soil redistribution by tillage only takes place within agricultural fields.
+In these areas, tillage may be modelled as a diffusion process.
+The functional equation implies that tillage erosion is controlled by the
+change in slope gradient, not by the slope gradient itself, so that erosion
+takes place on convexities while soil accumulation occurs in concavities.
+The intensity of the process is controlled by the value of a single constant,
+and is set to a uniform value (in current code ktil is equal to 600 kg/m).</p>
+</section>
+<section id="subfactors">
+<h2>Subfactors<a class="headerlink" href="#subfactors" title="Link to this heading">¶</a></h2>
+<section id="r-factor">
+<h3>R-factor<a class="headerlink" href="#r-factor" title="Link to this heading">¶</a></h3>
+<p>The erosive power of rainfall is quantified via the rainfall erosivity
+factor (R-factor). The R-factor quantifies the mean annual average
+rainfall erosivity, calculated by combining rainfall events over
+multiple years (22 years according to the USLE definition) and is
+expressed in <span class="math notranslate nohighlight">\(\frac{MJ.mm}{m^2.h.year}\)</span>. In the current module, one can
+define one singular value for the R-factor.</p>
+</section>
+<section id="k-factor">
+<h3>K-factor<a class="headerlink" href="#k-factor" title="Link to this heading">¶</a></h3>
+<p>The soil erodibility factor quantifies the change in the soil loss per unit
+of rainfall energy. The unit of soil erodibility factor is expressed in soil
+loss per rainfall erosion index unit following Renard et al. (1997).
+Soil erodibility can be calculated from the USLE nomograph or using empirical
+equations predicting the K-factor from the geometric mean particle diameter
+and organic matter content. The K-factor has large temporal variations, so
+the values always represent a long term average. In the module, the K-factor
+is defined as an input raster (grid) (expressed in <span class="math notranslate nohighlight">\(\frac{ton.ha}{MJ.mm}\)</span>).</p>
+</section>
+<section id="ls-factor">
+<h3>LS-factor<a class="headerlink" href="#ls-factor" title="Link to this heading">¶</a></h3>
+<p>The LS-factor can be computed using several formula’s, these are
+explained below. The formula for the computation of the upslope area is also
+given in this section. It is important to note that LS-factor is computed in
+one tool. Although the output can be given for S and L seperatly, the formula’s
+are always applicable to the LS-factor (see below and also
+<a class="reference internal" href="overview_watem.html"><span class="doc std std-doc">tool 6 in the module reference</span></a>). Computations are
+done based on a digital elevation model (raster) and parcels if one only wants
+pixels inside the same parcels to be used for slope calculation, to avoid high
+incorrect slopes due to border effects such as sunken roads and embankments
+(see also tool 6).</p>
 <section id="desmet-govers-1996">
-<h3>Desmet &amp; Govers (1996)<a class="headerlink" href="#desmet-govers-1996" title="Link to this heading">¶</a></h3>
+<h4>Desmet &amp; Govers (1996)<a class="headerlink" href="#desmet-govers-1996" title="Link to this heading">¶</a></h4>
 <div class="math notranslate nohighlight">
 \[ L = \frac{(A_U+D^2)^{m+1}-A_U^{m+1}}{D^{m+2}.x^m.22.13^m} \]</div>
 <p>with:</p>
@@ -170,34 +239,40 @@ dividing them by 1.4 (see Notebaert et al. 2006).</p></li>
 \[ S = 10.8 * sin(\text{slope}) + 0.03 \]</div>
 <p>Otherwise (larger than or equal to 9 %):</p>
 <div class="math notranslate nohighlight">
-\[ S = 16.8 * \text{slope} - 0.5 \]</div>
+\[ S = 16.8 * sin(\text{slope}) - 0.5 \]</div>
 <p>Note another formula for S is used in the case that the upstream area is
 smaller than 25 m<span class="math notranslate nohighlight">\(^2\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[ S = 3.0 * \text{slope}^{0.8} + 0.56 \]</div>
+\[ S'= \text{minimum}(3.0 * \text{sin(slope)}^{0.8} + 0.56, S)\]</div>
 </section>
 <section id="van-oost-et-al-2003">
-<h3>Van Oost et al. (2003)<a class="headerlink" href="#van-oost-et-al-2003" title="Link to this heading">¶</a></h3>
-<p>Van Oost et al. (2003) uses an depending on the surface of the upstream area
-<span class="math notranslate nohighlight">\(A\)</span> (see Desmet &amp; Govers (1996)). If the upstream area (<span class="math notranslate nohighlight">\(A_{U,\text{ref}}\)</span>) is
-smaller than 10 000 ha, then <span class="math notranslate nohighlight">\(m\)</span> is calculated as:</p>
+<h4>Van Oost et al. (2003)<a class="headerlink" href="#van-oost-et-al-2003" title="Link to this heading">¶</a></h4>
+<p>The formula’s for Van Oost et al. (2023) are equal to those of
+Desmet &amp; Govers (1996), except Van Oost et al. (2003) defines <span class="math notranslate nohighlight">\(m\)</span> as a
+function of the upstream area
+<span class="math notranslate nohighlight">\(A_U\)</span> (see Desmet &amp; Govers (1996)). If the upstream area (<span class="math notranslate nohighlight">\(A_{U,\text{ref}}\)</span>) is
+smaller than 10 000 ha, than <span class="math notranslate nohighlight">\(m\)</span> is calculated as:</p>
 <div class="math notranslate nohighlight">
 \[ m = 0.3+\frac{A_U}{A_{U,\text{ref}}}^c \]</div>
 <p>otherwise <span class="math notranslate nohighlight">\(m\)</span> is set to 0.72. In the model <span class="math notranslate nohighlight">\(c\)</span> is ‘hard coded’ as 0.8, meaning
 that this value is fixed for this model and cannot be changed by the user.</p>
 </section>
+<section id="moore-nieber-1989">
+<h4>Moore &amp; Nieber (1989)<a class="headerlink" href="#moore-nieber-1989" title="Link to this heading">¶</a></h4>
+<div class="math notranslate nohighlight">
+\[LS = (0.4 + 1) * (A_U / 22.13)^{0.4}*\frac{sin(\text{slope})}{0.0896}^{1.3} \]</div>
+</section>
 <section id="wischmeier-and-smith-1978">
-<h3>Wischmeier and Smith (1978)<a class="headerlink" href="#wischmeier-and-smith-1978" title="Link to this heading">¶</a></h3>
-<p>If slope higher than 3 % (0.050 rad):</p>
+<h4>Wischmeier and Smith (1978)<a class="headerlink" href="#wischmeier-and-smith-1978" title="Link to this heading">¶</a></h4>
+<p>If the slope is higher than 3 % (0.050 rad):</p>
 <div class="math notranslate nohighlight">
 \[ LS = \frac{A_U}{22.13} * (65.41 * sin(\text{slope})^2 + 4.56*sin(\text{slope}) + 0.065) \]</div>
-<p>Else:</p>
+<p>Otherwise:</p>
 <div class="math notranslate nohighlight">
 \[ LS = (\frac{A_U}{22.13})^{3*\text{slope}^{0.6}} * (65.41 * sin(\text{slope})^2 + 4.56*sin(\text{slope}) + 0.065 )\]</div>
 </section>
-</section>
 <section id="upslope-area">
-<h2>Upslope area<a class="headerlink" href="#upslope-area" title="Link to this heading">¶</a></h2>
+<h4>Upslope area<a class="headerlink" href="#upslope-area" title="Link to this heading">¶</a></h4>
 <p>The upslope or upstream area is computed as:</p>
 <div class="math notranslate nohighlight">
 \[ A_U = {\sum_1^n{\text{influx}_i}} \]</div>
@@ -222,15 +297,10 @@ cell).</p></li>
 <li><p>At the edge of a parcel: the water will primarily stay within the parcel,
 i.e. the water flows to the lowest pixel in the parcel next to the current
 pixel. Only if there is no lower pixel within the field, the water flows to
-the lowest adjacent pixel. Not all water flows to the adjacent parcel in
-this case. Between two parcels, only 30% of the water flows through. Towards
-a forest, this is only 0%. These values are adjustable (connectivity).</p></li>
+the lowest adjacent pixel.</p></li>
 </ul>
-</section>
-<section id="connectivity">
-<h2>Connectivity<a class="headerlink" href="#connectivity" title="Link to this heading">¶</a></h2>
 <p>Three additional parameters are introduced to account for the concept of
-connectivity between landuses ‘road’, ‘forest’ and ‘cropland’:</p>
+connectivity between land uses ‘road’, ‘forest’ and ‘cropland’:</p>
 <ul class="simple">
 <li><p>Parcel connectivity to cropland (%)</p></li>
 <li><p>Parcel connectivity to forest (%)</p></li>
@@ -240,28 +310,40 @@ connectivity between landuses ‘road’, ‘forest’ and ‘cropland’:</p>
 upstream area:</p>
 <div class="math notranslate nohighlight">
 \[ A_U = A_U * (100-\text{connectivity})/100 \]</div>
-<p>The default values are 70, 100 and 70, for the connectivity defined for roads,
-forest and cropland. It is important to note that this connectivity is defined
-based on the landuse of the <strong>target</strong> pixel.</p>
+<p>The default values are 70, 100 and 70, for respectively the connectivity
+defined for roads, forest and cropland. It is important to note that this
+connectivity is defined based on the landuse of the <strong>target</strong> pixel.</p>
 </section>
-<section id="tillage-erosion">
-<h2>Tillage erosion<a class="headerlink" href="#tillage-erosion" title="Link to this heading">¶</a></h2>
-<p>Tillage erosion, or soil translocation by tillage, is calculated according to
-the method of Van Oost et al. (2000). For every pixel the outgoing flux
-<span class="math notranslate nohighlight">\(Q_{s,t}\)</span> (kg.m<span class="math notranslate nohighlight">\(^{-1}\)</span>) due to tillage translocation is calculated as (
-slope as gradient = dx/dh)</p>
-<div class="math notranslate nohighlight">
-\[ Q_{s,t} = k_{til} \cdot \text{slope} \]</div>
-<p>with</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(ktil\)</span>: tillage transport coefficient (kg.m<span class="math notranslate nohighlight">\(^{-1}\)</span>)</p></li>
-</ul>
-<p>The local erosion or deposition rate by tillage (<span class="math notranslate nohighlight">\(E_t\)</span>) can be calculated
-as:</p>
-<div class="math notranslate nohighlight">
-\[ E_t = - \frac{Q_{s,t}}{dx} \]</div>
-<p>The outgoing sediment volume of a cell is distributed to one or two target
-pixels.</p>
+</section>
+<section id="c-factor">
+<h3>C-factor<a class="headerlink" href="#c-factor" title="Link to this heading">¶</a></h3>
+<p>The crop management factor (C-factor) is a dimensionless factor (0 – 1)
+that represents the erosional susceptibility of a given land use type
+compared to a non-vegetated or bare land cover. Within WaTEM, the
+user can provide a C-factor grid (raster) representing the spatial variability
+in land use, e.g. on a field parcel basis.</p>
+</section>
+<section id="p-factor">
+<h3>P-factor<a class="headerlink" href="#p-factor" title="Link to this heading">¶</a></h3>
+<p>The support practice factor is a dimensionless factor that represents the
+ratio of soil loss for a field with structural soil and water conservation
+(SWC) measures compared to a situation without. In the current module, one can
+define one singular value for the P-factor, between 0 and 1. Alternatively,
+if one wishes to vary the P-factor over space, one can set the P-factor by
+including it in the C-factor raster / grid (i.e. multiply input C-factor
+with desired P-factor in preprocesing).</p>
+</section>
+</section>
+<section id="implementation">
+<h2>Implementation<a class="headerlink" href="#implementation" title="Link to this heading">¶</a></h2>
+<p>WaTEM is implemented on a grid (raster). It computes the RUSLE based on the
+grid values for LS, K and C together with the input singular value for P
+([0,1]) and R (<span class="math notranslate nohighlight">\(\frac{\text{MJ.mm}}{\text{m}^2.\text{h.year}}\)</span>). In the core
+module, it relies on the user-defined defined the K- (<span class="math notranslate nohighlight">\(\frac{ton.ha}{MJ.mm}\)</span>) and
+C-factor ([0,1]) rasters, whereas preprocessing modules for Flanders can be
+used to help define the input for C-raster. When a singular cell
+contains a NODATA value for K, C or LS (computed based on DTM, so NODATA in
+DTM), then a no value is computed for the RUSLE equation (equal to NODATA).</p>
 </section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Link to this heading">¶</a></h2>
@@ -299,8 +381,8 @@ Maryland.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="index.html" class="btn btn-neutral float-left" title="SAGA GIS WaTEM module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="gettingstarted.html" class="btn btn-neutral float-right" title="Getting started" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="SAGA GIS WaTEM module (SAGA-WaTEM)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

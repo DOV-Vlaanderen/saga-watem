@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SAGA GIS WaTEM module &mdash; saga_watem unknown documentation</title>
+  <title>SAGA GIS WaTEM module (SAGA-WaTEM) &mdash; saga_watem unknown documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -52,8 +52,9 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">User guide</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="description.html">Model description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gettingstarted.html">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="flanders-tool.html">Flanders application</a></li>
 <li class="toctree-l1"><a class="reference internal" href="topology.html">Topology</a></li>
@@ -86,7 +87,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">SAGA GIS WaTEM module</li>
+      <li class="breadcrumb-item active">SAGA GIS WaTEM module (SAGA-WaTEM)</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/DOV-Vlaanderen/saga-watem/blob/main/docs/index.md" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -96,86 +97,39 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section class="tex2jax_ignore mathjax_ignore" id="saga-gis-watem-module">
-<h1>SAGA GIS WaTEM module<a class="headerlink" href="#saga-gis-watem-module" title="Link to this heading">¶</a></h1>
-<p>This repository contains a <a class="reference external" href="https://saga-gis.org">SAGA-GIS</a> translation of the <a class="reference external" href="https://watem-sedem.github.io/">WaTEM erosion model</a>. It also contains modules that can be used in preprocessing and postprocessing the result of that program.</p>
-<p>More details on the modules can be found in:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="saga-gis-watem-module-saga-watem">
+<h1>SAGA GIS WaTEM module (SAGA-WaTEM)<a class="headerlink" href="#saga-gis-watem-module-saga-watem" title="Link to this heading">¶</a></h1>
+<p>This repository contains a <a class="reference external" href="https://saga-gis.org">SAGA-GIS</a> translation of
+the <a class="reference external" href="https://watem-sedem.github.io/">WaTEM erosion model</a>. WaTEM (Van Oost et
+al. 2000) is a spatially distributed model that computes erosion by rainfall
+and tillage:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="gettingstarted.html"><span class="std std-doc">Getting started</span></a></p></li>
-<li><p><a class="reference internal" href="flanders-tool.html"><span class="std std-doc">Application to Flanders</span></a></p></li>
-<li><p><a class="reference internal" href="topology.html"><span class="std std-doc">Topology</span></a></p></li>
+<li><p>Water erosion: soil erosion occurring by natural rainfall water.</p></li>
+<li><p>Tillage erosion: soil erosion occurring in cultivated fields due to the
+movement of soil by tillage.</p></li>
 </ul>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="installing-saga">
-<h1>Installing SAGA<a class="headerlink" href="#installing-saga" title="Link to this heading">¶</a></h1>
-<section id="on-windows">
-<h2>On windows<a class="headerlink" href="#on-windows" title="Link to this heading">¶</a></h2>
-<p>On windows, download version SAGA 8.5.1 from the website, a direct link to the file is here <a class="reference external" href="https://sourceforge.net/projects/saga-gis/files/SAGA%20-%208/SAGA%20-%208.5.1/saga-8.5.1_x64.zip/download">saga-8.5.1_x64.zip</a>. Alternatively, you can use SAGA 9.2.0 from the same website. Other versions have not been tested.</p>
-<p>Get the windows built dll files from the releases page and copy these dll files into the tools subfolder of saga and restart. You can also drag and drop the dll on saga if they are stored in a different location.</p>
-<p>If you want to test unreleased version of SAGA, go to the github action page for <a class="reference external" href="https://github.com/DOV-Vlaanderen/saga-watem/actions/workflows/cmake-windows.yml">windows builds</a>. You can find snapshots of the dll here.</p>
-</section>
-<section id="on-linux">
-<h2>On linux<a class="headerlink" href="#on-linux" title="Link to this heading">¶</a></h2>
-<p>Packages are built for Debian Linux (Bullseye) and Ubuntu LTS (Focal). The pacakges can be grabbed from the release page.</p>
-</section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="building-saga">
-<h1>Building saga<a class="headerlink" href="#building-saga" title="Link to this heading">¶</a></h1>
-<section id="id1">
-<h2>On windows<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
-<p>Download SAGA (compiled version, 8.5.1 using the link above) and create an environmental variable <code class="docutils literal notranslate"><span class="pre">SAGA</span></code> containing the path where saga was installed/unzipped. Install Visual Studio or Visual studio build tools and cmake and create the solution file using cmake:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">build</span>
-<span class="n">cmake</span> <span class="o">..</span>
-</pre></div>
-</div>
-<p>This will create a solution that can be opened with visual studio, or can be built using msbuild.</p>
-</section>
-<section id="on-debian-ubuntu-linux">
-<h2>On debian/ubuntu linux:<a class="headerlink" href="#on-debian-ubuntu-linux" title="Link to this heading">¶</a></h2>
-<p>Make sure you have build-essential, cmake and libsaga-dev installed</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">build</span><span class="o">-</span><span class="n">essential</span> <span class="n">cmake</span> <span class="n">libsaga</span><span class="o">-</span><span class="n">dev</span>
-</pre></div>
-</div>
-<p>Next, build and install from source:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="n">build</span>
-<span class="n">mkdir</span> <span class="n">build</span>
-<span class="n">cd</span> <span class="n">build</span>
-<span class="n">cmake</span> <span class="o">..</span>
-<span class="n">make</span>
-<span class="n">make</span> <span class="n">DESTDIR</span><span class="o">=</span><span class="n">libs</span> <span class="n">install</span>
-<span class="n">cd</span> <span class="o">..</span>
-</pre></div>
-</div>
-<p>To build the documentation do (make sure you have dependencies in ci/requirements.txt) installed:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">docs</span>
-<span class="n">mkdir</span> <span class="n">tool_html</span>
-<span class="n">SAGA_TLB</span><span class="o">=../</span><span class="n">build</span><span class="o">/</span><span class="n">libs</span><span class="o">/</span><span class="n">saga</span> <span class="n">saga_cmd</span> <span class="o">--</span><span class="n">create</span><span class="o">-</span><span class="n">docs</span><span class="o">=</span><span class="n">tool_html</span>
-<span class="n">make</span> <span class="n">html</span>
-</pre></div>
-</div>
-</section>
-<section id="running-automated-tests">
-<h2>Running automated tests<a class="headerlink" href="#running-automated-tests" title="Link to this heading">¶</a></h2>
-<p>A few automated tests are written in python. To run these under linux, run the compilation as mentioned above.</p>
-<p>Next install the dependencies either in an environment or as apt packages and run</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">python</span><span class="o">-</span><span class="n">pytest</span> <span class="n">python</span><span class="o">-</span><span class="n">rasterio</span> <span class="n">python</span><span class="o">-</span><span class="n">geopandas</span>
-<span class="n">pytest</span><span class="o">-</span><span class="mi">3</span>
-</pre></div>
-</div>
-</section>
+<p>The main usage of this package is to compute WaTEM. The module is
+split in two submodules, one to compute WaTEM, and another submodule with
+specific tooling for an application for Flanders.</p>
+<p>The installation guidelines can be found <a class="reference internal" href="installation.html"><span class="std std-doc">here</span></a>, whereas
+the description of the model is presented <a class="reference internal" href="description.html"><span class="std std-doc">here</span></a>. An
+<a class="reference internal" href="gettingstarted.html"><span class="std std-doc">example</span></a> is presented to help users get started
+with the module. In addition, explanation is given about the extra tooling
+available for the application for <a class="reference internal" href="flanders-tool.html"><span class="std std-doc">Flanders</span></a>.</p>
+<p>Currently, the module contains one extra module, see
+<a class="reference internal" href="topology.html"><span class="std std-doc">Topology</span></a>.</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="legacy">
 <h1>Legacy<a class="headerlink" href="#legacy" title="Link to this heading">¶</a></h1>
-<p>The saga-watem module is a derivative product of the code that was devoloped
+<p>The SAGA-WaTEM module is a derivative product of the code that was devoloped
 for the ‘erosiekaart’ for Flanders (see below). The tool was developed
 in 2016 (in Dutch), and was fully documented and refactored in 2024 by Fluves.</p>
 <p>Consequently, the current tooling is structured in a different way compared
-to the initial tool. As of now, it consists of two tools (watem and
+to the initial tool. As of now, it consists of two modules (watem and
 watem-flanders) to make a clear distinction between tools relevant for
-computing the gross erosion (core) and tools relevant for preprocessing data from
-Flanders as input for the core tool.</p>
+computing the gross erosion (core) and tools relevant for preprocessing data
+from Flanders as input for the core tool.</p>
 <p>The tool is now structured as follows:</p>
-<p>in 2016 (in Dutch), and was fully documented and refactored in 2024 with a</p>
 <ul class="simple">
 <li><p>watem:</p>
 <ol class="arabic simple">
@@ -195,52 +149,67 @@ Flanders as input for the core tool.</p>
 </ol>
 </li>
 </ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="references">
+<h1>References<a class="headerlink" href="#references" title="Link to this heading">¶</a></h1>
+<p>Van Oost, K., 2003. Spatial modeling of soil redistribution processes in
+agricultural landscapes. (PhD thesis). KU Leuven, Leuven.</p>
 <section id="contents">
 <h2>Contents<a class="headerlink" href="#contents" title="Link to this heading">¶</a></h2>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">User guide</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="description.html">Model description</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="description.html#ls-factor">LS-factor</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="description.html#moore-nieber-1989">Moore &amp; Nieber (1989)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="description.html#desmet-govers-1996">Desmet &amp; Govers (1996)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="description.html#van-oost-et-al-2003">Van Oost et al. (2003)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="description.html#wischmeier-and-smith-1978">Wischmeier and Smith (1978)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="description.html#water-erosion">Water erosion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="description.html#tillage-erosion">Tillage erosion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="description.html#subfactors">Subfactors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="description.html#r-factor">R-factor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="description.html#k-factor">K-factor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="description.html#ls-factor">LS-factor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="description.html#c-factor">C-factor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="description.html#p-factor">P-factor</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="description.html#upslope-area">Upslope area</a></li>
-<li class="toctree-l2"><a class="reference internal" href="description.html#connectivity">Connectivity</a></li>
-<li class="toctree-l2"><a class="reference internal" href="description.html#tillage-erosion">Tillage erosion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="description.html#implementation">Implementation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="description.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#installing-saga">Installing SAGA</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#on-windows">On windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#on-linux">On linux</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#building-saga">Building saga</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#id1">On windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#on-debian-ubuntu-linux">On debian/ubuntu linux:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#running-automated-tests">Running automated tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#command-line-interface">Command line interface</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="gettingstarted.html">Getting started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="gettingstarted.html#the-watem-module">The WaTEM module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gettingstarted.html#compute-water-erosion">Compute water erosion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted.html#compute-tillage-erosion">Compute tillage erosion</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="flanders-tool.html">Flanders application</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="flanders-tool.html#landuse-map">Landuse map</a></li>
-<li class="toctree-l2"><a class="reference internal" href="flanders-tool.html#parcels-map">Parcels map</a></li>
-<li class="toctree-l2"><a class="reference internal" href="flanders-tool.html#digital-elevation-model">Digital elevation model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="flanders-tool.html#parcels-map-generation">Parcels map generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="flanders-tool.html#filtering-digital-elevation-model">Filtering digital elevation model</a></li>
 <li class="toctree-l2"><a class="reference internal" href="flanders-tool.html#c-grid">C-grid</a></li>
-<li class="toctree-l2"><a class="reference internal" href="flanders-tool.html#k-grid">K-grid</a></li>
-<li class="toctree-l2"><a class="reference internal" href="flanders-tool.html#postprocessing">Postprocessing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="flanders-tool.html#run-in-command-line">Run in command line</a></li>
 <li class="toctree-l2"><a class="reference internal" href="flanders-tool.html#complete-tool">Complete tool</a></li>
-<li class="toctree-l2"><a class="reference internal" href="flanders-tool.html#example-script-for-flanders">Example script for Flanders</a></li>
-<li class="toctree-l2"><a class="reference internal" href="flanders-tool.html#extra-information">Extra information</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="topology.html">Topology</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="topology.html#topology">Topology</a></li>
 <li class="toctree-l2"><a class="reference internal" href="topology.html#upstream-edges">Upstream edges</a></li>
-<li class="toctree-l2"><a class="reference internal" href="topology.html#shreve-order-and-sort-order">Shreve order and Sort order</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="topology.html#special-cases">Special cases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topology.html#shreve-order-and-sort-order">Shreve order and Sort order</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topology.html#special-cases">Special cases</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="topology.html#split-paths">Split paths</a></li>
 <li class="toctree-l3"><a class="reference internal" href="topology.html#circular-routes">Circular routes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="topology.html#complete-circle">Complete circle</a></li>
 </ul>
 </li>
 </ul>
