@@ -214,8 +214,8 @@ $$ LS_{corr} = \frac{LS_{avg,x}}{LS_{avg,y}} $$
 
 with
 
-$LS_{avg,x}$: the average LS factor in a catchment on resolution x m.
-$LS_{avg,y}$: the average LS factor in a catchment on resolution y m.
+- $LS_{avg,x}$: the average LS factor in a catchment on resolution x m.
+- $LS_{avg,y}$: the average LS factor in a catchment on resolution y m.
 
 The input variable is a float (default value 1, i.e. no correction). The 
 LS-factor in the model is divided by this variable. The value is set to 1.4 
