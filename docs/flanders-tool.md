@@ -44,6 +44,9 @@ outlines in the GRB layer are used to define infrastructure. Similarly, the
 vector outlines from WLAS and WTZ are used to define rivers, whereas SBN and 
 WBN vector outlines are used to define infrastructure.
 
+Note that only the vector outlines are used to define binary rasters, i.e. no
+attributes are used to define the binary rasters.
+
 Tool: watem-flanders-1
 
 ## Filtering digital elevation model 
@@ -62,8 +65,8 @@ Tool: watem-flanders-2
 
 A C-factor grid can be computed from:
 
-- a parcel raster (C calculation based on parcel grid).
-- a parcel shape with an attribute (C calculation shape attribute)
+- a parcel raster
+- a parcel shape (and other data input from Flanders, i.e. GRB, WLAS)
 
 In the first tool, the [Parcels map](#Parcels-map-generation) is translated 
 according to:
@@ -75,7 +78,9 @@ according to:
 The only input is the parcel grid. Alternatively, the C-factor can be computed 
 according to the inputs defined for [Parcels map](#Parcels-map-generation): it
 used the inputs to compute C directly, whereas in the first option you use the output 
-of [Parcels map](#Parcels-map-generation)
+of [Parcels map](#Parcels-map-generation). As such the parcel-shape-tool 
+is a joined tool of translating different data layers to a parcel 
+map, and translating this to the C-factor (as in the watem-flanders-3 tool). 
 
 Tool: watem-flanders-3 and watem-flanders-4
 
