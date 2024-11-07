@@ -11,7 +11,7 @@ computed in WaTEM and to describe the implemented formulas.
 
 ## Water erosion
 Water erosion is computed by using the RUSLE-equation 
-($A = \frac{\text{kg}}{\text{m}^{2}.\text{year}}$) (Revised
+($A = \frac{\text{kg}}{\text{ha.year}}$) (Revised
 Universal Soil Loss Equation, Renard et al., 1997):
 
 $$ A = R \cdot K \cdot LS \cdot C \cdot P $$
