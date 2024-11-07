@@ -59,7 +59,7 @@ Grid Filter tool (any available in SAGA/QGIS to the users' liking). An
 alternative is to perform a 3x3 filter on the DTM within the boundaries of 
 the parcels. This filters the DTM but only considers cells that lie within the
 same plot. The input for this tool (watem-flanders-2) is the DEM and
-[Parcels map](#Parcels-map-generation).
+[Parcels map](#parcels-map-generation).
 
 Tool: watem-flanders-2
 
@@ -70,16 +70,16 @@ A C-factor grid can be computed from:
 - a parcel raster
 - a parcel shape (and other data input from Flanders, i.e. GRB, WLAS)
 
-The first tool only takes the [Parcels grid](#Parcels-map-generation) as input.
+The first tool only takes the [Parcels grid](#parcels-map-generation) as input.
 The Parcel map is translated as follows:
 
 - 0.37 for cropland (code in [2,9999])
 - 0 for water (open water/river) and infrastructure/roads (code = -1 and -2)
 - 0.001 for forests (code = 10000)
 
-In the second tool, the functionalities described in [Parcels map](#Parcels-map-generation) 
+In the second tool, the functionalities described in [Parcels map](#parcels-map-generation) 
 are used. In other words, the tool has as input (see definition 
-[Parcels map](#Parcels-map-generation):
+[Parcels map](#parcels-map-generation)):
 
 - Landcover map
 - GRB layers(geopoint - dataset GRBgis)
