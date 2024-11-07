@@ -69,15 +69,14 @@ A C-factor grid can be computed from:
 - a parcel raster
 - a parcel shape (and other data input from Flanders, i.e. GRB, WLAS)
 
-The first tool only takes the arcel map (see section 'Parcel map generation') 
-as input. The Parcel map is translated as follows:
+The first tool only takes the [Parcels grid](##parcels-map-generation) as input.
+The Parcel map is translated as follows:
 
 - 0.37 for cropland (code in [2,9999])
 - 0 for water (open water/river) and infrastructure/roads (code = -1 and -2)
 - 0.001 for forests (code = 10000)
 
-In the second tool, the functionalities to generate the parcel map 
-(see section 'Parcel map generation')
+In the second tool, the functionalities described in [Parcels map](##parcels-map-generation) 
 are used. In other words, the tool has as input (see definition 
 [Parcels map](##parcels-map-generation)):
 
@@ -102,7 +101,7 @@ into addition to the definition of the R- ($\frac{\text{MJ.mm}}{\text{ha.h.year}
 P([0,1])-factor. The upslope area and
 LS is computed from the DEM (and parcel grid for computation of LS within 
 parcel boundaries). The C-factor is computed by 
-[translating the parcel raster](#c-grid). We invite users to check out the 
-[other options](overview_watem_flanders)
+[translating the parcel raster](##c-grid). We invite users to check out the 
+[other options](overview_watem_flanders).
 
 Tool: watem-flanders-5
