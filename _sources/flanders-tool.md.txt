@@ -19,9 +19,10 @@ watem-flanders 'Prepare parcel Map'. The plot grid is created from the files
 listed below. The order used is this (where later map layers are superimposed
 on previous map layers):
 
-- Land use map with values:
+- Landcover map with values:
 
   - 10000: forest
+  - -1: open water
   - -2: infrastructure / roads
 
 - GRB layers(geopoint - dataset GRBgis)
@@ -38,11 +39,15 @@ on previous map layers):
   - SBN (railway line), WBN (road line) (-2)
   - WLas (VHA lines), WTZ (VHA polygons) (-1)
 
-Note these inputs are flanders specific. In the landuse raster, the values 
-are used to define infrastructure and forest, whereas only the vector 
+Note these inputs are flanders specific. In the landcover raster, the values 
+are used to define infrastructure, water and forest, whereas only the vector 
 outlines in the GRB layer are used to define infrastructure. Similarly, the
 vector outlines from WLAS and WTZ are used to define rivers, whereas SBN and 
-WBN vector outlines are used to define infrastructure.
+WBN vector outlines are used to define infrastructure. We refer to the 
+document of the 'erosiekaart' for more information on these input data layers.
+
+Note that only the vector outlines are used to define binary rasters, i.e. no
+attributes are used to define the binary rasters.
 
 Tool: watem-flanders-1
 
@@ -62,20 +67,29 @@ Tool: watem-flanders-2
 
 A C-factor grid can be computed from:
 
-- a parcel raster (C calculation based on parcel grid).
-- a parcel shape with an attribute (C calculation shape attribute)
+- a parcel raster
+- a parcel shape (and other data input from Flanders, i.e. GRB, WLAS)
 
-In the first tool, the [Parcels map](#Parcels-map-generation) is translated 
-according to:
+The first tool only takes the [Parcels grid](#Parcels-map-generation) as input.
+The Parcel map is translated as follows:
 
-- 0.37 for cropland (code in [1,9999])
-- 0 for rivers infrastructure/roads (code = -1 and -2)
+- 0.37 for cropland (code in [2,9999])
+- 0 for water (open water/river) and infrastructure/roads (code = -1 and -2)
 - 0.001 for forests (code = 10000)
 
-The only input is the parcel grid. Alternatively, the C-factor can be computed 
-according to the inputs defined for [Parcels map](#Parcels-map-generation): it
-used the inputs to compute C directly, whereas in the first option you use the output 
-of [Parcels map](#Parcels-map-generation)
+In the second tool, the functionalities described in [Parcels map](#Parcels-map-generation) 
+are used. In other words, the tool has as input (see definition 
+[Parcels map](#Parcels-map-generation):
+
+- Landcover map
+- GRB layers(geopoint - dataset GRBgis)
+- Parcel map
+- Waterways and roads
+
+
+As such the parcel-shape-tool is a joined tool of translating different data 
+layers to a parcel map, and translating that map to the C-factor
+(as done in the watem-flanders-3 tool). 
 
 Tool: watem-flanders-3 and watem-flanders-4
 
@@ -89,6 +103,6 @@ P([0,1])-factor. The upslope area and
 LS is computed from the DEM (and parcel grid for computation of LS within 
 parcel boundaries). The C-factor is computed by 
 [translating the parcel raster](#c-grid). We invite users to check out the 
-[other options](overview-watem-flanders)
+[other options](overview_watem_flanders)
 
 Tool: watem-flanders-5

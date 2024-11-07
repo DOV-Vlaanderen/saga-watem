@@ -63,10 +63,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#r-factor">R-factor</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#k-factor">K-factor</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#ls-factor">LS-factor</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#desmet-govers-1996">Desmet &amp; Govers (1996)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#van-oost-et-al-2003">Van Oost et al. (2003)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#moore-nieber-1989">Moore &amp; Nieber (1989)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#wischmeier-and-smith-1978">Wischmeier and Smith (1978)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#upslope-area">Upslope area</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#ls-correction">LS correction</a></li>
 </ul>
@@ -135,14 +131,14 @@ computed in WaTEM and to describe the implemented formulas.</p>
 <section id="water-erosion">
 <h2>Water erosion<a class="headerlink" href="#water-erosion" title="Link to this heading">¶</a></h2>
 <p>Water erosion is computed by using the RUSLE-equation
-(<span class="math notranslate nohighlight">\(A = \frac{\text{kg}}{\text{m}^{2}.\text{year}}\)</span>) (Revised
+(<span class="math notranslate nohighlight">\(A = \frac{\text{ton}}{\text{m}^{2}.\text{year}}\)</span>) (Revised
 Universal Soil Loss Equation, Renard et al., 1997):</p>
 <div class="math notranslate nohighlight">
 \[ A = R \cdot K \cdot LS \cdot C \cdot P \]</div>
 <p>with</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(R\)</span>: rainfall erosivity factor (<span class="math notranslate nohighlight">\(\frac{\text{MJ.mm}}{\text{m}^2.\text{h.year}}\)</span>)</p></li>
-<li><p><span class="math notranslate nohighlight">\(K\)</span>: soil erodibility factor (<span class="math notranslate nohighlight">\(\frac{\text{kg.h}}{\text{MJ.mm}}\)</span>)</p></li>
+<li><p><span class="math notranslate nohighlight">\(K\)</span>: soil erodibility factor (<span class="math notranslate nohighlight">\(\frac{\text{ton.h}}{\text{MJ.mm}}\)</span>)</p></li>
 <li><p><span class="math notranslate nohighlight">\(LS\)</span>: topographical slope and length factor (-)</p></li>
 <li><p><span class="math notranslate nohighlight">\(C\)</span>: crop management factor (-, $<span class="math notranslate nohighlight">\(\in [0,1]\)</span>$)</p></li>
 <li><p><span class="math notranslate nohighlight">\(P\)</span>: erosion control factor (-, $<span class="math notranslate nohighlight">\(\in [0,1]\)</span>$)</p></li>
@@ -151,6 +147,10 @@ Universal Soil Loss Equation, Renard et al., 1997):</p>
 RUSLE-values: values above 150 are set equal to 150, this value can be adapted
 in the code. The explanation on how the subfactors are calculated are
 described in below.</p>
+<p>It is important to note that the units of <span class="math notranslate nohighlight">\(R\)</span> and <span class="math notranslate nohighlight">\(K\)</span> can be adapted, for
+instance compatible with <span class="math notranslate nohighlight">\(J\)</span> instead of <span class="math notranslate nohighlight">\(MJ\)</span>, as long as the units for <span class="math notranslate nohighlight">\(R\)</span>
+and <span class="math notranslate nohighlight">\(K\)</span> are synchronized. For reasons of clarity, the units are defined as a
+guidelines (see also module reference).</p>
 </section>
 <section id="tillage-erosion">
 <h2>Tillage erosion<a class="headerlink" href="#tillage-erosion" title="Link to this heading">¶</a></h2>
@@ -210,8 +210,7 @@ done based on a digital elevation model (raster) and parcels if one only wants
 pixels inside the same parcels to be used for slope calculation, to avoid high
 incorrect slopes due to border effects such as sunken roads and embankments
 (see also tool 6).</p>
-<section id="desmet-govers-1996">
-<h4>Desmet &amp; Govers (1996)<a class="headerlink" href="#desmet-govers-1996" title="Link to this heading">¶</a></h4>
+<p><strong>Desmet &amp; Govers (1996)</strong></p>
 <div class="math notranslate nohighlight">
 \[ L = \frac{(A_U+D^2)^{m+1}-A_U^{m+1}}{D^{m+2}.x^m.22.13^m} \]</div>
 <p>with:</p>
@@ -241,9 +240,7 @@ incorrect slopes due to border effects such as sunken roads and embankments
 smaller than 25 m<span class="math notranslate nohighlight">\(^2\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[ S'= \text{minimum}(3.0 * \text{sin(slope)}^{0.8} + 0.56, S)\]</div>
-</section>
-<section id="van-oost-et-al-2003">
-<h4>Van Oost et al. (2003)<a class="headerlink" href="#van-oost-et-al-2003" title="Link to this heading">¶</a></h4>
+<p><strong>Van Oost et al. (2003)</strong></p>
 <p>The formula’s for Van Oost et al. (2023) are equal to those of
 Desmet &amp; Govers (1996), except Van Oost et al. (2003) defines <span class="math notranslate nohighlight">\(m\)</span> as a
 function of the upstream area
@@ -253,21 +250,16 @@ smaller than 10 000 ha, than <span class="math notranslate nohighlight">\(m\)</s
 \[ m = 0.3+\frac{A_U}{A_{U,\text{ref}}}^c \]</div>
 <p>otherwise <span class="math notranslate nohighlight">\(m\)</span> is set to 0.72. In the model <span class="math notranslate nohighlight">\(c\)</span> is ‘hard coded’ as 0.8, meaning
 that this value is fixed for this model and cannot be changed by the user.</p>
-</section>
-<section id="moore-nieber-1989">
-<h4>Moore &amp; Nieber (1989)<a class="headerlink" href="#moore-nieber-1989" title="Link to this heading">¶</a></h4>
+<p><strong>Moore &amp; Nieber (1989)</strong></p>
 <div class="math notranslate nohighlight">
 \[LS = (0.4 + 1) * (A_U / 22.13)^{0.4}*\frac{sin(\text{slope})}{0.0896}^{1.3} \]</div>
-</section>
-<section id="wischmeier-and-smith-1978">
-<h4>Wischmeier and Smith (1978)<a class="headerlink" href="#wischmeier-and-smith-1978" title="Link to this heading">¶</a></h4>
+<p><strong>Wischmeier and Smith (1978)</strong></p>
 <p>If the slope is higher than 3 % (0.050 rad):</p>
 <div class="math notranslate nohighlight">
 \[ LS = \frac{A_U}{22.13} * (65.41 * sin(\text{slope})^2 + 4.56*sin(\text{slope}) + 0.065) \]</div>
 <p>Otherwise:</p>
 <div class="math notranslate nohighlight">
 \[ LS = (\frac{A_U}{22.13})^{3*\text{slope}^{0.6}} * (65.41 * sin(\text{slope})^2 + 4.56*sin(\text{slope}) + 0.065 )\]</div>
-</section>
 <section id="upslope-area">
 <h4>Upslope area<a class="headerlink" href="#upslope-area" title="Link to this heading">¶</a></h4>
 <p>The upslope or upstream area is computed as:</p>
@@ -335,7 +327,7 @@ by Notebaert et al. (2005) for an application for Flanders.</p>
 <h3>C-factor<a class="headerlink" href="#c-factor" title="Link to this heading">¶</a></h3>
 <p>The crop management factor (C-factor) is a dimensionless factor (0 – 1)
 that represents the erosional susceptibility of a given land use type
-compared to a non-vegetated or bare land cover. Within WaTEM, the
+compared to a non-vegetated or bare landcover. Within WaTEM, the
 user can provide a C-factor grid (raster) representing the spatial variability
 in land use, e.g. on a field parcel basis.</p>
 </section>
@@ -354,12 +346,15 @@ with desired P-factor in preprocesing).</p>
 <h2>Implementation<a class="headerlink" href="#implementation" title="Link to this heading">¶</a></h2>
 <p>WaTEM is implemented on a grid (raster). It computes the RUSLE based on the
 grid values for LS, K and C together with the input singular value for P
-([0,1]) and R (<span class="math notranslate nohighlight">\(\frac{\text{MJ.mm}}{\text{m}^2.\text{h.year}}\)</span>). In the core
-module, it relies on the user-defined defined the K- (<span class="math notranslate nohighlight">\(\frac{ton.ha}{MJ.mm}\)</span>) and
-C-factor ([0,1]) rasters, whereas preprocessing modules for Flanders can be
-used to help define the input for C-raster. When a singular cell
-contains a NODATA value for K, C or LS (computed based on DTM, so NODATA in
-DTM), then a no value is computed for the RUSLE equation (equal to NODATA).</p>
+([0,1]) and R (<span class="math notranslate nohighlight">\(\frac{\text{MJ.mm}}{\text{m}^2.\text{h.year}}\)</span>).</p>
+<p>The core module takes the K- and C-factor as raster inputs and the R- and
+P-factor as singular value inputs. It calculates the LS-Factor from a
+given DEM and then calculates the Erosion Amount based on the
+RUSLE equation. In the preprocessing module for Flanders an extra tool is
+provided to define the C-factor value based on Land Use information. If similar data are available, this tooling can be used for
+other regions as well. When a singular cell contains a NODATA value for
+K, C or LS (computed based on DTM, so NODATA in DTM), then a no value is
+computed for the RUSLE equation (equal to NODATA).</p>
 </section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Link to this heading">¶</a></h2>

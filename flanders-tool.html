@@ -127,9 +127,10 @@ watem-flanders ‘Prepare parcel Map’. The plot grid is created from the files
 listed below. The order used is this (where later map layers are superimposed
 on previous map layers):</p>
 <ul class="simple">
-<li><p>Land use map with values:</p>
+<li><p>Landcover map with values:</p>
 <ul>
 <li><p>10000: forest</p></li>
+<li><p>-1: open water</p></li>
 <li><p>-2: infrastructure / roads</p></li>
 </ul>
 </li>
@@ -151,11 +152,14 @@ KNW (structure): infrastructure (-2)</p></li>
 </ul>
 </li>
 </ul>
-<p>Note these inputs are flanders specific. In the landuse raster, the values
-are used to define infrastructure and forest, whereas only the vector
+<p>Note these inputs are flanders specific. In the landcover raster, the values
+are used to define infrastructure, water and forest, whereas only the vector
 outlines in the GRB layer are used to define infrastructure. Similarly, the
 vector outlines from WLAS and WTZ are used to define rivers, whereas SBN and
-WBN vector outlines are used to define infrastructure.</p>
+WBN vector outlines are used to define infrastructure. We refer to the
+document of the ‘erosiekaart’ for more information on these input data layers.</p>
+<p>Note that only the vector outlines are used to define binary rasters, i.e. no
+attributes are used to define the binary rasters.</p>
 <p>Tool: watem-flanders-1</p>
 </section>
 <section id="filtering-digital-elevation-model">
@@ -173,20 +177,28 @@ same plot. The input for this tool (watem-flanders-2) is the DEM and
 <h2>C-grid<a class="headerlink" href="#c-grid" title="Link to this heading">¶</a></h2>
 <p>A C-factor grid can be computed from:</p>
 <ul class="simple">
-<li><p>a parcel raster (C calculation based on parcel grid).</p></li>
-<li><p>a parcel shape with an attribute (C calculation shape attribute)</p></li>
+<li><p>a parcel raster</p></li>
+<li><p>a parcel shape (and other data input from Flanders, i.e. GRB, WLAS)</p></li>
 </ul>
-<p>In the first tool, the <a class="reference internal" href="#Parcels-map-generation"><span class="xref myst">Parcels map</span></a> is translated
-according to:</p>
+<p>The first tool only takes the <a class="reference internal" href="#Parcels-map-generation"><span class="xref myst">Parcels grid</span></a> as input.
+The Parcel map is translated as follows:</p>
 <ul class="simple">
-<li><p>0.37 for cropland (code in [1,9999])</p></li>
-<li><p>0 for rivers infrastructure/roads (code = -1 and -2)</p></li>
+<li><p>0.37 for cropland (code in [2,9999])</p></li>
+<li><p>0 for water (open water/river) and infrastructure/roads (code = -1 and -2)</p></li>
 <li><p>0.001 for forests (code = 10000)</p></li>
 </ul>
-<p>The only input is the parcel grid. Alternatively, the C-factor can be computed
-according to the inputs defined for <a class="reference internal" href="#Parcels-map-generation"><span class="xref myst">Parcels map</span></a>: it
-used the inputs to compute C directly, whereas in the first option you use the output
-of <a class="reference internal" href="#Parcels-map-generation"><span class="xref myst">Parcels map</span></a></p>
+<p>In the second tool, the functionalities described in <a class="reference internal" href="#Parcels-map-generation"><span class="xref myst">Parcels map</span></a>
+are used. In other words, the tool has as input (see definition
+<a class="reference internal" href="#Parcels-map-generation"><span class="xref myst">Parcels map</span></a>:</p>
+<ul class="simple">
+<li><p>Landcover map</p></li>
+<li><p>GRB layers(geopoint - dataset GRBgis)</p></li>
+<li><p>Parcel map</p></li>
+<li><p>Waterways and roads</p></li>
+</ul>
+<p>As such the parcel-shape-tool is a joined tool of translating different data
+layers to a parcel map, and translating that map to the C-factor
+(as done in the watem-flanders-3 tool).</p>
 <p>Tool: watem-flanders-3 and watem-flanders-4</p>
 </section>
 <section id="complete-tool">
@@ -199,7 +211,7 @@ P([0,1])-factor. The upslope area and
 LS is computed from the DEM (and parcel grid for computation of LS within
 parcel boundaries). The C-factor is computed by
 <a class="reference internal" href="#c-grid"><span class="xref myst">translating the parcel raster</span></a>. We invite users to check out the
-<a class="reference internal" href="#overview-watem-flanders"><span class="xref myst">other options</span></a></p>
+<a class="reference internal" href="overview_watem_flanders.html"><span class="doc std std-doc">other options</span></a></p>
 <p>Tool: watem-flanders-5</p>
 </section>
 </section>

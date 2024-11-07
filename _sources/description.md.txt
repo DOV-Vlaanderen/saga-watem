@@ -11,7 +11,7 @@ computed in WaTEM and to describe the implemented formulas.
 
 ## Water erosion
 Water erosion is computed by using the RUSLE-equation 
-($A = \frac{\text{kg}}{\text{m}^{2}.\text{year}}$) (Revised
+($A = \frac{\text{ton}}{\text{m}^{2}.\text{year}}$) (Revised
 Universal Soil Loss Equation, Renard et al., 1997):
 
 $$ A = R \cdot K \cdot LS \cdot C \cdot P $$
@@ -19,7 +19,7 @@ $$ A = R \cdot K \cdot LS \cdot C \cdot P $$
 with
 
 - $R$: rainfall erosivity factor ($\frac{\text{MJ.mm}}{\text{m}^2.\text{h.year}}$)
-- $K$: soil erodibility factor ($\frac{\text{kg.h}}{\text{MJ.mm}}$)
+- $K$: soil erodibility factor ($\frac{\text{ton.h}}{\text{MJ.mm}}$)
 - $LS$: topographical slope and length factor (-)
 - $C$: crop management factor (-, $$\in [0,1]$$)
 - $P$: erosion control factor (-, $$\in [0,1]$$)
@@ -28,6 +28,11 @@ In SAGA-WaTEM, additional parameters can be set to compensate for very high
 RUSLE-values: values above 150 are set equal to 150, this value can be adapted
 in the code. The explanation on how the subfactors are calculated are 
 described in below.
+
+It is important to note that the units of $R$ and $K$ can be adapted, for
+instance compatible with $J$ instead of $MJ$, as long as the units for $R$
+and $K$ are synchronized. For reasons of clarity, the units are defined as a 
+guidelines (see also module reference).
 
 ## Tillage erosion
 
@@ -92,7 +97,7 @@ pixels inside the same parcels to be used for slope calculation, to avoid high
 incorrect slopes due to border effects such as sunken roads and embankments
 (see also tool 6).
 
-#### Desmet & Govers (1996)
+**Desmet & Govers (1996)**
 
 $$ L = \frac{(A_U+D^2)^{m+1}-A_U^{m+1}}{D^{m+2}.x^m.22.13^m} $$
 
@@ -130,7 +135,7 @@ smaller than 25 m$^2$:
 
 $$ S'= \text{minimum}(3.0 * \text{sin(slope)}^{0.8} + 0.56, S)$$  
  
-#### Van Oost et al. (2003)
+**Van Oost et al. (2003)**
 
 The formula's for Van Oost et al. (2023) are equal to those of 
 Desmet & Govers (1996), except Van Oost et al. (2003) defines $m$ as a 
@@ -143,11 +148,11 @@ $$ m = 0.3+\frac{A_U}{A_{U,\text{ref}}}^c $$
 otherwise $m$ is set to 0.72. In the model $c$ is ‘hard coded’ as 0.8, meaning 
 that this value is fixed for this model and cannot be changed by the user.
 
-#### Moore & Nieber (1989)
+**Moore & Nieber (1989)**
 
 $$LS = (0.4 + 1) * (A_U / 22.13)^{0.4}*\frac{sin(\text{slope})}{0.0896}^{1.3} $$
 
-#### Wischmeier and Smith (1978)
+**Wischmeier and Smith (1978)**
 
 If the slope is higher than 3 % (0.050 rad):
 
@@ -225,7 +230,7 @@ by Notebaert et al. (2005) for an application for Flanders.
 
 The crop management factor (C-factor) is a dimensionless factor (0 – 1) 
 that represents the erosional susceptibility of a given land use type 
-compared to a non-vegetated or bare land cover. Within WaTEM, the
+compared to a non-vegetated or bare landcover. Within WaTEM, the
 user can provide a C-factor grid (raster) representing the spatial variability 
 in land use, e.g. on a field parcel basis.
 
@@ -243,12 +248,16 @@ with desired P-factor in preprocesing).
 
 WaTEM is implemented on a grid (raster). It computes the RUSLE based on the 
 grid values for LS, K and C together with the input singular value for P 
-([0,1]) and R ($\frac{\text{MJ.mm}}{\text{m}^2.\text{h.year}}$). In the core
-module, it relies on the user-defined defined the K- ($\frac{ton.ha}{MJ.mm}$) and
-C-factor ([0,1]) rasters, whereas preprocessing modules for Flanders can be 
-used to help define the input for C-raster. When a singular cell 
-contains a NODATA value for K, C or LS (computed based on DTM, so NODATA in 
-DTM), then a no value is computed for the RUSLE equation (equal to NODATA).
+([0,1]) and R ($\frac{\text{MJ.mm}}{\text{m}^2.\text{h.year}}$).
+
+The core module takes the K- and C-factor as raster inputs and the R- and
+P-factor as singular value inputs. It calculates the LS-Factor from a 
+given DEM and then calculates the Erosion Amount based on the 
+RUSLE equation. In the preprocessing module for Flanders an extra tool is
+provided to define the C-factor value based on Land Use information. If similar data are available, this tooling can be used for 
+other regions as well. When a singular cell contains a NODATA value for
+K, C or LS (computed based on DTM, so NODATA in DTM), then a no value is 
+computed for the RUSLE equation (equal to NODATA).
 
 ## References
 Desmet, P.J.J., Govers, G., 1996, A gis procedure for automatically
