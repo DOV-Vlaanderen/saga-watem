@@ -35,12 +35,12 @@ Complete::Complete()
 
     Parameters.Add_Value (
         NULL, "R", "R-factor value",
-        "rainfall erosivity factor (MJ mm ha-1 jaar-1)", PARAMETER_TYPE_Double, 880, 0, 1000
+        "rainfall erosivity factor (MJ mm ha-1 year-1)", PARAMETER_TYPE_Double, 880, 0, 1000
     );
 
     Parameters.Add_Value (
         NULL, "P", "P-factor value",
-        "erosion control factor (dimensieloos) ", PARAMETER_TYPE_Double, 1, 0, 1
+        "erosion control factor (-) ", PARAMETER_TYPE_Double, 1, 0, 1
     );
 
     Parameters.Add_Value (
