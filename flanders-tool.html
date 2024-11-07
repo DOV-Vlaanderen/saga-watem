@@ -170,8 +170,8 @@ Grid Filter tool (any available in SAGA/QGIS to the users’ liking). An
 alternative is to perform a 3x3 filter on the DTM within the boundaries of
 the parcels. This filters the DTM but only considers cells that lie within the
 same plot. The input for this tool (watem-flanders-2) is the DEM and
-<a class="reference internal" href="#parcels-map-generation"><span class="xref myst">Parcels map</span></a>.</p>
-<p>Tool: watem-flanders-2</p>
+the parcel map (see section ‘Parcel map generation’).
+Tool: watem-flanders-2</p>
 </section>
 <section id="c-grid">
 <h2>C-grid<a class="headerlink" href="#c-grid" title="Link to this heading">¶</a></h2>
@@ -180,16 +180,17 @@ same plot. The input for this tool (watem-flanders-2) is the DEM and
 <li><p>a parcel raster</p></li>
 <li><p>a parcel shape (and other data input from Flanders, i.e. GRB, WLAS)</p></li>
 </ul>
-<p>The first tool only takes the <a class="reference internal" href="#parcels-map-generation"><span class="xref myst">Parcels grid</span></a> as input.
-The Parcel map is translated as follows:</p>
+<p>The first tool only takes the arcel map (see section ‘Parcel map generation’)
+as input. The Parcel map is translated as follows:</p>
 <ul class="simple">
 <li><p>0.37 for cropland (code in [2,9999])</p></li>
 <li><p>0 for water (open water/river) and infrastructure/roads (code = -1 and -2)</p></li>
 <li><p>0.001 for forests (code = 10000)</p></li>
 </ul>
-<p>In the second tool, the functionalities described in <a class="reference internal" href="#parcels-map-generation"><span class="xref myst">Parcels map</span></a>
+<p>In the second tool, the functionalities to generate the parcel map
+(see section ‘Parcel map generation’)
 are used. In other words, the tool has as input (see definition
-<a class="reference internal" href="#parcels-map-generation"><span class="xref myst">Parcels map</span></a>):</p>
+<a class="reference internal" href="##parcels-map-generation"><span class="xref myst">Parcels map</span></a>):</p>
 <ul class="simple">
 <li><p>Landcover map</p></li>
 <li><p>GRB layers(geopoint - dataset GRBgis)</p></li>
