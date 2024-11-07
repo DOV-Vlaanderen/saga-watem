@@ -14,11 +14,11 @@ Create_Parcel_Grid::Create_Parcel_Grid()
                             "creating the erosion map based on parcel map, "
                             "'Grootschalig Referentie Bestand' (GRB), the "
                             "'Vlaams Hydrologische Atlas' (VHA) and "
-                            "Landuse map. Returns parcels with codes: \n"
+                            "Landcover map. Returns parcels with codes: \n"
                             "\n"
                             " - infrastructure and roads: -2 \n"
                             " - water (open water / river): -1 \n"
-                            " - parcels: [1,9999] \n"
+                            " - parcels: [2,9999] \n"
                             " - forest: 10000 \n"
                             "\n"
                             "Only the geometry of the input shapes is used for "
@@ -31,10 +31,10 @@ Create_Parcel_Grid::Create_Parcel_Grid()
                           ) );
 
     Parameters.Add_Shapes ( NULL, "PARCEL_SHAPES", "Parcels", "Polygon shape of parcels.", PARAMETER_INPUT, SHAPE_TYPE_Polygon );
-    Parameters.Add_Grid ( NULL, "LANDUSE", "Landuse", "Landuse with values 10000, -1 and -2.", PARAMETER_INPUT );
+    Parameters.Add_Grid ( NULL, "LANDCOVER", "Landcover", "Landcover with values 10000, -1 and -2.", PARAMETER_INPUT );
 
     Parameters.Add_Grid ( NULL, "PRC", "Parcel grid", "Output grid  with: \n"
-        "- a unique identifier per parcel: [1,9999] \n"
+        "- a unique identifier per parcel: [2,9999] \n"
         "- Forest = 10000  \n"
         "- Infrastructure & roads = -2 \n"
         "- Rivers -1 \n", PARAMETER_OUTPUT, true, SG_DATATYPE_Short );
@@ -77,7 +77,7 @@ CSG_Grid *BinaryShapetoGrid ( CSG_Parameter *shape, const CSG_Grid_System &syste
 bool Create_Parcel_Grid::On_Execute()
 {
     CSG_Grid *prc = Parameters ( "PRC" )->asGrid();
-    CSG_Grid *landuse = Parameters ( "LANDUSE" )->asGrid();
+    CSG_Grid *landuse = Parameters ( "LANDCOVER" )->asGrid();
 
     // grid maken van GRB achtergrondlagen (gebouwen, kunstwerken)
     CSG_Grid *gbg, *gba, *wga, *knw;
