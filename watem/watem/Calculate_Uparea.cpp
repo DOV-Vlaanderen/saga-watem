@@ -14,9 +14,9 @@ CCalculate_Uparea::CCalculate_Uparea()
     Set_Author ( _TL ( "Copyright (c) 2006 - 2016 by KULeuven. Converted to SAGA/C++ by Johan Van de Wauw" ) );
 
     Set_Description ( _TW (
-                          "This module converts a digital elevation model grid and a parcel grid and converts it to an upslope area."
-                          "The method takes into account parcel borders, water (grid value -1) and landuse (forest has value 10000)."
-                          "The upstream area  is computed from higher to lower pixels, within the boundaries of a parceL. At "
+                          "This module converts a digital elevation model grid and a parcel grid and converts it to an upslope area. "
+                          "The method takes into account parcel borders, water (grid value -1) and landuse (forest has value 10000). "
+                          "The upstream area  is computed from higher to lower pixels, within the boundaries of a parcel. At "
                           "parcel/forest-, parcel/parcel-, parcel/infr-boundaries, the upstream area is reduced with the connectivity  (1-x) "
                           "parameters. Pits are taken into account, such that flow is transported over maximum number of pixels (PIT_RADIUS) "
                           "(otherwise ignored). Optionally a grid with Pits and a table with pit information can be generated. "

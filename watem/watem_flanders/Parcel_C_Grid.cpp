@@ -45,7 +45,7 @@ Parcel_C_Grid::Parcel_C_Grid()
         "landcover grid with \n"
         "- Forest = 10000  \n"
         "- Infrastructure & roads = -2 \n"
-        "- Water -1 \n",
+        "- Water = -1 \n",
         PARAMETER_INPUT
     );
 

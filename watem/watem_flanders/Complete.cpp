@@ -31,7 +31,7 @@ Complete::Complete()
     Parameters.Add_Grid ( NULL, "PIT", _TL ( "Pit" ), _TL ("Pit id. These id's are linked to the id's in pit data (see watem-1 Calculate uparea)"), PARAMETER_OUTPUT, true, SG_DATATYPE_DWord );
     Parameters.Add_Grid ( NULL, "UPSLOPE_AREA", _TL ( "Upslope area" ), _TL ("Upslope Area: area that flow to a certain pixel (see watem-1 Calculate uparea)"), PARAMETER_OUTPUT );
     Parameters.Add_Grid ( NULL, "LS", _TL ( "LS" ), _TL ( "LS as defined by return tool (see watem-2, LS calculation)" ), PARAMETER_OUTPUT );
-    Parameters.Add_Grid ( NULL, "TILL", _TL ( "Tillage Erosion" ), _TL ( "Average soil loss due to tillage erosion (ton ha-1 jaar-1)" ), PARAMETER_OUTPUT_OPTIONAL );
+    Parameters.Add_Grid ( NULL, "TILL", _TL ( "Tillage Erosion" ), _TL ( "Average soil loss due to tillage erosion (kg ha-1 year-1)" ), PARAMETER_OUTPUT_OPTIONAL );
 
     Parameters.Add_Value (
         NULL, "R", "R-factor value",
