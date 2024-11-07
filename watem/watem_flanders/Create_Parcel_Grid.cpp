@@ -37,7 +37,7 @@ Create_Parcel_Grid::Create_Parcel_Grid()
         "- a unique identifier per parcel: [2,9999] \n"
         "- Forest = 10000  \n"
         "- Infrastructure & roads = -2 \n"
-        "- Rivers -1 \n", PARAMETER_OUTPUT, true, SG_DATATYPE_Short );
+        "- Water (rivers and open water) = -1 \n", PARAMETER_OUTPUT, true, SG_DATATYPE_Short );
     Parameters.Add_Shapes ( NULL, "WTZ", "GRB WTZ (VHA-polygon)", "VHA (polygons).", PARAMETER_INPUT, SHAPE_TYPE_Polygon );
     Parameters.Add_Shapes ( NULL, "WLAS", "VHA lines", "VHA (lines).", PARAMETER_INPUT, SHAPE_TYPE_Line );
 

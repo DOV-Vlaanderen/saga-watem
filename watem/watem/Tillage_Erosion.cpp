@@ -38,14 +38,14 @@ Tillage_Erosion::Tillage_Erosion()
         "- a unique identifier per parcel: [2,9999] \n"
         "- Forest = 10000  \n"
         "- Infrastructure & roads = -2 \n"
-        "- Rivers -1 \n",
+        "- Water (rivers and open water) = -1 \n",
         PARAMETER_INPUT
     );
 
 
     Parameters.Add_Grid (
         NULL, "TILL", "Tillage erosion",
-        "Average soil loss due to tillage erosion (ton ha-1 year-1)",
+        "Average soil loss due to tillage erosion (kg ha-1 year-1)",
         PARAMETER_OUTPUT
     );
 

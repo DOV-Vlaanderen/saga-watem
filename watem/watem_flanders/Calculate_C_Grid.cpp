@@ -33,7 +33,7 @@ Calculate_C_Grid::Calculate_C_Grid()
         "- a unique identifier per parcel: [2,9999] \n"
         "- Forest = 10000  \n"
         "- Infrastructure & roads = -2 \n"
-        "- Rivers -1 \n",
+        "- Water (rivers and open water) = -1 \n",
         PARAMETER_INPUT
     );
 

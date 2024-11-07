@@ -25,8 +25,8 @@ Complete::Complete()
         "- a unique identifier per parcel: [2,9999] \n"
         "- Forest = 10000  \n"
         "- Infrastructure & roads = -2 \n"
-        "- Rivers -1 \n", PARAMETER_INPUT );
-    Parameters.Add_Grid ( NULL, "K", _TL ("K-factor grid" ), _TL ("soil erodibility factor (K-factor, ton ha MJ-1 mm-1)"), PARAMETER_INPUT );
+        "- Water (rivers and open water) = -1 \n", PARAMETER_INPUT );
+    Parameters.Add_Grid ( NULL, "K", _TL ("K-factor grid" ), _TL ("soil erodibility factor (K-factor, kg ha MJ-1 mm-1)"), PARAMETER_INPUT );
 
     Parameters.Add_Grid ( NULL, "PIT", _TL ( "Pit" ), _TL ("Pit id. These id's are linked to the id's in pit data (see watem-1 Calculate uparea)"), PARAMETER_OUTPUT, true, SG_DATATYPE_DWord );
     Parameters.Add_Grid ( NULL, "UPSLOPE_AREA", _TL ( "Upslope area" ), _TL ("Upslope Area: area that flow to a certain pixel (see watem-1 Calculate uparea)"), PARAMETER_OUTPUT );
