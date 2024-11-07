@@ -131,14 +131,14 @@ computed in WaTEM and to describe the implemented formulas.</p>
 <section id="water-erosion">
 <h2>Water erosion<a class="headerlink" href="#water-erosion" title="Link to this heading">¶</a></h2>
 <p>Water erosion is computed by using the RUSLE-equation
-(<span class="math notranslate nohighlight">\(A = \frac{\text{ton}}{\text{m}^{2}.\text{year}}\)</span>) (Revised
+(<span class="math notranslate nohighlight">\(A = \frac{\text{kg}}{\text{m}^{2}.\text{year}}\)</span>) (Revised
 Universal Soil Loss Equation, Renard et al., 1997):</p>
 <div class="math notranslate nohighlight">
 \[ A = R \cdot K \cdot LS \cdot C \cdot P \]</div>
 <p>with</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(R\)</span>: rainfall erosivity factor (<span class="math notranslate nohighlight">\(\frac{\text{MJ.mm}}{\text{m}^2.\text{h.year}}\)</span>)</p></li>
-<li><p><span class="math notranslate nohighlight">\(K\)</span>: soil erodibility factor (<span class="math notranslate nohighlight">\(\frac{\text{ton.h}}{\text{MJ.mm}}\)</span>)</p></li>
+<li><p><span class="math notranslate nohighlight">\(R\)</span>: rainfall erosivity factor (<span class="math notranslate nohighlight">\(\frac{\text{MJ.mm}}{\text{ha.h.year}}\)</span>)</p></li>
+<li><p><span class="math notranslate nohighlight">\(K\)</span>: soil erodibility factor (<span class="math notranslate nohighlight">\(\frac{\text{kg.h}}{\text{MJ.mm}}\)</span>)</p></li>
 <li><p><span class="math notranslate nohighlight">\(LS\)</span>: topographical slope and length factor (-)</p></li>
 <li><p><span class="math notranslate nohighlight">\(C\)</span>: crop management factor (-, $<span class="math notranslate nohighlight">\(\in [0,1]\)</span>$)</p></li>
 <li><p><span class="math notranslate nohighlight">\(P\)</span>: erosion control factor (-, $<span class="math notranslate nohighlight">\(\in [0,1]\)</span>$)</p></li>
@@ -147,6 +147,7 @@ Universal Soil Loss Equation, Renard et al., 1997):</p>
 RUSLE-values: values above 150 are set equal to 150, this value can be adapted
 in the code. The explanation on how the subfactors are calculated are
 described in below.</p>
+<p><strong>NOTE</strong>:</p>
 <p>It is important to note that the units of <span class="math notranslate nohighlight">\(R\)</span> and <span class="math notranslate nohighlight">\(K\)</span> can be adapted, for
 instance compatible with <span class="math notranslate nohighlight">\(J\)</span> instead of <span class="math notranslate nohighlight">\(MJ\)</span>, as long as the units for <span class="math notranslate nohighlight">\(R\)</span>
 and <span class="math notranslate nohighlight">\(K\)</span> are synchronized. For reasons of clarity, the units are defined as a
@@ -184,7 +185,7 @@ and is set to a uniform value (in current code ktil is equal to 600 kg/m).</p>
 factor (R-factor). The R-factor quantifies the mean annual average
 rainfall erosivity, calculated by combining rainfall events over
 multiple years (22 years according to the USLE definition) and is
-expressed in <span class="math notranslate nohighlight">\(\frac{MJ.mm}{m^2.h.year}\)</span>. In the current module, one can
+expressed in <span class="math notranslate nohighlight">\(\frac{MJ.mm}{ha.h.year}\)</span>. In the current module, one can
 define one singular value for the R-factor.</p>
 </section>
 <section id="k-factor">
@@ -196,7 +197,7 @@ Soil erodibility can be calculated from the USLE nomograph or using empirical
 equations predicting the K-factor from the geometric mean particle diameter
 and organic matter content. The K-factor has large temporal variations, so
 the values always represent a long term average. In the module, the K-factor
-is defined as an input raster (grid) (expressed in <span class="math notranslate nohighlight">\(\frac{ton.ha}{MJ.mm}\)</span>).</p>
+is defined as an input raster (grid) (expressed in <span class="math notranslate nohighlight">\(\frac{kg.ha}{MJ.mm}\)</span>).</p>
 </section>
 <section id="ls-factor">
 <h3>LS-factor<a class="headerlink" href="#ls-factor" title="Link to this heading">¶</a></h3>
@@ -345,8 +346,8 @@ with desired P-factor in preprocesing).</p>
 <section id="implementation">
 <h2>Implementation<a class="headerlink" href="#implementation" title="Link to this heading">¶</a></h2>
 <p>WaTEM is implemented on a grid (raster). It computes the RUSLE based on the
-grid values for LS, K and C together with the input singular value for P
-([0,1]) and R (<span class="math notranslate nohighlight">\(\frac{\text{MJ.mm}}{\text{m}^2.\text{h.year}}\)</span>).</p>
+grid values for the LS-, K- and C- together with the input singular value for
+the P- and R-factor.</p>
 <p>The core module takes the K- and C-factor as raster inputs and the R- and
 P-factor as singular value inputs. It calculates the LS-Factor from a
 given DEM and then calculates the Erosion Amount based on the

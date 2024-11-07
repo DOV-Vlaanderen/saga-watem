@@ -93,7 +93,7 @@ use of different tools:
 3. Water erosion calculation based on LS (tool 'watem-4', used to be module 3.4, 
    see legacy). Note that an LS-, C- ([0,1]) and K-grid 
    ($\frac{\text{kg.h}}{\text{MJ.mm}}$) to be defined. R- 
-   ($\frac{\text{MJ.mm}}{\text{m}^2.\text{h.year}}$) and P-factor ([0,1]) need to be defined as 
+   ($\frac{\text{MJ.mm}}{\text{ha.h.year}}$) and P-factor ([0,1]) need to be defined as 
    numbers (floats). Note that a maximum gross erosion can be defined as an
    upper boundary condition. In addition, a resolution correction factor can be 
    defined, this is a value with which  the RUSLE value is divided 

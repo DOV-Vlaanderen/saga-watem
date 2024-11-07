@@ -98,7 +98,7 @@ Tool: watem-flanders-3 and watem-flanders-4
 The complete tool requires the DEM (m), parcel grid 
 (see [here](gettingstarted.md##compute-water-erosion)) and K-factor 
 ($\frac{\text{kg.h}}{\text{MJ.mm}}$) grid as input, 
-into addition to the definition of the R- ($\frac{\text{MJ.mm}}{\text{m}^2.\text{h.year}}$) and 
+into addition to the definition of the R- ($\frac{\text{MJ.mm}}{\text{ha.h.year}}$) and 
 P([0,1])-factor. The upslope area and
 LS is computed from the DEM (and parcel grid for computation of LS within 
 parcel boundaries). The C-factor is computed by 

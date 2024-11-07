@@ -11,15 +11,15 @@ computed in WaTEM and to describe the implemented formulas.
 
 ## Water erosion
 Water erosion is computed by using the RUSLE-equation 
-($A = \frac{\text{ton}}{\text{m}^{2}.\text{year}}$) (Revised
+($A = \frac{\text{kg}}{\text{m}^{2}.\text{year}}$) (Revised
 Universal Soil Loss Equation, Renard et al., 1997):
 
 $$ A = R \cdot K \cdot LS \cdot C \cdot P $$
 
 with
 
-- $R$: rainfall erosivity factor ($\frac{\text{MJ.mm}}{\text{m}^2.\text{h.year}}$)
-- $K$: soil erodibility factor ($\frac{\text{ton.h}}{\text{MJ.mm}}$)
+- $R$: rainfall erosivity factor ($\frac{\text{MJ.mm}}{\text{ha.h.year}}$)
+- $K$: soil erodibility factor ($\frac{\text{kg.h}}{\text{MJ.mm}}$)
 - $LS$: topographical slope and length factor (-)
 - $C$: crop management factor (-, $$\in [0,1]$$)
 - $P$: erosion control factor (-, $$\in [0,1]$$)
@@ -28,6 +28,8 @@ In SAGA-WaTEM, additional parameters can be set to compensate for very high
 RUSLE-values: values above 150 are set equal to 150, this value can be adapted
 in the code. The explanation on how the subfactors are calculated are 
 described in below.
+
+__NOTE__:
 
 It is important to note that the units of $R$ and $K$ can be adapted, for
 instance compatible with $J$ instead of $MJ$, as long as the units for $R$
@@ -68,7 +70,7 @@ The erosive power of rainfall is quantified via the rainfall erosivity
 factor (R-factor). The R-factor quantifies the mean annual average 
 rainfall erosivity, calculated by combining rainfall events over 
 multiple years (22 years according to the USLE definition) and is 
-expressed in $\frac{MJ.mm}{m^2.h.year}$. In the current module, one can 
+expressed in $\frac{MJ.mm}{ha.h.year}$. In the current module, one can 
 define one singular value for the R-factor. 
 
 
@@ -81,7 +83,7 @@ Soil erodibility can be calculated from the USLE nomograph or using empirical
 equations predicting the K-factor from the geometric mean particle diameter 
 and organic matter content. The K-factor has large temporal variations, so 
 the values always represent a long term average. In the module, the K-factor
-is defined as an input raster (grid) (expressed in $\frac{ton.ha}{MJ.mm}$).
+is defined as an input raster (grid) (expressed in $\frac{kg.ha}{MJ.mm}$).
 
 
 ### LS-factor
@@ -247,8 +249,8 @@ with desired P-factor in preprocesing).
 ## Implementation
 
 WaTEM is implemented on a grid (raster). It computes the RUSLE based on the 
-grid values for LS, K and C together with the input singular value for P 
-([0,1]) and R ($\frac{\text{MJ.mm}}{\text{m}^2.\text{h.year}}$).
+grid values for the LS-, K- and C- together with the input singular value for
+the P- and R-factor.
 
 The core module takes the K- and C-factor as raster inputs and the R- and
 P-factor as singular value inputs. It calculates the LS-Factor from a 
