@@ -9,8 +9,9 @@
 :maxdepth: 3
 :caption: User guide
 
-Installation <self>
+Introduction <self>
 Model description <description>
+Installation <installation>
 Getting started <gettingstarted>
 Flanders application <flanders-tool>
 Topology <topology>

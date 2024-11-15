@@ -84,9 +84,8 @@ CCalculate_LS_Watem::CCalculate_LS_Watem ( void )
         "Parcel grid with: \n"
         "- a unique identifier per parcel: [1,9999] \n"
         "- Forest = 10000  \n"
-        "- Other = 1 \n"
         "- Infrastructure & roads = -2 \n"
-        "- Rivers -1 \n",
+        "- Water (river/open water) -1 \n",
         PARAMETER_INPUT_OPTIONAL
     );
 

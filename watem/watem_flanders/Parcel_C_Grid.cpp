@@ -16,9 +16,11 @@ Parcel_C_Grid::Parcel_C_Grid()
 
     Set_Description ( _TW (
                           "Calculation of the C (crop and management factor) "
-                          "map based on shapefile with attribute 'C-factor'. "
+                          "map based on landcover raster. "
                           "Optionally GRB and VHA can be added, geometries of "
                           "this shapes are mapped to a C-factor value of 0. "
+                          "The C-factor for parcels are set to 0.37. The "
+                          "C-factor for Landuse forest is converted 0.01. "
                           "Only the geometry of the input shapes is used for "
                           "mapping. Note that the input instruction refers to "
                           "data specific attributes (i.e. GRB, VHA, in "
@@ -39,12 +41,12 @@ Parcel_C_Grid::Parcel_C_Grid()
 
     Parameters.Add_Table_Field ( shapes, "PARCEL_SHAPE_C_FIELD", "C Field", "Field name containing C-factor value" );
     Parameters.Add_Grid (
-        NULL, "LANDUSE", "Land use grid",
-        "Land use grid with \n"
+        NULL, "LANDCOVER", "landcover grid",
+        "landcover grid with \n"
         "- Forest = 10000  \n"
-        "- Other = 1 \n"
+        "- Agriculture = 1 \n"
         "- Infrastructure & roads = -2 \n"
-        "- Rivers -1 \n",
+        "- Water = -1 \n",
         PARAMETER_INPUT
     );
 
@@ -71,7 +73,7 @@ Parcel_C_Grid::Parcel_C_Grid()
 
 bool Parcel_C_Grid::On_Execute()
 {
-    CSG_Grid *LANDUSE = Parameters ( "LANDUSE" )->asGrid();
+    CSG_Grid *LANDUSE = Parameters ( "LANDCOVER" )->asGrid();
     CSG_Grid *C = Parameters ( "C" )->asGrid();
     // set scaling because short is used
     C->Set_Scaling ( 0.001 );

@@ -20,7 +20,8 @@ Water_Erosion::Water_Erosion()
                           "resolution can be used (see 'Resolution correction "
                           "factor'). In addition the RUSLE values can be "
                           "limited to a maximum value (see 'Flag maximum "
-                          "gross erosion').")
+                          "gross erosion'). A NULL value in K, C or LS return "
+                          "a NULL value")
                     );
 
 
@@ -37,7 +38,7 @@ Water_Erosion::Water_Erosion()
 
     Parameters.Add_Grid (
         NULL, "K", "K-factor grid",
-        "soil erodibility factor (K-factor, ton ha MJ-1 mm-1)",
+        "soil erodibility factor (K-factor, kg ha MJ-1 mm-1)",
         PARAMETER_INPUT
     );
 
@@ -66,7 +67,7 @@ Water_Erosion::Water_Erosion()
 
     Parameters.Add_Grid (
         NULL, "WATER_EROSION", _TL ( "Water erosion" ),
-        "Average soil loss due to rill and interrill erosion (ton ha-1 year-1)",
+        "Average soil loss due to rill and interrill erosion (kg ha-1 year-1)",
         PARAMETER_OUTPUT
     );
 

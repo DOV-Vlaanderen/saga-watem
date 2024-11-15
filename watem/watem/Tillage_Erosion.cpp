@@ -10,8 +10,14 @@ Tillage_Erosion::Tillage_Erosion()
     Set_Version ( VERSION );
 
     Set_Description ( _TW (
-                          "Calculation of Tillage Erosion based on DTM (grid) and parcels (grid). Based on the code from WaTEM (KU Leuven). "
-                          "Tillage erosion, or soil translocation by tillage, is calculated according to the method of Van Oost et al. (2000)."
+                          "Calculation of Tillage Erosion based on DTM (grid) "
+                          "and parcels (grid). Based on the code from WaTEM "
+                          "(KU Leuven). Tillage erosion, or soil translocation "
+                          "by tillage, is calculated according to the method "
+                          "of Van Oost et al. (2000). "
+                          "See model description for more information on "
+                          "the formula's. Note that the tillage transport "
+                          "coefficient is hardcoded being 600 kg/m."
                       )
                     );
 
@@ -32,14 +38,14 @@ Tillage_Erosion::Tillage_Erosion()
         "- a unique identifier per parcel: [1,9999] \n"
         "- Forest = 10000  \n"
         "- Infrastructure & roads = -2 \n"
-        "- Rivers -1 \n",
+        "- Water (rivers and open water) = -1 \n",
         PARAMETER_INPUT
     );
 
 
     Parameters.Add_Grid (
         NULL, "TILL", "Tillage erosion",
-        "Average soil loss due to tillage erosion (ton ha-1 year-1)",
+        "Average soil loss due to tillage erosion (kg ha-1 year-1)",
         PARAMETER_OUTPUT
     );
 

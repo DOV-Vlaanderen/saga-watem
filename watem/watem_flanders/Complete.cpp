@@ -14,32 +14,33 @@ Complete::Complete()
                            "- Calculate upslope area (watem-1) \n"
                            "- LS calculation (watem-2) \n"
                            "- C calculation based on parcel grid (watem-flanders-3) \n"
-                           "- Watererosion based on LS (RUSLE) (optional tillage erosion) (watem-3 and watem-4) \n"
+                           "- Watererosion based on LS (RUSLE) (optional "
+                           " tillage erosion) (watem-3 and watem-4). \n"
+                           "A NULL value in K, C or LS return a NULL value. \n"
                       ) );
 
     Parameters.Add_Grid ( NULL, "DEM", _TL ( "DEM" ), _TL ( "Digital elevation model."), PARAMETER_INPUT );
     Parameters.Add_Grid ( NULL,  "PRC", "Parcel grid",
         "Parcel grid with: \n"
-        "- a unique identifier per parcel: [2,9999] \n"
+        "- a unique identifier per parcel: [1,9999] \n"
         "- Forest = 10000  \n"
-        "- Other = 1 \n"
         "- Infrastructure & roads = -2 \n"
-        "- Rivers -1 \n", PARAMETER_INPUT );
-    Parameters.Add_Grid ( NULL, "K", _TL ("K-factor grid" ), _TL ("soil erodibility factor (K-factor, ton ha MJ-1 mm-1)"), PARAMETER_INPUT );
+        "- Water (rivers and open water) = -1 \n", PARAMETER_INPUT );
+    Parameters.Add_Grid ( NULL, "K", _TL ("K-factor grid" ), _TL ("soil erodibility factor (K-factor, kg ha MJ-1 mm-1)"), PARAMETER_INPUT );
 
     Parameters.Add_Grid ( NULL, "PIT", _TL ( "Pit" ), _TL ("Pit id. These id's are linked to the id's in pit data (see watem-1 Calculate uparea)"), PARAMETER_OUTPUT, true, SG_DATATYPE_DWord );
     Parameters.Add_Grid ( NULL, "UPSLOPE_AREA", _TL ( "Upslope area" ), _TL ("Upslope Area: area that flow to a certain pixel (see watem-1 Calculate uparea)"), PARAMETER_OUTPUT );
     Parameters.Add_Grid ( NULL, "LS", _TL ( "LS" ), _TL ( "LS as defined by return tool (see watem-2, LS calculation)" ), PARAMETER_OUTPUT );
-    Parameters.Add_Grid ( NULL, "TILL", _TL ( "Tillage Erosion" ), _TL ( "Average soil loss due to tillage erosion (ton ha-1 jaar-1)" ), PARAMETER_OUTPUT_OPTIONAL );
+    Parameters.Add_Grid ( NULL, "TILL", _TL ( "Tillage Erosion" ), _TL ( "Average soil loss due to tillage erosion (kg ha-1 year-1)" ), PARAMETER_OUTPUT_OPTIONAL );
 
     Parameters.Add_Value (
         NULL, "R", "R-factor value",
-        "rainfall erosivity factor (MJ mm ha-1 jaar-1)", PARAMETER_TYPE_Double, 880, 0, 1000
+        "rainfall erosivity factor (MJ mm ha-1 year-1)", PARAMETER_TYPE_Double, 880, 0, 1000
     );
 
     Parameters.Add_Value (
         NULL, "P", "P-factor value",
-        "erosion control factor (dimensieloos) ", PARAMETER_TYPE_Double, 1, 0, 1
+        "erosion control factor (-) ", PARAMETER_TYPE_Double, 1, 0, 1
     );
 
     Parameters.Add_Value (
@@ -51,7 +52,7 @@ Complete::Complete()
 
     Parameters.Add_Grid (
         NULL, "WATER_EROSION", _TL ( "Water erosion" ),
-        "Average soil loss due to rill and interrill erosion (ton ha-1 jaar-1)",
+        "Average soil loss due to rill and interrill erosion (kg ha-1 jaar-1)",
         PARAMETER_OUTPUT
     );
 
