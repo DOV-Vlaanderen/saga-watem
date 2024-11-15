@@ -44,6 +44,7 @@ Parcel_C_Grid::Parcel_C_Grid()
         NULL, "LANDCOVER", "landcover grid",
         "landcover grid with \n"
         "- Forest = 10000  \n"
+        "- Agriculture = 1 \n"
         "- Infrastructure & roads = -2 \n"
         "- Water = -1 \n",
         PARAMETER_INPUT

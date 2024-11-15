@@ -18,7 +18,7 @@ Create_Parcel_Grid::Create_Parcel_Grid()
                             "\n"
                             " - infrastructure and roads: -2 \n"
                             " - water (open water / river): -1 \n"
-                            " - parcels: [2,9999] \n"
+                            " - parcels: [1,9999] \n"
                             " - forest: 10000 \n"
                             "\n"
                             "Only the geometry of the input shapes is used for "
@@ -31,10 +31,10 @@ Create_Parcel_Grid::Create_Parcel_Grid()
                           ) );
 
     Parameters.Add_Shapes ( NULL, "PARCEL_SHAPES", "Parcels", "Polygon shape of parcels.", PARAMETER_INPUT, SHAPE_TYPE_Polygon );
-    Parameters.Add_Grid ( NULL, "LANDCOVER", "Landcover", "Landcover with values 10000, -1 and -2.", PARAMETER_INPUT );
+    Parameters.Add_Grid ( NULL, "LANDCOVER", "Landcover", "Landcover with values 10000 (forest), 1 (parcels), -1 (water) and -2 (infrastructure & roads).", PARAMETER_INPUT );
 
     Parameters.Add_Grid ( NULL, "PRC", "Parcel grid", "Output grid  with: \n"
-        "- a unique identifier per parcel: [2,9999] \n"
+        "- a unique identifier per parcel: [1,9999] \n"
         "- Forest = 10000  \n"
         "- Infrastructure & roads = -2 \n"
         "- Water (rivers and open water) = -1 \n", PARAMETER_OUTPUT, true, SG_DATATYPE_Short );

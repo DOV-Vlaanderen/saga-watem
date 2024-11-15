@@ -22,6 +22,7 @@ on previous map layers):
 - Landcover map with values:
 
   - 10000: forest
+  - 1: agriculture
   - -1: open water
   - -2: infrastructure / roads
 
@@ -38,6 +39,16 @@ on previous map layers):
 
   - SBN (railway line), WBN (road line) (-2)
   - WLas (VHA lines), WTZ (VHA polygons) (-1)
+
+The expected output is:
+
+  - infrastructure and roads: -2 
+  - water (open water / river): -1
+  - parcels: [1,9999]
+  - forest: 10000
+
+Note that the '1' in parcels comes from the 'agriculture' class in the 
+landcover map. 
 
 Note these inputs are flanders specific. In the landcover raster, the values 
 are used to define infrastructure, water and forest, whereas only the vector 
@@ -72,7 +83,7 @@ A C-factor grid can be computed from:
 The first tool only takes the [Parcels grid](##parcels-map-generation) as input.
 The Parcel map is translated as follows:
 
-- 0.37 for cropland (code in [2,9999])
+- 0.37 for cropland (code in [1,9999])
 - 0 for water (open water/river) and infrastructure/roads (code = -1 and -2)
 - 0.001 for forests (code = 10000)
 

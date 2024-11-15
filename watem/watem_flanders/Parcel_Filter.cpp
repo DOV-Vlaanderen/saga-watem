@@ -27,7 +27,7 @@ Parcel_Filter::Parcel_Filter()
 
     Parameters.Add_Grid ( NULL,  "PRC", "Parcel grid",
         "Parcel grid with: \n"
-        "- a unique identifier per parcel: [2,9999] \n"
+        "- a unique identifier per parcel: [1,9999] \n"
         "- Forest = 10000  \n"
         "- Infrastructure & roads = -2 \n"
         "- Water (rivers and open water) = -1 \n", PARAMETER_INPUT );
