@@ -102,7 +102,7 @@ use of different tools:
 The format for the parcel map is (see also in 
 [module reference](overview_watem)):
 
-- a unique identifier per parcel: [2,9999]
+- a unique identifier per parcel: [1,9999]
 - Forest = 10000
 - Infrastructure & roads = -2
 - Water (river/open water) -1

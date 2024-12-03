@@ -130,6 +130,7 @@ on previous map layers):</p>
 <li><p>Landcover map with values:</p>
 <ul>
 <li><p>10000: forest</p></li>
+<li><p>1: agriculture</p></li>
 <li><p>-1: open water</p></li>
 <li><p>-2: infrastructure / roads</p></li>
 </ul>
@@ -152,6 +153,15 @@ KNW (structure): infrastructure (-2)</p></li>
 </ul>
 </li>
 </ul>
+<p>The expected output is:</p>
+<ul class="simple">
+<li><p>infrastructure and roads: -2</p></li>
+<li><p>water (open water / river): -1</p></li>
+<li><p>parcels: [1,9999]</p></li>
+<li><p>forest: 10000</p></li>
+</ul>
+<p>Note that the ‘1’ in parcels comes from the ‘agriculture’ class in the
+landcover map.</p>
 <p>Note these inputs are flanders specific. In the landcover raster, the values
 are used to define infrastructure, water and forest, whereas only the vector
 outlines in the GRB layer are used to define infrastructure. Similarly, the
@@ -183,7 +193,7 @@ Tool: watem-flanders-2</p>
 <p>The first tool only takes the <a class="reference internal" href="##parcels-map-generation"><span class="xref myst">Parcels grid</span></a> as input.
 The Parcel map is translated as follows:</p>
 <ul class="simple">
-<li><p>0.37 for cropland (code in [2,9999])</p></li>
+<li><p>0.37 for cropland (code in [1,9999])</p></li>
 <li><p>0 for water (open water/river) and infrastructure/roads (code = -1 and -2)</p></li>
 <li><p>0.001 for forests (code = 10000)</p></li>
 </ul>
