@@ -19,19 +19,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: fetch linux builds (zip)
-        uses: dawidd6/action-download-artifact@v2
+        uses: dawidd6/action-download-artifact@v3
         with:
           workflow: cmake-linux.yml
           name: Release zip files
           path: linux
       - name: fetch linux builds (deb)
-        uses: dawidd6/action-download-artifact@v2
+        uses: dawidd6/action-download-artifact@v3
         with:
           workflow: cmake-linux.yml
           name: debian package
           path: deb
       - name: fetch windows builds
-        uses: dawidd6/action-download-artifact@v2
+        uses: dawidd6/action-download-artifact@v3
         with:
           workflow: cmake-windows.yml
           name: "Release dll files"
