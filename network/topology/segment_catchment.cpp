@@ -5,74 +5,78 @@
 
 segment_catchment::segment_catchment()
 {
-    Set_Name(_TL("Segment to subcatchments"));
+    Set_Name ( _TL ( "Segment to subcatchments" ) );
 
-    Set_Author(_TL("Copyrights (c) 2018 by Johan Van de Wauw"));
+    Set_Author ( _TL ( "Copyrights (c) 2018 by Johan Van de Wauw" ) );
 
-    Set_Description(_TL(
-                        "Routing and segments to subcatchment")
-                   );
+    Set_Description ( _TL (
+                          "This module uses output of watem-sedem (segments map and routing table) to create a grid with subcatchment" )
+                    );
 
     //----------------------------------------------------
 
-    Parameters.Add_Table(
-        NULL, "ROUTING"	, _TL("Routing Table"),
-        _TL(""),
+    Parameters.Add_Table (
+        NULL, "ROUTING"	, _TL ( "Routing Table" ),
+        _TL ( "" ),
         PARAMETER_INPUT
     );
-    Parameters.Add_Grid(
-        NULL, "SEGMENTS", _TL("Segment Map"),
-        _TL(""), PARAMETER_INPUT);
-    Parameters.Add_Grid(
-        NULL, "CATCH", _TL("Subcatchments"),
-        _TL(""), PARAMETER_OUTPUT);
+    Parameters.Add_Grid (
+        NULL, "SEGMENTS", _TL ( "Segment Map" ),
+        _TL ( "" ), PARAMETER_INPUT );
+    Parameters.Add_Grid (
+        NULL, "CATCH", _TL ( "Subcatchments" ),
+        _TL ( "" ), PARAMETER_OUTPUT );
 
 
 }
 
-segment_catchment::~segment_catchment(void)
+segment_catchment::~segment_catchment ( void )
 {}
 
-inline sLong segment_catchment::pos(const int row, const int col)
+inline sLong segment_catchment::pos ( const int row, const int col )
 {
     // convert the position in col en row to saga grid position
-    int x = col -1;
+    int x = col - 1;
     int y = Get_NY() - row;
-    sLong res = y * Get_NX() +x;
+    sLong res = y * Get_NX() + x;
 
-    return (res);
+    return ( res );
 }
 
-bool segment_catchment::On_Execute(void)
+bool segment_catchment::On_Execute ( void )
 {
-    CSG_Grid * subcatch = Parameters("CATCH")->asGrid();
-    CSG_Grid * segments = Parameters("SEGMENTS")->asGrid();
-    CSG_Table * routing = Parameters("ROUTING")->asTable();
+    CSG_Grid *subcatch = Parameters ( "CATCH" )->asGrid();
+    CSG_Grid *segments = Parameters ( "SEGMENTS" )->asGrid();
+    CSG_Table *routing = Parameters ( "ROUTING" )->asTable();
 
     subcatch->Assign_NoData();
 
     // routing will be stored as a map cell -> upstream cells[]
     std::map<int, std::vector<int>> upstream;
 
-    int col_field = routing->Get_Field("col");
-    int row_field = routing->Get_Field("row");
-    int t1col = routing->Get_Field("target1col");
-    int t1row = routing->Get_Field("target1row");
-    int t2col = routing->Get_Field("target2col");
-    int t2row = routing->Get_Field("target2row");
-    int part1 = routing->Get_Field("part1");
+    int col_field = routing->Get_Field ( "col" );
+    int row_field = routing->Get_Field ( "row" );
+    int t1col = routing->Get_Field ( "target1col" );
+    int t1row = routing->Get_Field ( "target1row" );
+    int t2col = routing->Get_Field ( "target2col" );
+    int t2row = routing->Get_Field ( "target2row" );
+    int part1 = routing->Get_Field ( "part1" );
 
     int from, to;
 
-    for (int i=0; i< routing->Get_Count(); i++)
+    for ( int i = 0; i < routing->Get_Count(); i++ )
     {
-        CSG_Table_Record * rec = routing->Get_Record(i);
-        if (rec->asInt(row_field)<=0 | rec->asInt(row_field)<=0)
+        CSG_Table_Record *rec = routing->Get_Record ( i );
+        if ( rec->asInt ( row_field ) <= 0 | rec->asInt ( row_field ) <= 0 )
+        {
             continue;
-        from = pos(rec->asInt(row_field), rec->asInt(col_field));
-        to=rec->asDouble(part1)>=0.5?pos(rec->asInt(t1row), rec->asInt(t1col)):pos(rec->asInt(t2row), rec->asInt(t2col));
-        if (to >0 && to < Get_NCells() && to!=from)
-            upstream[to].push_back(from);
+        }
+        from = pos ( rec->asInt ( row_field ), rec->asInt ( col_field ) );
+        to = rec->asDouble ( part1 ) >= 0.5 ? pos ( rec->asInt ( t1row ), rec->asInt ( t1col ) ) : pos ( rec->asInt ( t2row ), rec->asInt ( t2col ) );
+        if ( to > 0 && to < Get_NCells() && to != from )
+        {
+            upstream[to].push_back ( from );
+        }
 
     }
     // x*Get_NX() + y
@@ -83,29 +87,32 @@ bool segment_catchment::On_Execute(void)
     std::map<int, std::queue<int>> todo;
 
     // fill initial todo values
-    for (int i=0; i<segments->Get_NCells(); i++)
+    for ( int i = 0; i < segments->Get_NCells(); i++ )
     {
-        int seg = segments->asInt(i);
-        if (seg >0) {
-            subcatch->Set_Value(i,seg);
-            todo[seg].push(i);
+        int seg = segments->asInt ( i );
+        if ( seg > 0 )
+        {
+            subcatch->Set_Value ( i, seg );
+            todo[seg].push ( i );
         }
     }
 
-    for (auto & iSeg:todo)
+    for ( auto &iSeg : todo )
     {
         int segment = iSeg.first;
         auto iTodo = iSeg.second;
-        while (iTodo.size()>0)
+        while ( iTodo.size() > 0 )
         {
             int cell = iTodo.front();
             iTodo.pop();
-            subcatch->Set_Value(cell, segment);
+            subcatch->Set_Value ( cell, segment );
 
-            for (auto &iUp :upstream[cell])
+            for ( auto &iUp : upstream[cell] )
             {
-                if (subcatch->asInt(iUp)<=0)
-                    iTodo.push(iUp);
+                if ( subcatch->asInt ( iUp ) <= 0 )
+                {
+                    iTodo.push ( iUp );
+                }
             }
         }
     }
