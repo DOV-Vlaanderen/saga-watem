@@ -3,7 +3,7 @@ name: 'Build on debian/ubuntu in container'
 on:
   push:
     branches: ["main"]
-    pull-request:
+  pull-request:
       branches: ["main"]
   workflow_call:
 
@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        os: ["debian:bullseye", "debian:bookworm", "ubuntu:focal", "ubuntu:jammy"]
+        os: ["debian:bullseye", "debian:bookworm", "ubuntu:focal", "ubuntu:jammy", "ubuntu:noble"]
     container:
       image: ghcr.io/johanvdw/saga-watem-build-${{ matrix.os }}
       options: --user 1001
@@ -40,7 +40,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        os: ["debian:bullseye", "debian:bookworm", "ubuntu:focal", "ubuntu:jammy"]
+        os: ["debian:bullseye", "debian:bookworm", "ubuntu:focal", "ubuntu:jammy", "ubuntu:noble"]
     container:
       image: ghcr.io/johanvdw/saga-watem-build-${{ matrix.os }}
       options: --user 1001

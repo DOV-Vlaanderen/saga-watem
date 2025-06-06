@@ -2,9 +2,9 @@ name: CMake Windows
 
 on:
   push:
-    branches: [ "main","gha" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "main", "printf" ]
+    branches: [ "main" ]
   workflow_call:
 
 jobs:
