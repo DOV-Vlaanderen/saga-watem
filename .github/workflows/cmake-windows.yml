@@ -78,5 +78,5 @@ jobs:
     - name: 'Upload Artifact'
       uses: actions/upload-artifact@v3
       with:
-        name: Release dll files
+        name: Release dll files ${{ matrix.saga_version }}
         Path: saga_watem_windows_${{ matrix.saga_version }}.zip
