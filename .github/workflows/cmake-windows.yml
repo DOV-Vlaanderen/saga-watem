@@ -2,9 +2,9 @@ name: CMake Windows
 
 on:
   push:
-    branches: [ "main","gha" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "main", "printf" ]
+    branches: [ "main" ]
   workflow_call:
 
 jobs:
@@ -32,7 +32,7 @@ jobs:
         echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
     - name: get cached saga folder
       id: get-saga-cache
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: d:/deps/saga-${{ matrix.saga_version }}_x64
         key: saga-${{ matrix.saga_version }}_x64
@@ -49,7 +49,7 @@ jobs:
     - name: store cache
       if: ${{ steps.get-saga-cache.outputs.cache-hit != 'true' }}
       id: store-saga-cache
-      uses: actions/cache/save@v3
+      uses: actions/cache/save@v4
       with:
         path: d:\deps\saga-${{ matrix.saga_version }}_x64
         key: saga-${{ matrix.saga_version }}_x64
@@ -76,7 +76,7 @@ jobs:
         7z a -tzip saga_watem_windows_${{ matrix.saga_version }}.zip -r .\built\*.dll
 
     - name: 'Upload Artifact'
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: Release dll files ${{ matrix.saga_version }}
         Path: saga_watem_windows_${{ matrix.saga_version }}.zip
