@@ -31,10 +31,14 @@ jobs:
     - name: run tests
       run: |
         pytest-3 -vv
+    - name: Set sanitized OS name
+      id: os_name
+      run: echo "sanitized_os=$(echo '${{ matrix.os }}' | sed 's/:/-/')" >> "$GITHUB_OUTPUT"
+
     - name: 'Upload Artifact'
       uses: actions/upload-artifact@v4
       with:
-        name: Release zip files ${{ matrix.os.replace(':', '-')  }}
+        name: Release zip files ${{ steps.os_name.outputs.sanitized_os  }}
         Path: build/*.zip
       
   linux-container-build-deb:
@@ -57,8 +61,11 @@ jobs:
         dch --newversion $(git describe --tags)~$release  "autobuild $(git describe --tags)"
         debian/rules binary
         mv ../*.deb .
+    - name: Set sanitized OS name
+      id: os_name
+      run: echo "sanitized_os=$(echo '${{ matrix.os }}' | sed 's/:/-/')" >> "$GITHUB_OUTPUT"
     - name: 'Upload Artifact'
       uses: actions/upload-artifact@v4
       with:
-        name: debian package ${{ matrix.os.replace(':', '-') }}
+        name: debian package ${{ steps.osname.outputs.sanitized_os }}
         Path: "*.deb"
