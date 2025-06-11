@@ -34,7 +34,7 @@ jobs:
     - name: 'Upload Artifact'
       uses: actions/upload-artifact@v4
       with:
-        name: Release zip files
+        name: Release zip files ${{ matrix.os.replace(':', '-')  }}
         Path: build/*.zip
       
   linux-container-build-deb:
@@ -60,5 +60,5 @@ jobs:
     - name: 'Upload Artifact'
       uses: actions/upload-artifact@v4
       with:
-        name: debian package
+        name: debian package ${{ matrix.os.replace(':', '-') }}
         Path: "*.deb"
