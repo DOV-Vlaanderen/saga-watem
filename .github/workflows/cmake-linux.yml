@@ -3,7 +3,7 @@ name: 'Build on debian/ubuntu in container'
 on:
   push:
     branches: ["main"]
-  pull-request:
+  pull_request:
       branches: ["main"]
   workflow_call:
 
