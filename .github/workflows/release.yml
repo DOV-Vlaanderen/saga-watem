@@ -22,21 +22,25 @@ jobs:
         uses: dawidd6/action-download-artifact@v3
         with:
           workflow: cmake-linux.yml
-          name: Release zip files
           path: linux
       - name: fetch linux builds (deb)
         uses: dawidd6/action-download-artifact@v3
         with:
           workflow: cmake-linux.yml
-          name: debian package
           path: deb
       - name: fetch windows builds
         uses: dawidd6/action-download-artifact@v3
         with:
           workflow: cmake-windows.yml
-          name: "Release dll files"
           path: dll
+      - name: Gather all release files
+        run: |
+          mkdir release-files
+          find dll/ linux/ deb/ -type f -exec cp --parents {} release-files/ \;
       - uses: ncipollo/release-action@v1
         with:
-          artifacts: "dll/*,linux/*,deb/*"
+          artifacts: |
+            dll/**/*.zip
+            linux/**/*.zip
+            deb/**/*.deb
           omitBody: true
