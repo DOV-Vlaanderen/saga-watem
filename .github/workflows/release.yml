@@ -33,7 +33,14 @@ jobs:
         with:
           workflow: cmake-windows.yml
           path: dll
+      - name: Gather all release files
+        run: |
+          mkdir release-files
+          find dll/ linux/ deb/ -type f -exec cp --parents {} release-files/ \;
       - uses: ncipollo/release-action@v1
         with:
-          artifacts: "dll/*,linux/*,deb/*"
+          artifacts: |
+            dll/**/*.zip
+            linux/**/*.zip
+            deb/**/*.deb
           omitBody: true
