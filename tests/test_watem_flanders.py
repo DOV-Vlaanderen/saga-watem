@@ -59,7 +59,7 @@ def test_watem_3x3(tmpdir):
 def test_watem_c_parcel(tmpdir):
     args = {
         "PARCEL_SHAPES": data_dir / "Adpe768698.shp",
-        "LANDUSE": data_dir / "Landgebruik_def.sgrd",
+        "LANDCOVER": data_dir / "Landgebruik_def.sgrd",
         "C": tmpdir / "c.sgrd",
         "WTZ": data_dir / "Wtze768698.shp",
         "WLAS": data_dir / "Wlase768698.shp",
@@ -81,7 +81,7 @@ def test_watem_c_parcel(tmpdir):
 
     args = {
         "PARCEL_SHAPES": data_dir / "Adpe768698.shp",
-        "LANDUSE": data_dir / "Landgebruik_def.sgrd",
+        "LANDCOVER": data_dir / "Landgebruik_def.sgrd",
         "C": tmpdir / "c.sgrd",
         "GRB_VHA": "0"
     }
@@ -96,7 +96,7 @@ def test_watem_c_parcel(tmpdir):
 def test_watem_c_parcel_tiff(tmpdir):
     args = {
         "PARCEL_SHAPES": data_dir / "Adpe768698.shp",
-        "LANDUSE": data_dir / "Landgebruik_def.sgrd",
+        "LANDCOVER": data_dir / "Landgebruik_def.sgrd",
         "C": tmpdir / "c.sgrd",
         "WTZ": data_dir / "Wtze768698.shp",
         "WLAS": data_dir / "Wlase768698.shp",
@@ -118,7 +118,7 @@ def test_watem_c_parcel_tiff(tmpdir):
 
     args = {
         "PARCEL_SHAPES": data_dir / "Adpe768698.shp",
-        "LANDUSE": data_dir / "Landgebruik_def.sgrd",
+        "LANDCOVER": data_dir / "Landgebruik_def.sgrd",
         "C": tmpdir / "c.tif",
         "GRB_VHA": "0"
     }
