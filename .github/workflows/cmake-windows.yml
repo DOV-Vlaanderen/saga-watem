@@ -35,7 +35,7 @@ jobs:
       uses: actions/cache@v4
       with:
         path: d:/deps/saga-${{ matrix.saga_version }}_x64
-        key: saga-${{ matrix.saga_version }}_x64
+        key: saga-${{ matrix.saga_version }}_x64-v2
     - if: ${{ steps.get-saga-cache.outputs.cache-hit != 'true' }}
       name: get saga build
       shell: bash
@@ -52,8 +52,7 @@ jobs:
       uses: actions/cache/save@v4
       with:
         path: d:\deps\saga-${{ matrix.saga_version }}_x64
-        key: saga-${{ matrix.saga_version }}_x64
-     
+        key: saga-${{ matrix.saga_version }}_x64-v2
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
@@ -78,5 +77,5 @@ jobs:
     - name: 'Upload Artifact'
       uses: actions/upload-artifact@v4
       with:
-        name: Release dll files
+        name: Release dll files ${{ matrix.saga_version }}
         Path: saga_watem_windows_${{ matrix.saga_version }}.zip

@@ -42,6 +42,7 @@ if(MSVC)
 	set(CMAKE_PREFIX_PATH "%SAGA")
 	FIND_LIBRARY(SAGA_API NAMES saga_api PATHS
 		"$ENV{SAGA}"
+		NO_DEFAULT_PATH
 		)
 else()
     set(CMAKE_CXX_FLAGS "-I /usr/include/saga/")
