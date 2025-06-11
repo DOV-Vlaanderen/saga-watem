@@ -59,7 +59,7 @@ jobs:
       run: |
         IFS=':' read -r os release <<< '${{ matrix.os }}'
         dch --newversion $(git describe --tags)~$release  "autobuild $(git describe --tags)"
-        debian/rules binary
+        fakeroot debian/rules binary
         mv ../*.deb .
     - name: Set sanitized OS name
       id: os_name
@@ -67,5 +67,5 @@ jobs:
     - name: 'Upload Artifact'
       uses: actions/upload-artifact@v4
       with:
-        name: debian package ${{ steps.osname.outputs.sanitized_os }}
+        name: debian package ${{ steps.os_name.outputs.sanitized_os }}
         Path: "*.deb"
