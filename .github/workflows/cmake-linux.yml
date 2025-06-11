@@ -8,11 +8,11 @@ on:
   workflow_call:
 
 jobs:
-  bullseye-container-test:
+  linux-container-test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        os: ["debian:bullseye", "debian:bookworm", "ubuntu:focal", "ubuntu:jammy", "ubuntu:noble"]
+        os: ["debian:bookworm", "ubuntu:focal", "ubuntu:jammy", "ubuntu:noble"]
     container:
       image: ghcr.io/johanvdw/saga-watem-build-${{ matrix.os }}
       options: --user 1001
@@ -36,11 +36,11 @@ jobs:
         name: Release zip files
         Path: build/*.zip
       
-  bullseye-container-build-deb:
+  linux-container-build-deb:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        os: ["debian:bullseye", "debian:bookworm", "ubuntu:focal", "ubuntu:jammy", "ubuntu:noble"]
+        os: ["debian:bookworm", "ubuntu:focal", "ubuntu:jammy", "ubuntu:noble"]
     container:
       image: ghcr.io/johanvdw/saga-watem-build-${{ matrix.os }}
       options: --user 1001
