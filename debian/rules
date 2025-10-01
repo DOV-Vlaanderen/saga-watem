@@ -1,5 +1,12 @@
 #!/usr/bin/make -f
 
 %:
-	dh $@ --buildystem=cmake
+	dh $@ --buildsystem=cmake
+
+# Generate debian/control from template before the build
+override_dh_auto_configure:
+	# Get the exact version of libsaga-dev installed
+	SAGA_VER=$$(dpkg-query -W -f='$${Version}' libsaga-dev) && \
+	sed "s/@SAGA_VER@/$$SAGA_VER/" debian/control.in > debian/control
+	dh_auto_configure
 
