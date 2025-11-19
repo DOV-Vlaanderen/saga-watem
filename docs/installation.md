@@ -5,7 +5,7 @@
 On windows, download version SAGA 8.5.1 from the website, a direct link to 
 the file is here 
 [saga-8.5.1_x64.zip](https://sourceforge.net/projects/saga-gis/files/SAGA%20-%208/SAGA%20-%208.5.1/saga-8.5.1_x64.zip/download). 
-Alternatively, you can use SAGA 9.2.0 from the same website. Other versions 
+Alternatively, you can use SAGA 9.2.0 or 9.3.1 from the same website. Other versions 
 have not been tested.
 
 Get the windows built dll files from the releases page and copy these dll 

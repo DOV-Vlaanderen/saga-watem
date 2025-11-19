@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        os: ["debian:bookworm", "debian:trixie", "ubuntu:focal", "ubuntu:jammy", "ubuntu:noble"]
+        os: ["debian:bookworm", "ubuntu:focal", "ubuntu:noble"]
     container:
       image: ghcr.io/johanvdw/saga-watem-build-${{ matrix.os }}
       options: --user 1001
