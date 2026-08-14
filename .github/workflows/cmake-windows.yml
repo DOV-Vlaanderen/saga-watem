@@ -30,7 +30,8 @@ jobs:
       shell: bash
       run: |
         echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
-        if [ "${{ matrix.saga_version }}" = "9.13.0" ]; then
+        version="${{ matrix.saga_version }}"
+        if [ "$(printf '%s\n%s\n' "$version" "9.11.0" | sort -V | head -n1)" = "9.11.0" ]; then
           echo "saga-suffix=msw" >> "$GITHUB_OUTPUT"
         else
           echo "saga-suffix=x64" >> "$GITHUB_OUTPUT"
