@@ -1,7 +1,7 @@
 # ensure login is stored
 #echo $CR_PAT | docker login ghcr.io -u USERNAME --password-stdin
 
-for i in  "debian:bookworm" "debian:trixie" "ubuntu:jammy" "ubuntu:noble";
+for i in  "debian:bookworm" "debian:trixie" "ubuntu:jammy" "ubuntu:noble" "ubuntu:resolute";
 do 
 	podman build --build-arg base_container=$i -t ghcr.io/johanvdw/saga-watem-build-$i .
 	podman push ghcr.io/johanvdw/saga-watem-build-$i
