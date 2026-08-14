@@ -28,6 +28,7 @@ jobs:
         IFS=':' read -r os release <<< '${{ matrix.os }}'
         zip "saga_watem_$release.zip" $(find . -name *.so) -j
         make DESTDIR=libs install
+        mv libs/saga/lib* libs # normalizes the path, debian:trixie uses a different path
     - name: run tests
       run: |
         pytest-3 -vv
