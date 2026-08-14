@@ -9,8 +9,20 @@ Alternatively, you can use SAGA 9.2.0 or 9.3.1 from the same website. Other vers
 have not been tested.
 
 Get the windows built dll files from the releases page and copy these dll 
-files into the tools subfolder of saga and restart. You can also drag and 
-drop the dll on saga if they are stored in a different location.
+files into the tools subfolder of saga and restart. 
+If you use windows to unzip the files, it may be needed to unblock these dll
+files before they are recognised: if the block security is present after right
+clicking the file and choosing properties, make sure to mark 'unblock'.
+
+![Unblocking dll](img/unblock_dll.png)
+
+If the modules still don't show up, try to drag and drop the dll on saga 
+or open using File\Open. This is alway required if they are stored in a
+different location than tools.
+
+Finally if this still gives errors, double check that the exact same version
+of SAGA as the build was using is used.
+
 
 If you want to test unreleased version of SAGA, go to the github action page 
 for [windows builds](https://github.com/DOV-Vlaanderen/saga-watem/actions/workflows/cmake-windows.yml). 
