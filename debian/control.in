@@ -11,7 +11,7 @@ Package: saga-vpo
 Architecture: any
 Depends: ${shlibs:Depends},
          ${misc:Depends},
-         libsaga (= @SAGA_VER@)
+         libsaga-api9 (= @SAGA_VER@)
 Pre-Depends: ${misc:Pre-Depends}
 Description: SAGA modules for VPO
  Specific modules for running watem and watem/sedem.
