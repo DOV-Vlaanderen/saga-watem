@@ -59,7 +59,7 @@ jobs:
       shell: bash
       run: |
         IFS=':' read -r os release <<< '${{ matrix.os }}'
-        SAGA_VER=$$(dpkg-query -W -f='$${Version}' libsaga-dev) && sed "s/@SAGA_VER@/$$SAGA_VER/" debian/control.in > debian/control
+        SAGA_VER=$(dpkg-query -W -f='${Version}' libsaga-dev) && sed "s/@SAGA_VER@/$SAGA_VER/" debian/control.in > debian/control
         dch --newversion $(git describe --tags)~$release  "autobuild $(git describe --tags)"
         fakeroot debian/rules binary
         mv ../*.deb .
