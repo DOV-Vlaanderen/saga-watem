@@ -49,7 +49,6 @@ jobs:
         os: ["debian:bookworm", "debian:trixie", "ubuntu:focal", "ubuntu:noble", "ubuntu:resolute"]
     container:
       image: ghcr.io/johanvdw/saga-watem-build-${{ matrix.os }}
-      options: --user 1001
     steps:
     - uses: actions/checkout@v4
       with:
