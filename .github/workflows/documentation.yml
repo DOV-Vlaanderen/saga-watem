@@ -7,7 +7,7 @@ jobs:
   build-docs-linux:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/johanvdw/saga-watem-build-docs
+      image: ghcr.io/watem-sedem/saga-watem-build-docs
       options: --user 1001
     steps:
     - uses: actions/checkout@v4
