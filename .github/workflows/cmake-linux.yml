@@ -81,7 +81,7 @@ jobs:
       matrix:
         os: ["debian:trixie", "ubuntu:focal", "ubuntu:noble", "ubuntu:resolute"]
     container:
-      image: ghcr.io/johanvdw/saga-watem-build-${{ matrix.os }}
+      image: ${{ matrix.os }}
     steps:
     - name: Set sanitized OS name
       id: os_name
