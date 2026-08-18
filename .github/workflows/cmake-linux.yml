@@ -77,7 +77,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        os: ["debian:bookworm", "debian:trixie", "ubuntu:focal", "ubuntu:noble", "ubuntu:resolute"]
+        os: ["debian:trixie", "ubuntu:focal", "ubuntu:noble", "ubuntu:resolute"]
     container:
       image: ghcr.io/johanvdw/saga-watem-build-${{ matrix.os }}
     steps:
