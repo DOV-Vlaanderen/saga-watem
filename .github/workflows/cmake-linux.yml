@@ -93,4 +93,5 @@ jobs:
     - name: sanity check - see if the install works
       shell: bash
       run: |
-        dpkg -i *.deb
+        apt-get update
+        apt-get install -y ./*.deb
