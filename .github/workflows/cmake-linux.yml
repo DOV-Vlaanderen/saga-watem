@@ -14,7 +14,7 @@ jobs:
       matrix:
         os: ["debian:bookworm", "debian:trixie", "ubuntu:focal", "ubuntu:noble"]
     container:
-      image: ghcr.io/johanvdw/saga-watem-build-${{ matrix.os }}
+      image: ghcr.io/watem-sedem/saga-watem-build-${{ matrix.os }}
       options: --user 1001
     steps:
     - uses: actions/checkout@v7
@@ -48,7 +48,7 @@ jobs:
       matrix:
         os: ["debian:trixie", "ubuntu:focal", "ubuntu:noble", "ubuntu:resolute"]
     container:
-      image: ghcr.io/johanvdw/saga-watem-build-${{ matrix.os }}
+      image: ghcr.io/watem-sedem/saga-watem-build-${{ matrix.os }}
       options: --user 1001
     steps:
     - uses: actions/checkout@v7

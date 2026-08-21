@@ -3,9 +3,9 @@
 
 for i in  "debian:bookworm" "debian:trixie" "ubuntu:jammy" "ubuntu:noble" "ubuntu:resolute";
 do 
-	podman build --build-arg base_container=$i -t ghcr.io/johanvdw/saga-watem-build-$i .
-	podman push ghcr.io/johanvdw/saga-watem-build-$i
+	podman build --build-arg base_container=$i -t ghcr.io/watem-sedem/saga-watem-build-$i .
+	podman push ghcr.io/watem-sedem/saga-watem-build-$i
 done;
 
-podman build -f Dockerfile-docs -t ghcr.io/johanvdw/saga-watem-build-docs
-podman push ghcr.io/johanvdw/saga-watem-build-docs
+podman build -f Dockerfile-docs -t ghcr.io/watem-sedem/saga-watem-build-docs
+podman push ghcr.io/watem-sedem/saga-watem-build-docs
