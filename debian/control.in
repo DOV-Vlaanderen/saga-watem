@@ -10,7 +10,8 @@ Vcs-Git: https://git.fluves.net/fluves/saga-watem.git
 Package: saga-vpo
 Architecture: any
 Depends: ${shlibs:Depends},
-         ${misc:Depends}
+         ${misc:Depends},
+         @SAGA_API_PKG@ (= @SAGA_VER@)
 Pre-Depends: ${misc:Pre-Depends}
 Description: SAGA modules for VPO
  Specific modules for running watem and watem/sedem.
