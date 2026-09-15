@@ -10,7 +10,8 @@ segment_catchment::segment_catchment()
     Set_Author ( _TL ( "Copyrights (c) 2018 by Johan Van de Wauw" ) );
 
     Set_Description ( _TL (
-                          "This module uses output of watem-sedem (segments map and routing table) to create a grid with subcatchment" )
+                          "This module uses output of watem-sedem (segments map and routing table) to create a grid with subcatchment. " 
+                          "This will use only the major routing direction, where more than half of the water is going." )
                     );
 
     //----------------------------------------------------
